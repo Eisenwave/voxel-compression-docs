@@ -1,5 +1,6 @@
 # DIRECTORIES
 site/
+.idea/
 
 # FILES
 .directory 
