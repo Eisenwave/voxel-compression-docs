@@ -1,1 +1,30 @@
-site_name: My Docs
+site_name: VOXEL COMPRESSION
+
+use_directory_urls: false
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_style: darcula
+  hljs_languages: [c++, c, rust, python]
+  custom_dir: custom_theme
+
+nav:
+  - index.md
+  - Basics:
+      - statistical_tests.md
+      - methods.md
+  - Encoding Methods:
+      - svo/svo.md
+      - rle/rle.md
+      - dag/dag.md
+  - File Formats:
+      - file_formats/structlang.md
+      - file_formats/vl32.md
+
+extra_css:
+  - css/darcula.css
+  - css/extra.css
