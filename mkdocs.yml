@@ -12,14 +12,21 @@ theme:
   hljs_languages: [c++, c, rust, python]
   custom_dir: custom_theme
 
+markdown_extensions:
+  - admonition
+
 nav:
   - index.md
   - Basics:
       - statistical_tests.md
       - methods.md
+  - Related Work:
+      - related/overview.md
+      - related/literature.md
   - Encoding Methods:
-      - svo/svo.md
+      - uncompressed.md
       - rle/rle.md
+      - svo/svo.md
       - dag/dag.md
   - File Formats:
       - file_formats/structlang.md
@@ -28,3 +35,6 @@ nav:
 extra_css:
   - css/darcula.css
   - css/extra.css
+
+extra_javascript:
+  - js/extra.js
