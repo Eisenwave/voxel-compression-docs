@@ -4,15 +4,15 @@ The uncompressed format used for reference in this project is a 32-bit list of v
 In this case a voxel is a triple of coordinates and an ARGB integer, meaning that voxels can be partially transparent.
 
 ## Example Representation
-```c
+```rust
 struct voxel {
-    int32_t x;
-    int32_t y;
-    int32_t z;
-    int8_t a;
-    int8_t r;
-    int8_t g;
-    int8_t b;
+    i32 x;
+    i32 y;
+    i32 z;
+    u8 a;
+    u8 r;
+    u8 g;
+    u8 b;
 }
 ```
 

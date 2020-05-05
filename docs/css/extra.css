@@ -9,3 +9,28 @@
 .caption-text {
     font-weight: bold;
 }
+
+/* Hide the page title in the table of contents.*/
+li.toctree-l2:first-child, li.toctree-l3:first-child {
+    display: none;
+}
+
+/* Reduce excessive left-padding.*/
+.toctree-l4 {
+    padding-left: 2em !important;
+}
+
+ul.subnav {
+}
+
+h1 {
+    font-size: 200%;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 175%;
+}
+
+h3 {
+}

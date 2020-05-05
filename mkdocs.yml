@@ -9,11 +9,14 @@ theme:
   name: readthedocs
   highlightjs: true
   hljs_style: darcula
-  hljs_languages: [c++, c, rust, python]
+  hljs_languages: [ebnf, cpp, rust, python]
   custom_dir: custom_theme
 
 markdown_extensions:
   - admonition
+  - footnotes
+  - mdx_math:
+      enable_dollar_delimiter: true
 
 nav:
   - index.md
@@ -27,7 +30,9 @@ nav:
       - uncompressed.md
       - rle/rle.md
       - svo/svo.md
+      - svo/construction.md
       - dag/dag.md
+      - cuboid_extraction.md
   - File Formats:
       - file_formats/structlang.md
       - file_formats/vl32.md
@@ -37,4 +42,6 @@ extra_css:
   - css/extra.css
 
 extra_javascript:
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML'
+  - js/mathjax_config.js
   - js/extra.js
