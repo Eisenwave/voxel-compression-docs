@@ -8,4 +8,4 @@ This documentation is designed to be viewed using GitHub pages.
 ```sh
 cd build
 python3 -m http.server 8000
-``
+```
