@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="img/favicon.ico">
+<title>Voxel Compression</title>
+
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="css/darcula.css" rel="stylesheet">
+  <link href="css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Statistical Tests to Determine Voxel Model Properties";
+    var mkdocs_page_input_path = "statistical_tests.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> VOXEL COMPRESSION</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="index.html">Compression of Voxel Models</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Basics</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#statistical-tests-to-determine-voxel-model-properties">Statistical Tests to Determine Voxel Model Properties</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#spatial-locality-of-different-methods-of-iteration-over-voxel-models">Spatial Locality of Different Methods of Iteration Over Voxel Models</a></li>
+        
+            <li><a class="toctree-l4" href="#correlation-of-color-and-geometry-deltas">Correlation of Color and Geometry Deltas</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="methods.html">Analyzed Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Related Work</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="related/overview.html">Overview over Related Work</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="related/literature.html">Literature References</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Encoding Methods</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="uncompressed.html">Uncompressed Format</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="rle/rle.html">Run-Length Encoding</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="svo/svo.html">Sparse Voxel Octree</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="svo/construction.html">SVO Construction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="dag/dag.html">Directed Acyclic Graph</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="cuboid_extraction.html">Cuboid Extraction</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">File Formats</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="file_formats/structlang.html">Structure Language (StructLang)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">VOXEL COMPRESSION</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Basics &raquo;</li>
+        
+      
+    
+    <li>Statistical Tests to Determine Voxel Model Properties</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="statistical-tests-to-determine-voxel-model-properties">Statistical Tests to Determine Voxel Model Properties</h1>
+<p>The following list should give an overview over possible properties which voxel models are suspected to have.
+A description of an algorithm and/or pseudocude is used to provide a potential test.</p>
+<h2 id="spatial-locality-of-different-methods-of-iteration-over-voxel-models">Spatial Locality of Different Methods of Iteration Over Voxel Models</h2>
+<p>There are various different ways of iterating over a voxel model.
+We will consider only two or three, which are relevant to us.</p>
+<h4 id="nested-loop-iteration">Nested Loop Iteration</h4>
+<p>This is the traditional method of iterating over multi-dimensional arrays.</p>
+<pre><code class="c">char data[SIZE_X][SIZE_Y][SIZE_Z];
+for (size_t x = 0; x &lt; SIZE_X; ++x)
+    for (size_t y = 0; y &lt; SIZE_Y; ++y)
+        for (size_t z = 0; z &lt; SIZE_Z; ++z)
+            data[x][y][z];
+</code></pre>
+
+<p>It is extremely efficient for traversing memory because it seemlessly iterates over memory locations, as long as the
+axes of iteration are in the right order.
+The distances between two positions are at best <code>1</code> and at worst <code>SIZE_X + SIZEY</code>.
+However, the spatial locality is much worse when looking at more than one position.
+For say, 10 positions the distance between the first and last will be 10, which is comparably far.</p>
+<h4 id="z-order-iteration">Z-Order Iteration</h4>
+<p>Z-Order iteration traverses space with much higher locality.
+It works by traversing all nodes of an octree depth-first.
+3D-Vectors can be converted into "octree positions" by interleaving the bits of the coordinates into a single number.</p>
+<pre><code class="c">char data[SIZE_X][SIZE_Y][SIZE_Z];
+for (size_t x = 0; x &lt; SIZE_X; ++x)
+    for (size_t y = 0; y &lt; SIZE_Y; ++y)
+        for (size_t z = 0; z &lt; SIZE_Z; ++z)
+            data[interleave_bits(x, y, z)];
+)
+</code></pre>
+
+<h4 id="hilbert-curve-iteration">Hilbert-Curve Iteration</h4>
+<p>Hilbert-Curves have even higher locality than Z-Order iterations, but are considerably better in locality.
+See https://slideplayer.com/slide/3370293/ for construction.
+In short, space is filled in the following order, which is a Gray Code.</p>
+<pre><code class="json">[[0, 0, 0], [0, 0, 1], [0, 1, 1], [0, 1, 0], [1, 1, 0], [1, 1, 1], [1, 0, 1], [1, 0, 0]]
+</code></pre>
+
+<p>The entry direction for one of these pieces is +Z and the exit-direction is -Y.
+This pattern is repeated recursively, but the smaller building blocks have to be mirrored and rotated to fit together
+seemlessly into a larger block.
+The tremendously useful property here is that the distance between two points in the iteration is at most <code>1</code>.</p>
+<h3 id="testing-spatial-locality">Testing Spatial Locality</h3>
+<p>Spatial locality can simply be tested by comparing the average distance between each pair of points, triple of points,
+etc. within an iteration.
+When more than two points are tested, the distances of each unique pair of points can be summed up or averaged.
+Hilber-Curve Iteration is expected to deliver the best results on most, if not all scales.</p>
+<h2 id="correlation-of-color-and-geometry-deltas">Correlation of Color and Geometry Deltas</h2>
+<p>It is expected that color correlates with positions.
+This means that positions which are close to each other should also have similar colors.
+To verify this property, each unique pair of points can be iterated over.
+The euclidean distance in geometry-space (scaled down to a unit-cube) as well as the euclidean distance in the RGB
+color space should be plotted.
+The correlation can then be calculated from all data entries.</p>
+<pre><code class="cpp">struct Entry {
+    double geoDistance;
+    double colDistance;
+};
+struct ColoredPoint {
+    vec3 geo;
+    vec3 col;
+}
+std::vector&lt;double[2]&gt; entries;
+for (const std::pair&lt;ColoredPoint, ColoredPoint&gt; &amp;pair : allPoints) {
+    double geoDistance = pair.first.geo.distanceTo(pair.second.geo);
+    double colDistance = pair.first.col.distanceTo(pair.second.col);
+    entries.emplace_back(geoDistance, colDistance);
+}
+</code></pre>
+              
+            </div>
+          </div>
+<footer></footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="index.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="methods.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML" defer></script>
+      <script src="js/mathjax_config.js" defer></script>
+      <script src="js/extra.js" defer></script>
+      <script src="search/main.js" defer></script>
+
+</body>
+</html>

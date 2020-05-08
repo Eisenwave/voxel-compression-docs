@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="img/favicon.ico">
+<title>Voxel Compression</title>
+
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="css/darcula.css" rel="stylesheet">
+  <link href="css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Uncompressed Format";
+    var mkdocs_page_input_path = "uncompressed.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> VOXEL COMPRESSION</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="index.html">Compression of Voxel Models</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Basics</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="methods.html">Analyzed Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Related Work</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="related/overview.html">Overview over Related Work</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="related/literature.html">Literature References</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Encoding Methods</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="uncompressed.html">Uncompressed Format</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#uncompressed-format">Uncompressed Format</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#example-implementation">Example Implementation</a></li>
+        
+            <li><a class="toctree-l4" href="#justification-voxel-arrays-vs-voxel-lists">Justification - Voxel Arrays vs. Voxel Lists</a></li>
+        
+            <li><a class="toctree-l4" href="#serialization">Serialization</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="rle/rle.html">Run-Length Encoding</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="svo/svo.html">Sparse Voxel Octree</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="svo/construction.html">SVO Construction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="dag/dag.html">Directed Acyclic Graph</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="cuboid_extraction.html">Cuboid Extraction</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">File Formats</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="file_formats/structlang.html">Structure Language (StructLang)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">VOXEL COMPRESSION</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Encoding Methods &raquo;</li>
+        
+      
+    
+    <li>Uncompressed Format</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="uncompressed-format">Uncompressed Format</h1>
+<p>The uncompressed format used for reference in this project is a 32-bit list of voxels.
+In this case a voxel is a triple of coordinates and an ARGB integer, meaning that voxels can be partially transparent.</p>
+<h2 id="example-implementation">Example Implementation</h2>
+<p>Here is a simple example implementation of a 32-bit voxel list in Rust.</p>
+<pre><code class="rust">struct voxel {
+    i32 x;
+    i32 y;
+    i32 z;
+    u8 a;
+    u8 r;
+    u8 g;
+    u8 b;
+}
+
+let mut voxel_list = Vec&lt;voxel&gt;::new();
+</code></pre>
+
+<h2 id="justification-voxel-arrays-vs-voxel-lists">Justification - Voxel Arrays vs. Voxel Lists</h2>
+<p>There are at least two popular methods of representing voxels in an uncompressed way:</p>
+<ul>
+<li>3D-array of colors, aka. voxel array</li>
+<li>array of coordinate/color pairs, aka. voxel list</li>
+</ul>
+<p>The first method is often used in software on a small scale.
+Arrays allow for random access in <script type="math/tex">O(1)</script>.
+They are also used in other research, such as <a href="related/literature.html#high-resolution-sparse-voxel-dags">High Resolution Sparse Voxel DAGs</a>.
+Despite its popularity, arrays are unsuitable for measuring compression ratios because the entropy of the voxel data
+poorly correlates with the size of this representation.
+For instance, two voxels at <script type="math/tex">(1, 1, 1)</script> and <script type="math/tex">(1000, 1000, 1000)</script> require 1 gigavoxel of space due to all the empty space
+between the two voxels.
+However, in the best case where all voxels are present, this method has only constant overhead: that which is necessary
+to store the dimensions of the array.</p>
+<p>The second representation -which is the one used here- will require space that linearly scales with the amount of
+non-empty voxels.
+Note that in the worst case, this could require four times the space of the first method due to the coordinates
+being stored explicitly.
+This kind of overhead is still preferable to the potential (near) complete waste of space of the first method.</p>
+<p>To summarize, here is a quick overview:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Voxel Array</th>
+<th>Voxel List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>worst case overhead (space)</td>
+<td>
+<script type="math/tex">O(\infty)</script>
+<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></td>
+<td>
+<script type="math/tex">O(4n)</script>
+<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup></td>
+</tr>
+<tr>
+<td>best case overhead (space)</td>
+<td>
+<script type="math/tex">\Omega(1)</script>
+</td>
+<td>
+<script type="math/tex">\Omega(4n)</script>
+<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></td>
+</tr>
+<tr>
+<td>random access (time)</td>
+<td>
+<script type="math/tex">O(1)</script>
+</td>
+<td>
+<script type="math/tex">O(n)</script>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="serialization">Serialization</h2>
+<p>Serialization of this representation is trivial because the data structure in memory is similar of not identical to its
+serialized counterpart.
+Here, the <a href="file_formats/vl32.html">VL32</a> file format is used.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Unbounded because two voxels can be infinitely far apart, creating infinite wasted space / overhead&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>The constant factor of 4 is irrelevant in this notation, but illustrates the extent of the overhead&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+              
+            </div>
+          </div>
+<footer></footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="related/literature.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="rle/rle.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML" defer></script>
+      <script src="js/mathjax_config.js" defer></script>
+      <script src="js/extra.js" defer></script>
+      <script src="search/main.js" defer></script>
+
+</body>
+</html>

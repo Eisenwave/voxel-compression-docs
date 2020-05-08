@@ -1,0 +1,79 @@
+/*
+Darcula color scheme from the JetBrains family of IDEs
+*/
+
+
+.hljs {
+    white-space: pre !important;
+    display: block !important;
+    overflow-x: auto !important;
+    padding: 0.5em !important;
+    background: #2b2b2b !important;
+    color: #bababa !important;
+}
+
+.hljs-class,
+.hljs-title {
+    color: #bababa !important;
+    font-weight: normal !important;
+}
+
+.hljs-strong,
+.hljs-emphasis {
+    color: #a8a8a2  !important;
+}
+
+.hljs-bullet,
+.hljs-quote,
+.hljs-link,
+.hljs-number,
+.hljs-regexp,
+.hljs-literal {
+    color: #6896ba !important;
+}
+
+.hljs-code,
+.hljs-selector-class {
+    color: #a6e22e  !important;
+}
+
+.hljs-emphasis {
+    font-style: italic  !important;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-section,
+.hljs-attribute,
+.hljs-name,
+.hljs-variable {
+    color: #cb7832  !important;
+}
+
+.hljs-params {
+    color: #b9b9b9  !important;
+}
+
+.hljs-string {
+    color: #6a8759  !important;
+}
+
+.hljs-subst,
+.hljs-type,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-symbol,
+.hljs-selector-id,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-addition {
+    color: #e0c46c  !important;
+}
+
+.hljs-comment,
+.hljs-deletion,
+.hljs-meta {
+    color: #7f7f7f  !important;
+} 

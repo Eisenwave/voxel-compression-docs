@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+<title>Voxel Compression</title>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/darcula.css" rel="stylesheet">
+  <link href="../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Structure Language (StructLang)";
+    var mkdocs_page_input_path = "file_formats/structlang.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="icon icon-home"> VOXEL COMPRESSION</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../index.html">Compression of Voxel Models</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Basics</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../methods.html">Analyzed Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Related Work</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../related/overview.html">Overview over Related Work</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../related/literature.html">Literature References</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Encoding Methods</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../uncompressed.html">Uncompressed Format</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rle/rle.html">Run-Length Encoding</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../svo/svo.html">Sparse Voxel Octree</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../svo/construction.html">SVO Construction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../dag/dag.html">Directed Acyclic Graph</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cuboid_extraction.html">Cuboid Extraction</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">File Formats</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="structlang.html">Structure Language (StructLang)</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#structure-language-structlang">Structure Language (StructLang)</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#comments">Comments</a></li>
+        
+            <li><a class="toctree-l4" href="#settings">Settings</a></li>
+        
+            <li><a class="toctree-l4" href="#type-definitions">Type Definitions</a></li>
+        
+            <li><a class="toctree-l4" href="#arrays">Arrays</a></li>
+        
+            <li><a class="toctree-l4" href="#structures">Structures</a></li>
+        
+            <li><a class="toctree-l4" href="#enumerations">Enumerations</a></li>
+        
+            <li><a class="toctree-l4" href="#templated-structures">Templated Structures</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="vl32.html">32-Bit Voxel List (VL32)</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">VOXEL COMPRESSION</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>File Formats &raquo;</li>
+        
+      
+    
+    <li>Structure Language (StructLang)</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="structure-language-structlang">Structure Language (StructLang)</h1>
+<p>StructLang is a data specification language used within the scope of this project.
+It uses a syntax similar to Rust and C to mathematically specify a syntax for binary data.</p>
+<h2 id="comments">Comments</h2>
+<p>Comments begin with a <code>//</code> and continue until the end of the line.
+Alternatively, a comment block which begins with <code>/*</code> and ends with <code>*/</code> can be used.</p>
+<h2 id="settings">Settings</h2>
+<p>Some global settings may be necessary to write a proper specification.</p>
+<h3 id="syntax">Syntax</h3>
+<pre><code class="ebnf">set = &quot;set&quot; identifier &quot;=&quot; value;
+</code></pre>
+
+<h3 id="examples">Examples</h3>
+<pre><code class="rust">set byte_bits = 32
+set default_byte_order = big_endian
+set default_signed_representation = twos_complement
+</code></pre>
+
+<h3 id="list-of-settings">List of Settings</h3>
+<table>
+<thead>
+<tr>
+<th>Identifier</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>byte_bits</code></td>
+<td><code>unsigned integer</code></td>
+<td>number of bits in one byte</td>
+</tr>
+<tr>
+<td><code>default_byte_order</code></td>
+<td><code>modifier</code></td>
+<td>default byte order (endianness) of types</td>
+</tr>
+<tr>
+<td><code>default_signed_representation</code></td>
+<td><code>modifier</code></td>
+<td>default representation of signed integers</td>
+</tr>
+</tbody>
+</table>
+<h2 id="type-definitions">Type Definitions</h2>
+<p>Definitions define data types.</p>
+<h3 id="syntax_1">Syntax</h3>
+<pre><code class="ebnf">def = &quot;def&quot; type &quot;=&quot; {modifier} base_type;
+</code></pre>
+
+<ul>
+<li><code>type</code> is the identifier of the type</li>
+<li><code>modifier</code> a type modifier</li>
+<li><code>base_type</code> the base type which this type is specializing</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre><code class="python">def i32 = signed 32_bit twos_complement integer
+def u8 = unsigned 8_bit integer
+def string = null_terminated u8[]
+</code></pre>
+
+<h2 id="arrays">Arrays</h2>
+<p>Arrays are blocks of one type which are stored using a single variable.</p>
+<h3 id="syntax_2">Syntax</h3>
+<pre><code class="ebnf">array_type = type &quot;[&quot; size | &quot;&quot; &quot;]&quot;;
+</code></pre>
+
+<h3 id="examples_1">Examples</h3>
+<pre><code class="rust">u8[4096] buffer     // a constant-sized array
+
+u32 size
+u8[size] var_buffer // a variable-sized array
+
+u8[] endless_buffer // an array which extends until the end of the data
+</code></pre>
+
+<h2 id="structures">Structures</h2>
+<p>Defines a structure of other types.
+These types can also be structures.
+The first (uppermost) type in a struct is also the first element in the serialized data.</p>
+<h3 id="syntax_3">Syntax</h3>
+<pre><code class="ebnf">struct = &quot;struct&quot; identifier &quot;{&quot;
+    type identifier
+    ...
+&quot;}&quot;;
+</code></pre>
+
+<h3 id="example_1">Example</h3>
+<pre><code class="rust">struct Color {
+    u8 red
+    u8 green
+    u8 blue
+}
+</code></pre>
+
+<h2 id="enumerations">Enumerations</h2>
+<p>Defines a list of constants of some type.</p>
+<h3 id="syntax_4">Syntax</h3>
+<pre><code class="ebnf">enum = &quot;enum&quot;, identifier, &quot;:&quot;, type, &quot;{&quot;,
+    {identifier, &quot;=&quot;, value},
+&quot;}&quot;;
+</code></pre>
+
+<h3 id="examples_2">Examples</h3>
+<pre><code class="rust">enum Size : string {
+    SMALL = &quot;S&quot;
+    MEDIUM = &quot;M&quot;
+    LARGE = &quot;L&quot;
+    EXTRA_LARGE = &quot;XL&quot;
+}
+
+enum ArgbColor : u32 {
+    RED   = 0xffff0000
+    GREEN = 0xff00ff00
+    BLUE  = 0xff0000ff
+}
+</code></pre>
+
+<h2 id="templated-structures">Templated Structures</h2>
+<p>Sometimes a structure depends on content found in a header or other structures.
+Templates can change how a structure is laid out using variables.</p>
+<h3 id="syntax_5">Syntax</h3>
+<pre><code class="ebnf">struct = &quot;struct&quot; type &quot;&lt;&quot; type {identifier &quot;,&quot;} &quot;&gt;&quot; &quot;{&quot;
+    ...
+&quot;}&quot;;
+</code></pre>
+
+<h3 id="example_2">Example</h3>
+<pre><code class="rust">struct varint&lt;u8 bits&gt; {
+    if bits == 8 {
+        u8 data
+    }
+    else if bits == 16 {
+        u16 data
+    }
+    else if bits == 32 {
+        u32 data
+    }
+    else {
+        error &quot;Invalid bits variable&quot;
+    }
+}
+</code></pre>
+              
+            </div>
+          </div>
+<footer></footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../cuboid_extraction.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="vl32.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML" defer></script>
+      <script src="../js/mathjax_config.js" defer></script>
+      <script src="../js/extra.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

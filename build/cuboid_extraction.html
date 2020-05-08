@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="img/favicon.ico">
+<title>Voxel Compression</title>
+
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="css/darcula.css" rel="stylesheet">
+  <link href="css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Cuboid Extraction";
+    var mkdocs_page_input_path = "cuboid_extraction.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> VOXEL COMPRESSION</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="index.html">Compression of Voxel Models</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Basics</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="methods.html">Analyzed Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Related Work</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="related/overview.html">Overview over Related Work</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="related/literature.html">Literature References</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Encoding Methods</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="uncompressed.html">Uncompressed Format</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="rle/rle.html">Run-Length Encoding</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="svo/svo.html">Sparse Voxel Octree</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="svo/construction.html">SVO Construction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="dag/dag.html">Directed Acyclic Graph</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="cuboid_extraction.html">Cuboid Extraction</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#cuboid-extraction">Cuboid Extraction</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#motivation">Motivation</a></li>
+        
+            <li><a class="toctree-l4" href="#absolutely-stupid-method">Absolutely Stupid Method</a></li>
+        
+            <li><a class="toctree-l4" href="#xyz-merge">XYZ-Merge</a></li>
+        
+            <li><a class="toctree-l4" href="#heightmap-based-approaches">Heightmap-Based Approaches</a></li>
+        
+            <li><a class="toctree-l4" href="#naive-method">Naive Method</a></li>
+        
+            <li><a class="toctree-l4" href="#modified-kadanes-algorithm">Modified Kadane's-Algorithm</a></li>
+        
+            <li><a class="toctree-l4" href="#golden-section-search-not-sure-if-this-actually-works">Golden-Section-Search (not sure if this actually works)</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">File Formats</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="file_formats/structlang.html">Structure Language (StructLang)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">VOXEL COMPRESSION</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Encoding Methods &raquo;</li>
+        
+      
+    
+    <li>Cuboid Extraction</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="cuboid-extraction">Cuboid Extraction</h1>
+<h2 id="motivation">Motivation</h2>
+<p>Voxel models of certain types have large volumes of voxels.
+These types include extruded heightmaps, medical scans, video game worlds and voxel art.
+Other types such as voxelized polygonal models may also be filled up instead of being kept hollow.</p>
+<p>The volumes may often be misaligned with the octree structure.
+Consider a single 2x2x2 cube in the center of an octree.
+All 8 subtrees of the octree would have to encode an individual voxel of this cube, which is far from optimal.
+In addition, decoding volumes which are completely filled simplifies the decoding process.
+These volumes could be extracted and encoded as cuboids like <code>{triple&lt;u8&gt; pos, triple&lt;u8&gt; size}</code> within a container that
+has dimensions up to 256^3.</p>
+<p>However we extract cuboids, those should be as large in volume as possible.
+This way, we cover the most voxels with our pairs of positions.
+The highest-volume container should be found, then extracted and the next-highest-volume container
+found, etc.
+We invest 6 bytes into the extraction, so our volume needs to be 48 to break even (e.g. <code>4x4x3</code>).</p>
+<h2 id="absolutely-stupid-method">Absolutely Stupid Method</h2>
+<ul>
+<li>extreme complexity</li>
+<li>but optimal results</li>
+</ul>
+<p>Since a cuboid is just a pair of positions, we can simply iterate over all pairs of positions.
+We then iterate over all voxels in the cuboid to test whether they exist.
+For a <code>d*d*d</code> model containing <code>v</code> voxels the complexity is thus <code>O(d^3 * d^3 * d^3)</code> or <code>O(d^9)</code> or <code>O(v^3)</code>.
+This is some clown-world-tier complexity and should not find its way into any serious implementation.
+Due to its simplicity, it could be used to verify the correctness of more complex approaches though.</p>
+<h2 id="xyz-merge">XYZ-Merge</h2>
+<ul>
+<li>best possible complexity</li>
+<li>not optimal</li>
+</ul>
+<p>An XYZ-merge works by merging all neighboring voxels into lines on one axis first.
+Then neighboring lines are merged into planes on the second axis.
+Then neighboring planes are merged into cuboids on the last axis.
+The results are not optimal and may differ depending on the order of axes.</p>
+<p>At worst, we can't merge anything and thus iterate over every voxel in each of the steps once.
+The complexity is <code>O(d^3 * 3) = O(d^3)</code> or <code>O(v)</code>. </p>
+<h2 id="heightmap-based-approaches">Heightmap-Based Approaches</h2>
+<p>All following approaches are based on the idea, that we can simplify this problem to a 2-dimensional one.
+One axis is being used as a height-axis, ideally the smallest one if the model is not cubical.
+We then use a sweeping-plane approach where at each coordinate, we draw a heightmap which extends into our
+chosen direction.
+Finding the largest volume in the model is reduced to finding the maximum of the largest volumes for all heightmaps.</p>
+<h3 id="constructing-heightmaps-from-voxel-models">Constructing Heightmaps from Voxel-Models</h3>
+<p>Here is an illustration of how this is done, in 2 dimensions, where "up" in text is the height axis:</p>
+<pre><code>   0123456789    0123456789
+
+7  ###        -&gt; 1110000000
+6  #### ## #  -&gt; 2221011010
+5  ## ### # # -&gt; 3302120101
+4  ##### # ## -&gt; 4413201012
+3  ## # # #   -&gt; 5504010100
+2  ########   -&gt; 6612121200
+1  #########  -&gt; 7726232310
+0  ## ## #### -&gt; 8807303420
+</code></pre>
+
+<p>In this illustration, <code>#</code> would be encoded as <code>1</code> and <code></code> would be encoded as <code>0</code>
+Each slice from <code>0</code> to <code>7</code> is one histogram in 2 dimensions or a heightmap in 3 dimensions.
+We can construct these very efficiently by just taking the heightmap at one height above and incrementing each height,
+unless we find an empty voxel (<code>0</code>).</p>
+<h3 id="constructing-bitmaps-from-heightmaps">Constructing Bitmaps from Heightmaps</h3>
+<p>Finding the largest cuboid in a voxel-model has been reduced to finding the largest cuboid in all its heightmaps.
+The problem is once again reduced to finding the largest area of <code>1</code>s in a bitmap, which can be done in <code>O(n*n)</code>.
+This is done by looking at all different height-values of the heightmap.
+At every height, a bitmap is constructed.
+In our bitmap of equal dimensions, <code>1</code> represents that the height at the location is <code>&gt;=</code> the height.</p>
+<p>Example:</p>
+<pre><code>389200          111000
+323350  ------&gt; 101110
+500020   (h=3)  100000
+211141          000010
+</code></pre>
+
+<p>Finding the largest area of <code>1</code> in an <code>n*n</code> rectangle has <code>O(n^2)</code> complexity or <code>O(1)</code> per pixel, when using a
+sweeping-line algorithm and searching for the greatest area in the resulting histograms:
+https://www.geeksforgeeks.org/maximum-size-rectangle-binary-sub-matrix-1s/</p>
+<p>The volume of the greatest cuboid is then the current height multiplied with the size of the greatest area of <code>1</code> which
+we find.</p>
+<h3 id="expected-values">Expected values</h3>
+<p>To understand the following approaches, one must realize that the highest cuboid is not necessarily the largest.
+For example, a very flat pyramid may have a shape which is only great in volume towards the base.
+For an <code>n*n</code> heightmap with <code>n</code> height, we can find the cuboid with the largest volume for all heights by finding the
+largest cuboid at each individual height.
+This forces us to check every single height.</p>
+<h2 id="naive-method">Naive Method</h2>
+<ul>
+<li>high complexity</li>
+<li>optimal results</li>
+</ul>
+<p>The naive method simply to iterate over all heights.
+We then require <code>O(d^2 * d^2)</code> complexity where one <code>d^2</code> represents the size of the base and the other <code>d^2</code> represents
+the amount of pairs of heights.
+This would be <code>O(v^(4/3))</code>, which is not as bad as the stupid approach but still polynomial.</p>
+<h2 id="modified-kadanes-algorithm">Modified Kadane's-Algorithm</h2>
+<pre><code>THIS SECTION IS WIP
+
+- complexity yet unknown
+- hopefully optimal results
+
+This can be done by using a sweeping-plane algorithm, where each plane is a heightmap which encodes how many voxels
+extrude upwards, starting from each one of its pixels.
+The problem is thus reduced to finding the greatest cuboid on a heightmap, which can be done somewhat efficiently using
+Kadane's algorithm, where any `0` is treated as negative infinity and the heights are cut-off at some maximum height
+dynamically during the search.
+
+For a `n*n` map, Kadane's algorithm has a complexity of `O(n^3)` or `O(n)` per pixel.
+Whether this is usable has to be investigated further.
+</code></pre>
+
+<h2 id="golden-section-search-not-sure-if-this-actually-works">Golden-Section-Search (not sure if this actually works)</h2>
+<ul>
+<li>best known complexity</li>
+<li>optimal</li>
+</ul>
+<p>We can achieve logarithmic complexity per voxel.</p>
+<p>The approach to this is very similar to the naive method, but based on a crucial observation.
+The maximum volumes at each minimum height form a unimodal function.
+Our search is still based on finding the greatest are of <code>1</code> in a bitmap, but we choose our heights in a smarter
+way instead of iterating over all heights.</p>
+<p>Consider a histogram such as:</p>
+<pre><code>  ^
+ 7|   # 
+ 6|#  #                                       #
+ 5|#  #    ###     #                          #
+ 4|#  #    ###  ## ###                ##      #
+ 3|# ##    ### ### ###             #######   ##
+ 2|####    ### ### ####    ###     #######  ###
+ 1|#####  #### ### #####   ############### ####
+ -+----------------------------------------------&gt;
+  |0123456789abcdefghijklmnopqrstuvwxyzABCDEFGH
+</code></pre>
+
+<p>The greatest areas for each height are:</p>
+<pre><code>7:     07 (3:1, 3:7)
+6:     07 (3:1, 3:7) found by extruding (3:1, 3:6)
+&gt;&gt;5:   15 (8:1, a:5)
+&gt;&gt;4:   15 (8:1, a:5)
+&gt;&gt;&gt;&gt;3: 21 (w:1, C:3)
+&gt;&gt;&gt;&gt;2: 21 (w:1, C:3)
+&gt;&gt;1:   15 (o:1, C:1)
+</code></pre>
+
+<p>Note that the maximum volumes at each height only form a unimodal function if we extrude our found area as far up as
+possible.
+Searching for the maximum or minimum of a unimodal function can be done with logarithmic complexity.
+The final complexity would thus be <code>O(n^2 * log_2 n)</code> or <code>O(log_2 n)</code> per pixel. </p>
+              
+            </div>
+          </div>
+<footer></footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="dag/dag.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="file_formats/structlang.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML" defer></script>
+      <script src="js/mathjax_config.js" defer></script>
+      <script src="js/extra.js" defer></script>
+      <script src="search/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+<title>Voxel Compression</title>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/darcula.css" rel="stylesheet">
+  <link href="../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "SVO Construction";
+    var mkdocs_page_input_path = "svo/construction.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="icon icon-home"> VOXEL COMPRESSION</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../index.html">Compression of Voxel Models</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Basics</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../methods.html">Analyzed Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Related Work</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../related/overview.html">Overview over Related Work</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../related/literature.html">Literature References</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Encoding Methods</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../uncompressed.html">Uncompressed Format</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rle/rle.html">Run-Length Encoding</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="svo.html">Sparse Voxel Octree</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="construction.html">SVO Construction</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#svo-construction">SVO Construction</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#summary-of-construction">Summary of Construction</a></li>
+        
+            <li><a class="toctree-l4" href="#coordinate-system">Coordinate System</a></li>
+        
+            <li><a class="toctree-l4" href="#special-case-where-voxel-coordinates-are-positive">Special Case Where Voxel Coordinates Are Positive</a></li>
+        
+            <li><a class="toctree-l4" href="#efficient-boundary-test">Efficient Boundary Test</a></li>
+        
+            <li><a class="toctree-l4" href="#octree-node-index">Octree Node Index</a></li>
+        
+            <li><a class="toctree-l4" href="#traversing-the-octree">Traversing the Octree</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../dag/dag.html">Directed Acyclic Graph</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cuboid_extraction.html">Cuboid Extraction</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">File Formats</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">VOXEL COMPRESSION</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Encoding Methods &raquo;</li>
+        
+      
+    
+    <li>SVO Construction</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="svo-construction">SVO Construction</h1>
+<p>When constructing an SVO from a <a href="../uncompressed.html">voxel list</a>, the complexity of this process depends on the data
+fed to the constructing algorithm.
+Within the scope of this project, the <a href="../uncompressed.html">uncompressed format is a list of voxels</a>, but there are
+further subtle differences.</p>
+<h4 id="summary-of-construction">Summary of Construction</h4>
+<p>The following process must be repeated for all voxels <script type="math/tex">v := (p := (x, y, z),  c) \in (\mathbb{Z}^3, \mathbb{N})</script> in the
+list.</p>
+<ol>
+<li>Test signed input position <script type="math/tex">p</script> against current SVO dimensions <script type="math/tex">d</script>.</li>
+<li>If the position is outside of our boundaries, enlarge the SVO to fit <script type="math/tex">p</script>.</li>
+<li>Subtract the new most negative corner <script type="math/tex">p_{min}</script> of the SVO from <script type="math/tex">p</script> to obtain <script type="math/tex">p_{\text{normalized}}</script>.</li>
+<li>Convert <script type="math/tex">p_{\text{normalized}}</script> to the octree node index <script type="math/tex">n</script>.</li>
+<li>Use <script type="math/tex">n</script> to traverse the SVO and insert the voxel at the correct location.</li>
+<li>Optional: If only one octant is used, cut branches belonging to other octants recursively.
+   This step reduces the SVO's depth by at least one layer when applicable.</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To handle signed values, the octree must be extended into both positive and negative octants.</p>
+</div>
+<h4 id="coordinate-system">Coordinate System</h4>
+<p>There are two coordinate systems with which we must concern ourselves with:</p>
+<ul>
+<li><em>world coordinate system (signed)</em></li>
+<li><em>SVO coordinate system (unsigned)</em></li>
+</ul>
+<p>The conversion between these two coordinate systems occurs in step 3.</p>
+<p>The problem which we face is that our SVO is meant to split the world coordinate system into eight equal octants,
+recursively.
+The first split occurs at the origin however, the origin <script type="math/tex">(0, 0, 0)</script> must be located in one of these octants.</p>
+<p>To solve this, we put the origin into the first octant; then all positions with no negative coordinates will lie in just
+one octant.
+This allows us to perform the optimisation from step 6 for only unsigned coordinates.
+It also helps us optimize our <a href="#efficient-boundary-test">boundary test</a>.</p>
+<p>As a result, for example, an SVO that can contain 4x4x4 voxels will have space from <script type="math/tex">(-2, -2, -2)</script> to <script type="math/tex">(1, 1, 1)</script>.</p>
+<h4 id="special-case-where-voxel-coordinates-are-positive">Special Case Where Voxel Coordinates Are Positive</h4>
+<p>If the voxels are sorted with the first voxel being the most negative corner of the model, we have a global <script type="math/tex">p_{min}</script>
+(see step 3.).
+All voxels can then be translated by <script type="math/tex">-p_{min}</script>, yielding only positions that belong in the first octant.
+If <script type="math/tex">x, y, z</script> are already guaranteed to be positive, this condition is obviously also met.
+In such cases. step 1. and 2. are simplified and step 6. is eliminated.</p>
+<h2 id="efficient-boundary-test">Efficient Boundary Test</h2>
+<p>To check whether a point lies within our SVO, <script type="math/tex">max(abs(x), abs(y), abs(z)) > d</script> would suffice.
+However, this test is overly pessimistic because we have more negative space instead of positive space.
+Also, assuming no compiler optimisations, we have to perform six conditional operations:</p>
+<ul>
+<li>each call to <code>abs()</code> requires one conditional operation</li>
+<li>a three-argument <code>max()</code> would require two more</li>
+<li>one more conditional operation is necessary for the <script type="math/tex">> d</script> comparison</li>
+</ul>
+<p>Assuming unsorted inputs, these six conditional jumps may wreak havoc on the performance of the
+<a href="https://en.wikipedia.org/wiki/Branch_predictor">branch predictor</a>.</p>
+<p>To remove the pessimism from our test, we define a new function to be used in stead of <script type="math/tex">abs</script>:
+<script type="math/tex; mode=display">
+abs_{\text{SVO}}(n) =
+\begin{cases}
+    -n - 1,& \text{if } n < 0\\
+    n,              & \text{otherwise}
+\end{cases}
+</script>
+</p>
+<h3 id="implementation">Implementation</h3>
+<pre><code class="cpp">uint32_t abs_svo(int32_t n)
+{
+    return n &lt; 0 ? (-n -1) : n;
+}
+
+bool comp_against_svo_bounds(int32_t x, int32_t y, int32_t z, uint32_t d)
+{
+    return (abs_svo(x) | abs_svo(y) | abs_svo(z)) &gt;= d;
+}
+</code></pre>
+
+<p>Such an implementation eliminates five out of six conditional operations on modern compilers, leaving only the final
+<code>&gt;=</code> comparison.
+See <a href="https://godbolt.org/z/K2CCmU">this Compiler Explorer page</a> for an example.</p>
+<h4 id="compiler-optimization-of-abs_svo">Compiler Optimization of <code>abs_svo</code></h4>
+<p>Using <script type="math/tex">abs_{\text{SVO}}</script> actually works in ours and the compiler's favor.
+This is due to the fact that negating a number in two's complement requires a bitwise negation and an increment.
+Due to our decrement of the negated number, we eliminate this need.</p>
+<pre><code class="asm">abs_svo(int):
+  mov eax, edi  # copy function parameter into result register
+  sar eax, 31   # fill the register with 1s if the number is negative, else with 0s
+  xor eax, edi  # xor result register with parameter, performing a conditional bitwise NOT
+  retn          # return from the function
+</code></pre>
+
+<h4 id="manual-optimization-of-comparison-with-d">Manual Optimization of Comparison with <code>d</code></h4>
+<p>This only works because <script type="math/tex">d</script> is an SVO dimension and thus always guaranteed to be a power of two.
+The most significant bit of lower numbers is lower than the single bit of a greater power of two.
+To name an example, 128 will have the 128-bit set, whereas all lower numbers will consist only of less significant bits.
+Hence, they can be safely combined with an <code>|</code> operation before making the comparison.</p>
+<h3 id="summary">Summary</h3>
+<p>The overly pessimistic initial comparison could be fixed with -surprisingly- no performance impact.
+Out of the six necessary conditional operations, we could optimize five away.
+During a microbenchmark of the original <script type="math/tex">max(abs(x), abs(y), abs(z)) > d</script> comparison vs. our optimized method, <strong>no
+performance difference could be found</strong>.
+However, microbenchmarks are to be taken with a grain of salt and depending on the architecture and the surrounding
+code, a performance improvement may happen.</p>
+<h2 id="octree-node-index">Octree Node Index</h2>
+<p>The conventional method of addressing positions within a 3D-container would be by using a vector
+<script type="math/tex">v = (x, y, z) \in \mathbb{Z}^3</script>.
+Finding a voxel within an octree using <script type="math/tex">v</script> would cumbersome, since it requires recursively testing whether
+each coordinate is in the lower or the upper half of current subtree.
+As long as the tree's dimensions are a power of 2, this is actually simplified since this test can be reduced to
+checking whether a bit is set.
+For example, 128 is in the upper half of the 256-tree, because the most 128-bit is set, which is not the case for 127.</p>
+<h3 id="idea">Idea</h3>
+<p>Binary numbers can generally be interpreted as locations in binary trees:</p>
+<pre><code>     _**_
+    /    \
+  0*     1*
+  / \    / \
+00  01  10  11
+</code></pre>
+
+<p>As we can see, the lower bit indicates whether the position is left or right in the lower subtree and the higher bit
+indicates whether the position is left or right in the upper subtree.
+The same pattern occurs for octal digits and octrees.
+<script type="math/tex">(x, y, z)</script> can thus be seen as three positions in separate binary trees which we want to combine into an octree.</p>
+<p>To convert <script type="math/tex">(x, y, z)</script> to a position in an octree, the bits of <script type="math/tex">(x, y, z)</script> can simply be interleaved.
+The result will be a single number of octal digits, each of which represents the position within one octree node.</p>
+<h3 id="examples">Examples</h3>
+<p>This is how coordinates can be mapped to octree indices:
+<script type="math/tex; mode=display">\begin{align}
+& (6, 8, 9) = (0101_2, 1000_2, 1001_2) \\
+\xrightarrow{\text{interleave}} \quad& (0,1,1),(1,1,1),(0,0,0),(1,0,1) \\
+\xrightarrow{\text{concatenate}} \quad& 011,111,000,101_2 = 3705_8 = 1989
+\end{align}</script>
+</p>
+<p>Note that in the above example, <script type="math/tex">x</script> is used as the most significant bit of each octal digit, followed by <script type="math/tex">y</script> and <script type="math/tex">z</script>.
+This is how octree node indices can be mapped to coordinates:</p>
+<p>
+<script type="math/tex; mode=display">\begin{align}
+&25 = 31_8 = 011,001_2 \\ 
+\xrightarrow{\text{to vectors}} \quad& (0, 1, 1), (0, 0, 1) \\
+\xrightarrow{\text{deinterleave}} \quad& (00_2, 10_2, 11_2) = (0, 2, 3)
+\end{align}</script>
+</p>
+<h3 id="implementation_1">Implementation</h3>
+<p>The following C++17 implementation shows how three coordinates <script type="math/tex">(x, y, z)</script> can be efficiently interleaved using
+binary Magic Numbers.
+The implementation expands upon one of the
+<a href="https://graphics.stanford.edu/~seander/bithacks.html#InterleaveBMN">Bit Twiddling Hacks by Sean Eron Anderson</a>.</p>
+<pre><code class="cpp">// interleaves a given number with two zero-bits after each input bit
+// the first insertion occurs between the least significant bit and the next higher bit
+uint64_t ileave_two0(uint32_t input)
+{
+    constexpr size_t numInputs = 3;
+    constexpr uint64_t masks[] = {
+      0x9249'2492'4924'9249,
+      0x30C3'0C30'C30C'30C3,
+      0xF00F'00F0'0F00'F00F,
+      0x00FF'0000'FF00'00FF,
+      0xFFFF'0000'0000'FFFF
+    };
+
+    uint64_t n = input;
+    for (int i = 4; i != 1; --i) {
+        const auto shift = (numInputs - 1) * (1 &lt;&lt; i);
+        n |= n &lt;&lt; shift;
+        n &amp;= masks[i];
+    }
+
+    return n;
+}
+
+uint64_t ileave3(uint32_t x, uint32_t y, uint32_t z)
+{
+    return (ileave_two0(x) &lt;&lt; 2) | (ileave_two0(y) &lt;&lt; 1) | ileave_two0(z);
+}
+
+</code></pre>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An implementation for a variable amount of inputs is equally possible, but would significantly increase the code
+complexity.
+Most notably, the <code>masks</code> lookup table would need to be generated computationally.</p>
+<p>C++ was chosen due to its <code>constexpr</code> compile-time context.</p>
+</div>
+<h2 id="traversing-the-octree">Traversing the Octree</h2>
+<p>Once the octree node index is computed, traversing the octree becomes simple:</p>
+<ol>
+<li>For a given index <script type="math/tex">n</script>, we start at the most significant octal digit <script type="math/tex">o</script> and the root node.</li>
+<li>We follow the branch number <script type="math/tex">o</script> or construct it if it does not exist yet.</li>
+<li>Insert the voxel's color once a leaf node is found.</li>
+<li>Repeat until the least significant octal digit is processed.</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once a nonexistent branch is found in step 2, all deeper branches will also be missing.
+In such a case, we can enter a different code path that handles this case.</p>
+</div>
+<h3 id="node-implementation">Node Implementation</h3>
+<p>An SVO will need to store our voxel colors at some level.
+We can reduce memory consumption and cache misses by using a small voxel array at the second-to-final depth:</p>
+<pre><code class="c++">// a regular node
+struct svo_node {
+    svo_node *children[8];
+};
+
+// a node that stores colors instead
+struct svo_array_node {
+    uint32_t colors[8];
+}
+
+// a node that stores just one color, something that we want to avoid
+struct svo_leaf_node {
+    uint32_t color;
+}
+</code></pre>
+
+<p>This code will need to be adjusted so that the nodes are either polymorphic or type unions are used.</p>
+              
+            </div>
+          </div>
+<footer></footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="svo.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../dag/dag.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML" defer></script>
+      <script src="../js/mathjax_config.js" defer></script>
+      <script src="../js/extra.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

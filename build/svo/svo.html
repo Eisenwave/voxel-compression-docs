@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+<title>Voxel Compression</title>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/darcula.css" rel="stylesheet">
+  <link href="../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Sparse Voxel Octree";
+    var mkdocs_page_input_path = "svo/svo.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="icon icon-home"> VOXEL COMPRESSION</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../index.html">Compression of Voxel Models</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Basics</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../methods.html">Analyzed Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Related Work</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../related/overview.html">Overview over Related Work</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../related/literature.html">Literature References</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Encoding Methods</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../uncompressed.html">Uncompressed Format</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rle/rle.html">Run-Length Encoding</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="svo.html">Sparse Voxel Octree</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#sparse-voxel-octree">Sparse Voxel Octree</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#extreme-cases-and-limits">Extreme Cases And Limits</a></li>
+        
+            <li><a class="toctree-l4" href="#construction">Construction</a></li>
+        
+            <li><a class="toctree-l4" href="#serialization">Serialization</a></li>
+        
+            <li><a class="toctree-l4" href="#tetrahexacontrees">Tetrahexacontrees</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="construction.html">SVO Construction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../dag/dag.html">Directed Acyclic Graph</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../cuboid_extraction.html">Cuboid Extraction</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">File Formats</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">VOXEL COMPRESSION</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Encoding Methods &raquo;</li>
+        
+      
+    
+    <li>Sparse Voxel Octree</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="sparse-voxel-octree">Sparse Voxel Octree</h1>
+<p><img alt="Octree" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Octree2.svg/1280px-Octree2.svg.png" />
+<em>An Octree - Source: <a href="https://commons.wikimedia.org/wiki/File:Octree2.svg">Wikipedia</a>, WhiteTimberwolf</em></p>
+<p>A sparse voxel octree is a data structure which stores voxels in a tree with a branching factor of 8, with its branches
+being potentially absent.
+Missing branches typically represent empty volumes where no voxels exist.
+The greater these volumes are, the closer to a the root of the tree can the branches be pruned.</p>
+<p>This results in a very efficient representation of models with a significant portion of empty space.
+Unlike with a voxel list, all positioning is implicit and results from the tree structure, meaning that no space has
+to be used for the storage of coordinates during serialization.
+Thus, octrees combine the two greatest advantages of voxel lists and voxel arrays:</p>
+<ul>
+<li>like lists, they waste little space on encoding empty voxels</li>
+<li>like for arrays, voxel coordinates are implicit and little space is wasted</li>
+</ul>
+<h2 id="extreme-cases-and-limits">Extreme Cases And Limits</h2>
+<p>To illustrate the following extreme cases, voxel arrays and voxel lists are also compared.
+The space complexity of three extreme cases is compared between the three data structures, where <script type="math/tex">v</script> is the amount
+of voxels.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Voxel Array</th>
+<th>Voxel List</th>
+<th>Sparse Voxel Octree</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Empty</td>
+<td>
+<script type="math/tex">O(1)</script>
+<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></td>
+<td>
+<script type="math/tex">O(1)</script>
+</td>
+<td>
+<script type="math/tex">O(1)</script>
+</td>
+</tr>
+<tr>
+<td>Tightly Filled</td>
+<td>
+<script type="math/tex">O(v)</script>
+</td>
+<td>
+<script type="math/tex">O(4v)</script>
+</td>
+<td>
+<script type="math/tex">O(\frac{8}{7} v)</script>
+</td>
+</tr>
+<tr>
+<td>Stretched</td>
+<td>
+<script type="math/tex">O(\infty)</script>
+</td>
+<td>
+<script type="math/tex">O(1)</script>
+</td>
+<td>
+<script type="math/tex">O(\infty)</script>
+</td>
+</tr>
+</tbody>
+</table>
+<h5 id="empty-octree">Empty Octree</h5>
+<p>Entirely empty models can be encoded using just the root note, which then encodes that no subtrees exist.</p>
+<h5 id="tightly-filled-octree">Tightly Filled Octree</h5>
+<p>Entirely filled models will have some overhead compared to an array of voxels.
+For every eight nodes, there is one parent node.
+We can calculate the maximum possible overhead by summing up this <script type="math/tex">\frac{1}{8}</script> overhead infinitely:
+<script type="math/tex; mode=display">\sum_{n=1}^\infty{\frac{1}{8}^n} = \frac{1}{7}</script>
+So at worst, our data will increase by <script type="math/tex">\frac{1}{7}</script>, which is much better than a 100% increase such as for binary
+trees.</p>
+<h5 id="stretched-octree">Stretched Octree</h5>
+<p>The <em>stretched</em> case is a case where a finite amount of voxels are placed infinitely far apart.
+For arrays, this produces infinite space requirements because all space between these points must be filled.
+For octrees, more layers are necessary to encode positions further from the origin.
+In neither case there is an upper bound to this.</p>
+<p>In practice, octrees perform significantly better at encoding sparse data than arrays.</p>
+<h2 id="construction">Construction</h2>
+<p>How an octree can be constructed from a list voxels is thorougly explained in <a href="construction.html">SVO Construction</a>.</p>
+<h2 id="serialization">Serialization</h2>
+<p>To be used in a serial data format, octrees must first be serialized.
+Nodes will no longer be laid out "randomly" in memory but instead be arranged one after another.
+To fully encode an SVO, two steps must be performed:</p>
+<ol>
+<li>Linearize nodes by traversing the SVO's nodes in a deterministic, reversible order.</li>
+<li>Serialize each node to binary data.</li>
+</ol>
+<h3 id="traversal-order">Traversal Order</h3>
+<p>There are two well-known strategies for traversing trees completely:</p>
+<ul>
+<li>Depth-First Search (DFS)</li>
+<li>Breadth-First Search (BFS)</li>
+</ul>
+<h4 id="depth-first">Depth-First</h4>
+<p><img alt="depth-first-tree" src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Depth-first-tree.svg" /></p>
+<p><em>Tree, traversed depth-first - Source: <a href="https://en.wikipedia.org/wiki/File:Depth-first-tree.svg">Wikipedia</a>,
+Alexander Drichel</em></p>
+<p>DFS can be performed using only a stack to keep track of the node number at each level.
+On the deepest level, the next node is chosen until the end is reached and the next parent node is chosen.
+This low memory cost (which is in fact <script type="math/tex">O(\log{n})</script> where n is the number of nodes) is highly advantageous when encoding
+enormous models. </p>
+<h4 id="breadth-first">Breadth-First</h4>
+<p><img alt="breadth-first-tree" src="https://upload.wikimedia.org/wikipedia/commons/3/33/Breadth-first-tree.svg" /></p>
+<p><em>Tree, traversed breadth first - Source:
+<a href="https://en.wikipedia.org/wiki/Breadth-first_search#/media/File:Breadth-first-tree.svg">Wikipedia</a>, Alexander Drichel</em></p>
+<p>BFS comes with a higher cost since a typical algorithm appends all branches to a queue for every traversed node.
+This means that in the worst case, which is at the beginning of serialization eight nodes are appended on every level
+before any node is popped from the queue, resulting in a higher memory cost.</p>
+<h3 id="node-encoding">Node Encoding</h3>
+<h3 id="single-bit-format">Single-Bit Format</h3>
+<ul>
+<li><code>0</code> stands for air-subtree</li>
+<li><code>1</code> stands for partially or entirely filled voxel-subtree</li>
+</ul>
+<p>8 Bits per octree-node, thus this format is byte-aligned.</p>
+<h3 id="15-bit-format">1.5-Bit Format</h3>
+<ul>
+<li><code>00</code> stands for air-subtree</li>
+<li><code>01</code> stands for solid subtree</li>
+<li><code>1</code>  stands for partially filled subtree</li>
+</ul>
+<p>Variable amount of bits per octree-node, neither bit- nor byte-aligned.
+On the last level (node = voxel), the single-bit format is used because there are no subtrees.</p>
+<h3 id="2-bit-format">2-Bit Format</h3>
+<ul>
+<li><code>00</code> stands for air-subtree</li>
+<li><code>01</code> stands for solid subtree</li>
+<li><code>10</code> stands for partially filled subtree</li>
+<li><code>11</code> variable purpose</li>
+</ul>
+<h4 id="11-for-rawarray-subtrees"><code>11</code> for Raw/Array Subtrees</h4>
+<p>Useful to encode subtrees completely filled with high-entropy content.
+On the second-to-last level, <code>11</code> for raw-subtrees there is no difference between <code>10</code> and <code>11</code>, so reverting to
+the 1.5-bit format is viable.
+On the last level, the single-bit format should be used.</p>
+<p>As long as the 1.5-bit format is not used, this encoding is completely byte-aligned:
+* alignment to <code>16</code>-bit boundaries on most levels
+* alignment to <code>8</code>-bit boundaries on last level</p>
+<h4 id="11-for-pointers-to-subtrees-on-the-same-level"><code>11</code> for Pointers to Subtrees on the Same Level</h4>
+<p>Useful for encoding multiple similar subtrees.
+Similarities between structures could be effectively exploited.
+Verifying whether subtrees are equal down to the base level has very high complexity: <code>O(n^2 * 8^n)</code>.
+The comparison depth could be reduced down to a limited number of levels or the level number could be encoded next to
+the pointer: <code>{u32 indexOfOtherTree, u8 depth}</code>.</p>
+<p>Instead of the pointer, a tree could instead encode all the places where it is additionally used.
+This would make decoding easier, since remembering trees on the same level is not necessary.</p>
+<h2 id="tetrahexacontrees">Tetrahexacontrees</h2>
+<p>This term comes from "tetrahexaconta" (Greek for 64) and "tree".
+It builds on the idea of octrees but expands the branching factor from 8 to 8<sup>2</sup>, or 64.
+A use of this concept can be seen in the
+<a href="../related/literature.html#vola-a-compact-volumetric-format-for-3d-mapping-and-embedded-systems">VOLA</a> file format.</p>
+<p>64-bit architectures established themselves as the de-facto standard for desktop operating systems.
+Anecdotally, "macOS Mojave would be the last version of macOS to run 32-bit apps"
+-<a href="https://support.apple.com/en-us/HT208436">Apple</a>.
+Thus, optimization of algorithms in the present day can be performed for 64-bit architectures without worrying about
+32-bit users.</p>
+<h3 id="comparison-to-octrees">Comparison to Octrees</h3>
+<p>Tetrahexacontrees encode two octree layers of depth in a single layer.
+CPU-performance wise, they fill exactly one 64-bit register with one node, using the architecture's capacities
+optimally unlike octrees.</p>
+<p>However, they sacrifice potential compression efficiency.
+In the best case which is an entirely empty node, an octree requires only one byte of space to encode that each of the
+8 child-nodes are empty.
+A hexacontree will however require eight times the space, meaning 64 bits that are all <code>0</code>.
+In the worst case, which is noise that requires all nodes to be present, a tetrahexacontree is slightly more efficient
+because it requires only 8 bytes for two octree layers instead of 8+1 such as an octree.</p>
+<p>In conclusion, tetrahexacontrees can come with a significant space cost, while making better use of modern
+architectures.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Depends on how much space is pre-allocated before the insertion of any voxels.
+  Other data structures consume no space for such a pre-allocation.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+              
+            </div>
+          </div>
+<footer></footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../rle/rle.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="construction.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML" defer></script>
+      <script src="../js/mathjax_config.js" defer></script>
+      <script src="../js/extra.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
