@@ -1,7 +1,7 @@
 # Sparse Voxel Octree
 
 ![Octree](https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Octree2.svg/1280px-Octree2.svg.png)
-Source: [Wikipedia](https://en.wikipedia.org/wiki/Octree#/media/File:Octree2.svg)
+*An Octree - Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Octree2.svg), WhiteTimberwolf*
 
 A sparse voxel octree is a data structure which stores voxels in a tree with a branching factor of 8, with its branches
 being potentially absent.
@@ -16,12 +16,27 @@ Thus, octrees combine the two greatest advantages of voxel lists and voxel array
 - like lists, they waste little space on encoding empty voxels
 - like for arrays, voxel coordinates are implicit and little space is wasted
 
-## Limitations
+## Extreme Cases And Limits
 
-#### Best Case
+To illustrate the following extreme cases, voxel arrays and voxel lists are also compared.
+The space complexity of three extreme cases is compared between the three data structures, where $v$ is the amount
+of voxels.
+
+| | Voxel Array | Voxel List | Sparse Voxel Octree
+| ----- | ----- | ----- | ----- |
+Empty          | $O(1)$[^1] | $O(1)$ | $O(1)$
+Tightly Filled | $O(v)$ | $O(4v)$ | $O(\frac{8}{7} v)$
+Stretched      | $O(\infty)$ | $O(1)$ | $O(\infty)$
+
+[^1]: Depends on how much space is pre-allocated before the insertion of any voxels.
+      Other data structures consume no space for such a pre-allocation.
+
+##### Empty Octree
+
 Entirely empty models can be encoded using just the root note, which then encodes that no subtrees exist.
 
-#### Worst Case
+##### Tightly Filled Octree
+
 Entirely filled models will have some overhead compared to an array of voxels.
 For every eight nodes, there is one parent node.
 We can calculate the maximum possible overhead by summing up this $\frac{1}{8}$ overhead infinitely:
@@ -29,27 +44,59 @@ $$\sum_{n=1}^\infty{\frac{1}{8}^n} = \frac{1}{7}$$
 So at worst, our data will increase by $\frac{1}{7}$, which is much better than a 100% increase such as for binary
 trees.
 
+##### Stretched Octree
+
+The *stretched* case is a case where a finite amount of voxels are placed infinitely far apart.
+For arrays, this produces infinite space requirements because all space between these points must be filled.
+For octrees, more layers are necessary to encode positions further from the origin.
+In neither case there is an upper bound to this.
+
+In practice, octrees perform significantly better at encoding sparse data than arrays.
+
 ## Construction
 
-How an octree can be constructed from a list voxels is thorougly explained in [[construction.md]].
+How an octree can be constructed from a list voxels is thorougly explained in [SVO Construction](construction.md).
 
 ## Serialization
 
 To be used in a serial data format, octrees must first be serialized.
 Nodes will no longer be laid out "randomly" in memory but instead be arranged one after another.
+To fully encode an SVO, two steps must be performed:
+
+1. Linearize nodes by traversing the SVO's nodes in a deterministic, reversible order.
+2. Serialize each node to binary data.
+
+### Traversal Order
+
 There are two well-known strategies for traversing trees completely:
 
-- Depth-First-Search (DFS)
-- Breadth-First-Search (BFS)
+- Depth-First Search (DFS)
+- Breadth-First Search (BFS)
+
+#### Depth-First
+
+![depth-first-tree](https://upload.wikimedia.org/wikipedia/commons/1/1f/Depth-first-tree.svg)
+
+*Tree, traversed depth-first - Source: [Wikipedia](https://en.wikipedia.org/wiki/File:Depth-first-tree.svg),
+Alexander Drichel*
 
 DFS can be performed using only a stack to keep track of the node number at each level.
 On the deepest level, the next node is chosen until the end is reached and the next parent node is chosen.
 This low memory cost (which is in fact $O(\log{n})$ where n is the number of nodes) is highly advantageous when encoding
 enormous models. 
 
+#### Breadth-First
+
+![breadth-first-tree](https://upload.wikimedia.org/wikipedia/commons/3/33/Breadth-first-tree.svg)
+
+*Tree, traversed breadth first - Source:
+[Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search#/media/File:Breadth-first-tree.svg), Alexander Drichel*
+
 BFS comes with a higher cost since a typical algorithm appends all branches to a queue for every traversed node.
 This means that in the worst case, which is at the beginning of serialization eight nodes are appended on every level
 before any node is popped from the queue, resulting in a higher memory cost.
+
+### Node Encoding
 
 ### Single-Bit Format
 
