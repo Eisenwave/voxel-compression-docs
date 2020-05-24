@@ -2,8 +2,8 @@ site_name: VOXEL COMPRESSION
 
 use_directory_urls: false
 
-docs_dir: docs
-site_dir: build
+docs_dir: src
+site_dir: docs
 
 theme:
   name: readthedocs
