@@ -6,6 +6,6 @@ This documentation is designed to be viewed using GitHub pages.
 
 ## Getting Started
 ```sh
-cd build
+cd docs
 python3 -m http.server 8000
 ```
