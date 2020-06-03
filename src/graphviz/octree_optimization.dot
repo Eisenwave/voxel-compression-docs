@@ -1,0 +1,52 @@
+digraph g {
+    rankdir=LR
+    bgcolor=transparent
+    node [shape = record]
+    
+    a [shape=none, margin=0, label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+        <tr>
+            <td bgcolor="gray">  </td>
+            <td bgcolor="gray">  </td>
+            <td>  </td>
+            <td><font point-size="9">3,3</font></td>
+        </tr>
+        <tr>
+            <td bgcolor="gray">  </td>
+            <td bgcolor="gray">  </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr >
+            <td bgcolor="gray">  </td>
+            <td bgcolor="gray">  </td>
+            <td bgcolor="gray">  </td>
+            <td bgcolor="gray">  </td>
+        </tr>
+        <tr>
+            <td bgcolor="gray">  </td>
+            <td bgcolor="gray">  </td>
+            <td bgcolor="gray">  </td>
+            <td bgcolor="gray">  </td>
+        </tr>
+    </TABLE>
+    >,fontname="monospace"]
+    
+    b [shape=none, margin=0, label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+        <tr>
+            <td bgcolor="gray">  </td>
+            <td><font point-size="9">1,1</font></td>
+        </tr>
+        <tr>
+            <td bgcolor="gray">  </td>
+            <td bgcolor="gray">  </td>
+        </tr>
+    </TABLE>
+    >,fontname="monospace"]
+    
+    c [shape=box,label="0,0",fontname="monospace"]
+    
+    a -> b [style=dotted,minlen=2,label="s += (2,2)",fontname="monospace"]
+    b -> c [style=dotted,minlen=2,label="s += (1,1)",fontname="monospace"]
+} 
