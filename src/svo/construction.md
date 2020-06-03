@@ -313,7 +313,7 @@ This code will need to be adjusted so that the nodes are either polymorphic or t
 ## Octree Optimization
 
 ![Octree Optimization](../img/graph/octree_optimization.svg)<br>
-*Figure 3: Octree Optimization (visualized using a Quadtree)*
+*Figure 3: Octree Optimization, where b is a sub-branch (visualized using a Quadtree)*
 
 Once an octree has been fully constructed, unused octants can be optimized or "cut away" recursively.
 This can be especially helpful for octrees where all voxels reside very far from the origin.
@@ -325,7 +325,7 @@ Trimming away such almost completely layers accelerates encoding and decoding.
 
 1. $s \gets (0,0,0)$
 2. If the root node $r$ has exactly one branch $b$:
-    - $s \gets s + 2^d$
+    - $s \gets s + 2^{d-2}$
     - $r \gets b$
     - repeat 2.
 
