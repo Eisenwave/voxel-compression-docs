@@ -47,12 +47,39 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 <br>
 **Last Viewed:** 2020-05-04
 
-# Qubicle File Specification Articles
+## Qubicle File Specification Articles
 
 **Authors:** Minddesk Software GmbH<br>
 **Publication Dates:** 2015-10-02, 2016-01-11<br>
-**Published in:** [getqubicle.com](https://getqubicle.com/)<br>
+**Published at:** [getqubicle.com](https://getqubicle.com/)<br>
 **Links:** [QEF Spec.](https://getqubicle.com/learn/article.php?id=23),
 [QB Spec.](https://getqubicle.com/learn/article.php?id=22), [QBT Spec.](https://getqubicle.com/learn/article.php?id=47)
 <br>
 **Last Viewed:** 2020-05-04
+
+## Binvox Voxel File Format Specification
+
+**Author:** Patrick Min<br>
+**Last Modification Date:** 2015-12-17<br>
+**Published at:** [patrickmin.com](https://www.patrickmin.com)<br>
+**Links:** [Website](https://www.patrickmin.com/binvox/binvox.html),
+[Parent Page](https://www.patrickmin.com/binvox/index.php)<br>
+**Last Viewed:** 2020-06-03
+
+## Compressing Voxel Worlds
+
+**Author:** Steven Pigeon<br>
+**Publication Date:** 2011 or prior<br>
+**Published at:** [Harder, Better, Faster, Stronger Blog](https://hbfs.wordpress.com/)<br>
+**Links:** [HBFS Page](https://hbfs.wordpress.com/2011/03/22/compressing-voxel-worlds/)<br>
+**Last Viewed:** 2020-05-30
+
+## Symmetry-aware Sparse Voxel DAGs (SSVDAGs) for compression-domain tracing of high-resolution geometric scenes 
+
+**Authors:** Alberto Jaspe Villanueva, Fabio Marton, Enrico Gobbetti, CRS4<br>
+**Publication Date:** 2017-05-12<br>
+**Published In:** Journal of Computer Graphics Techniques (JCGT), vol. 6, no. 2<br>
+**Links:** [Computer Graphics Techniques](http://jcgt.org/published/0006/02/01/),
+[Full-Text PDF](http://jcgt.org/published/0006/02/01/paper.pdf),
+[Low-Resolution PDF](http://jcgt.org/published/0006/02/01/paper-lowres.pdf),
+[Video Demo](http://jcgt.org/published/0006/02/01/jcgt-ssvdags-demo.mp4)

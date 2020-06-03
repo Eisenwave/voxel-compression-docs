@@ -1,0 +1,13 @@
+digraph g {
+    bgcolor=transparent
+    node [shape = record]
+    root [label="<f0> 1 | 00 |<f1> 1 | 00000000...00000000 |<f2> 1| 0000"]
+    
+    c00 [shape=none, label=<<font face="monospace" color="#d13232">#d13232</font>>]
+    c01 [shape=none, label=<<font face="monospace" color="#6c6e3b">#6c6e3b</font>>]
+    c20 [shape=none, label=<<font face="monospace" color="#1d6bd1">#1d6bd1</font>>]
+    
+    root:f0 -> c00
+    root:f1 -> c01
+    root:f2 -> c20
+} 

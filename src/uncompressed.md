@@ -5,20 +5,20 @@ In this case a voxel is a triple of coordinates and an ARGB integer, meaning tha
 
 ## Example Implementation
 
-Here is a simple example implementation of a 32-bit voxel list in Rust.
+Here is a simple example implementation of a 32-bit voxel list in C++.
 
-```rust
+```cpp
 struct voxel {
-    i32 x;
-    i32 y;
-    i32 z;
-    u8 a;
-    u8 r;
-    u8 g;
-    u8 b;
+    int32_t x;
+    int32_t y;
+    int32_t z;
+    uint8_t a;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
 }
 
-let mut voxel_list = Vec<voxel>::new();
+std::vector<voxel> voxel_list;
 ```
 
 ## Justification - Voxel Arrays vs. Voxel Lists

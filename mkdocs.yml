@@ -21,21 +21,27 @@ markdown_extensions:
 nav:
   - index.md
   - Basics:
+      - properties.md
       - statistical_tests.md
       - methods.md
   - Related Work:
       - related/overview.md
       - related/literature.md
-  - Encoding Methods:
+  - Geometry Encoding:
       - uncompressed.md
       - rle/rle.md
       - svo/svo.md
       - svo/construction.md
       - dag/dag.md
       - cuboid_extraction.md
-  - File Formats:
-      - file_formats/structlang.md
+  - Attribute Encoding:
+      - attribute_compression.md
+  - Implementation:
+      - flvc/flvc.md
+  - Auxiliary File Formats:
       - file_formats/vl32.md
+      - file_formats/vlascii.md
+      - file_formats/structlang.md
 
 extra_css:
   - css/darcula.css

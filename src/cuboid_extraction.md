@@ -166,7 +166,6 @@ The greatest areas for each height are:
 >>1:   15 (o:1, C:1)
 ```
   
-  
 Note that the maximum volumes at each height only form a unimodal function if we extrude our found area as far up as
 possible.
 Searching for the maximum or minimum of a unimodal function can be done with logarithmic complexity.

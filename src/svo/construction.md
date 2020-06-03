@@ -116,8 +116,9 @@ The overly pessimistic initial comparison could be fixed with -surprisingly- no 
 Out of the six necessary conditional operations, we could optimize five away.
 During a microbenchmark of the original $max(abs(x), abs(y), abs(z)) > d$ comparison vs. our optimized method, **no
 performance difference could be found**.
-However, microbenchmarks are to be taken with a grain of salt and depending on the architecture and the surrounding
-code, a performance improvement may happen.
+However, keep in mind that `abs()` functions are often compiled to use a conditional move instruction which can be
+expensive on older architectures.
+So depending on the architecture, such a benefit could be seen.
 
 ## Octree Node Index
 
@@ -151,18 +152,27 @@ The result will be a single number of octal digits, each of which represents the
 
 This is how coordinates can be mapped to octree indices:
 $$\begin{align}
-& (6, 8, 9) = (0101_2, 1000_2, 1001_2) \\
-\xrightarrow{\text{interleave}} \quad& (0,1,1),(1,1,1),(0,0,0),(1,0,1) \\
-\xrightarrow{\text{concatenate}} \quad& 011,111,000,101_2 = 3705_8 = 1989
+& (6, 8, 9) = (\color{red}{0101_2}, \color{green}{1000_2}, \color{blue}{1001_2}) \\
+\xrightarrow{\text{interleave}} \quad&
+(\color{red}{0},\color{green}{1},\color{blue}{1}),
+(\color{red}{1},\color{green}{1},\color{blue}{1}),
+(\color{red}{0},\color{green}{0},\color{blue}{0}),
+(\color{red}{1},\color{green}{0},\color{blue}{1}) \\
+\xrightarrow{\text{concatenate}} \quad&
+\color{red}{0}\color{green}{1}\color{blue}{1},
+\color{red}{1}\color{green}{1}\color{blue}{1},
+\color{red}{0}\color{green}{0}\color{blue}{0},
+\color{red}{1}\color{green}{0}\color{blue}{1}_2 = 3705_8 = 1989
 \end{align}$$
 
 Note that in the above example, $x$ is used as the most significant bit of each octal digit, followed by $y$ and $z$.
 This is how octree node indices can be mapped to coordinates:
 
 $$\begin{align}
-&25 = 31_8 = 011,001_2 \\ 
-\xrightarrow{\text{to vectors}} \quad& (0, 1, 1), (0, 0, 1) \\
-\xrightarrow{\text{deinterleave}} \quad& (00_2, 10_2, 11_2) = (0, 2, 3)
+&25 = 31_8 = \color{red}{0}\color{green}{1}\color{blue}{1},\color{red}{0}\color{green}{0}\color{blue}{1}_2 \\ 
+\xrightarrow{\text{to vectors}} \quad&
+(\color{red}{0}, \color{green}{1}, \color{blue}{1}), (\color{red}{0}, \color{green}{0}, \color{blue}{1}) \\
+\xrightarrow{\text{deinterleave}} \quad& (\color{red}{00_2}, \color{green}{10_2}, \color{blue}{11_2}) = (0, 2, 3)
 \end{align}$$
 
 ### Implementation

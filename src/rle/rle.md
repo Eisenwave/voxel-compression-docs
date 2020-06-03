@@ -10,7 +10,34 @@ Due to [voxel arrays](../uncompressed.md) often containing huge amounts of empty
 `0x0` RGB values (or whatever other value represents empty voxels) which could be run-length-compressed.
 This mitigates their greatest downside compared to [voxel lists](../uncompressed.md), their empty-space-overhead.
 
-### Existing Implementation: Qubicle Binary File Format
+## Existing Implementations
+
+### Binvox
+
+The [Binvox](https://www.patrickmin.com/binvox/binvox.html) file format provides simple compression
+for geometry-only voxel data.
+It uses [out-of-band signaling](#out-of-band-signaling)
+After a text header, the binary voxel data can be specified as follows:
+
+```rust
+struct binvox_data {
+    marker[]
+}
+
+struct marker {
+    u8 count
+    u8 bit_value
+}
+```
+
+
+#### Criticism
+
+Binvox run-length encodes only individual bits.
+But to store their values, it uses an entire byte which wastes 7 bits.
+Almost half (7 out of 16) bits for each marker are thus wasted.
+
+### Qubicle Binary
 
 The [Qubicle Binary](//getqubicle.com/learn/article.php?id=22) (QB) file format has an option for compressing models
 using RLE.
@@ -20,7 +47,7 @@ instead of custom RLE.
 
 Models are mode of *matrices*, which are arrays, usually sized 128<sup>3</sup> or smaller[^matrix_size].
 When compressing *matrices*, each *slice* (xy-plane) is being run-length-encoded.
-The RLE implementation uses [in-band-signaling](#in-band-signaling).
+The RLE implementation uses [in-band signaling](#in-band-signaling).
 The `CODEFLAG = 2` escape sequence signals a following pair of count and data, whereas the `NEXTSLICEFLAG = 6` signals
 the end of the current *slice*.
 

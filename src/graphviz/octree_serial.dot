@@ -1,0 +1,25 @@
+digraph g {
+    bgcolor=transparent
+    splines=spline
+    rankdir=LR
+    node [shape = record]
+    
+    root [label="{<f0>1 | 00 |<f1> 1 | 000 |<f2> 1}"]
+    
+    b0 [label="{<f0> 1 | 00 |<f1> 1 | 0000}"]
+    b1 [label="00000000"]
+    b2 [label="{000 |<f0> 1| 0000}"]
+    
+    c00 [shape=none, label=<<font face="monospace" color="#d13232">#d13232</font>>]
+    c01 [shape=none, label=<<font face="monospace" color="#6c6e3b">#6c6e3b</font>>]
+    c20 [shape=none, label=<<font face="monospace" color="#1d6bd1">#1d6bd1</font>>]
+    
+    root -> b0 -> c00 -> c01 -> b1 -> b2 -> c20 [weight=100, style=invis]
+    
+    root:f0:n -> b0:nw
+    root:f1:s -> b1:s
+    root:f2:s -> b2:s
+    b0:f0:n -> c00:n 
+    b0:f1:n -> c01:n
+    b2:f0:n -> c20:n
+} 
