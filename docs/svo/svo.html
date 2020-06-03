@@ -300,7 +300,7 @@ In neither case there is an upper bound to this.</p>
 <h2 id="construction">Construction</h2>
 <p>How an octree can be constructed from a list voxels is thorougly explained in <a href="construction.html">SVO Construction</a>.</p>
 <h2 id="serialization">Serialization</h2>
-<p><img alt="SVO" src="/img/graph/octree.svg" /><br>
+<p><img alt="SVO" src="../img/graph/octree.svg" /><br>
 <em>Figure 0: A Sparse Voxel Octree, encoded in memory</em></p>
 <p>To be used in a serial data format, octrees must first be serialized.
 Nodes will no longer be laid out freely in memory but instead be arranged one after another.
@@ -316,20 +316,20 @@ To fully encode an SVO, two steps must be performed:</p>
 <li>Breadth-First Search (BFS)</li>
 </ul>
 <h4 id="depth-first">Depth-First</h4>
-<p><img alt="depth-first-tree" src="/img/graph/depth_first.svg" /><br>
+<p><img alt="depth-first-tree" src="../img/graph/depth_first.svg" /><br>
 <em>Figure 1: Tree, traversed depth-first</em></p>
 <p>DFS can be performed using only a stack to keep track of the node number at each level.
 On the deepest level, the next node is chosen until the end is reached and the next parent node is chosen.
 This low memory cost (which is in fact <script type="math/tex">O(\log{n})</script> where n is the number of nodes) is highly advantageous when encoding
 enormous models. </p>
 <h4 id="breadth-first">Breadth-First</h4>
-<p><img alt="breadth-first-tree" src="/img/graph/breadth_first.svg" /><br>
+<p><img alt="breadth-first-tree" src="../img/graph/breadth_first.svg" /><br>
 <em>Figure 2: Tree, traversed breadth-first</em></p>
 <p>BFS comes with a higher cost since a typical algorithm appends all branches to a queue for every traversed node.
 This means that in the worst case, which is at the beginning of serialization eight nodes are appended on every level
 before any node is popped from the queue, resulting in a higher memory cost.</p>
 <h4 id="why-to-serialize-octrees-depth-first">Why To Serialize Octrees Depth-First</h4>
-<p><img alt="octree-serial" src="/img/graph/octree_serial.svg" /><br>
+<p><img alt="octree-serial" src="../img/graph/octree_serial.svg" /><br>
 <em>Figure 3: A serialized octree, depth-first</em></p>
 <p>The scheme more practical for encoding octrees is depth-first.
 This is due to the fact that only a stack is necessary to keep track of the current position.
@@ -389,7 +389,7 @@ an SVO.
 They could offer special functionality as seen in <code>3.2.3</code> to the single-bit format, which does not have
 any unused values.</p>
 <h2 id="squashed-octrees">Squashed Octrees</h2>
-<p><img alt="octree-squashed" src="/img/graph/octree_squashed.svg" /><br>
+<p><img alt="octree-squashed" src="../img/graph/octree_squashed.svg" /><br>
 <em>Figure 5: A squashed Octree (compare to Figure 0)</em></p>
 <p>A squashed octree is an octree where two or more layers of the tree have been combined into a single layer.</p>
 <p>By squashing an octree once, we receive a tetrahexacontree.

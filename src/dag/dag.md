@@ -1,6 +1,6 @@
 # Directed Acyclic Graph
 
-![Directed Acyclic Graph](/img/graph/dag.svg)<br>
+![Directed Acyclic Graph](../img/graph/dag.svg)<br>
 *Figure 1: A Directed Acyclic Graph*
 
 Directed Acyclic Graphs (DAGs) for voxel encoding build on the idea of octrees.

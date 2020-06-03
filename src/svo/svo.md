@@ -59,7 +59,7 @@ How an octree can be constructed from a list voxels is thorougly explained in [S
 
 ## Serialization
 
-![SVO](/img/graph/octree.svg)<br>
+![SVO](../img/graph/octree.svg)<br>
 *Figure 0: A Sparse Voxel Octree, encoded in memory*
 
 To be used in a serial data format, octrees must first be serialized.
@@ -78,7 +78,7 @@ There are two well-known strategies for traversing trees completely:
 
 #### Depth-First
 
-![depth-first-tree](/img/graph/depth_first.svg)<br>
+![depth-first-tree](../img/graph/depth_first.svg)<br>
 *Figure 1: Tree, traversed depth-first*
 
 DFS can be performed using only a stack to keep track of the node number at each level.
@@ -88,7 +88,7 @@ enormous models.
 
 #### Breadth-First
 
-![breadth-first-tree](/img/graph/breadth_first.svg)<br>
+![breadth-first-tree](../img/graph/breadth_first.svg)<br>
 *Figure 2: Tree, traversed breadth-first*
 
 BFS comes with a higher cost since a typical algorithm appends all branches to a queue for every traversed node.
@@ -97,7 +97,7 @@ before any node is popped from the queue, resulting in a higher memory cost.
 
 #### Why To Serialize Octrees Depth-First
 
-![octree-serial](/img/graph/octree_serial.svg)<br>
+![octree-serial](../img/graph/octree_serial.svg)<br>
 *Figure 3: A serialized octree, depth-first*
 
 The scheme more practical for encoding octrees is depth-first.
@@ -174,7 +174,7 @@ any unused values.
 
 ## Squashed Octrees
 
-![octree-squashed](/img/graph/octree_squashed.svg)<br>
+![octree-squashed](../img/graph/octree_squashed.svg)<br>
 *Figure 5: A squashed Octree (compare to Figure 0)*
 
 A squashed octree is an octree where two or more layers of the tree have been combined into a single layer.
