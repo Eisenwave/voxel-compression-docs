@@ -23,7 +23,6 @@ nav:
   - Basics:
       - properties.md
       - statistical_tests.md
-      - methods.md
   - Related Work:
       - related/overview.md
       - related/literature.md
