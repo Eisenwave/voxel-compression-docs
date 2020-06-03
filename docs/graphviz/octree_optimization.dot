@@ -9,7 +9,7 @@ digraph g {
             <td bgcolor="gray">  </td>
             <td bgcolor="gray">  </td>
             <td>  </td>
-            <td><font point-size="9">3,3</font></td>
+            <td><font point-size="9">b</font></td>
         </tr>
         <tr>
             <td bgcolor="gray">  </td>
@@ -36,7 +36,7 @@ digraph g {
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
         <tr>
             <td bgcolor="gray">  </td>
-            <td><font point-size="9">1,1</font></td>
+            <td><font point-size="9">b</font></td>
         </tr>
         <tr>
             <td bgcolor="gray">  </td>
@@ -45,8 +45,8 @@ digraph g {
     </TABLE>
     >,fontname="monospace"]
     
-    c [shape=box,label="0,0",fontname="monospace"]
+    c [shape=box,label="b",fontname="monospace"]
     
-    a -> b [style=dotted,minlen=2,label="s += (2,2)",fontname="monospace"]
-    b -> c [style=dotted,minlen=2,label="s += (1,1)",fontname="monospace"]
+    a -> b [style=dotted,minlen=2,fontname="monospace"]
+    b -> c [style=dotted,minlen=2,fontname="monospace"]
 } 

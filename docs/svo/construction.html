@@ -492,7 +492,7 @@ struct svo_leaf_node {
 <p>This code will need to be adjusted so that the nodes are either polymorphic or type unions are used.</p>
 <h2 id="octree-optimization">Octree Optimization</h2>
 <p><img alt="Octree Optimization" src="../img/graph/octree_optimization.svg" /><br>
-<em>Figure 3: Octree Optimization (visualized using a Quadtree)</em></p>
+<em>Figure 3: Octree Optimization, where b is a sub-branch (visualized using a Quadtree)</em></p>
 <p>Once an octree has been fully constructed, unused octants can be optimized or "cut away" recursively.
 This can be especially helpful for octrees where all voxels reside very far from the origin.
 For instance, we could be encoding voxels with coordinates ranging from 100,000 to 100,050.
@@ -505,7 +505,7 @@ Trimming away such almost completely layers accelerates encoding and decoding.</
 </li>
 <li>If the root node <script type="math/tex">r</script> has exactly one branch <script type="math/tex">b</script>:<ul>
 <li>
-<script type="math/tex">s \gets s + 2^d</script>
+<script type="math/tex">s \gets s + 2^{d-2}</script>
 </li>
 <li>
 <script type="math/tex">r \gets b</script>
