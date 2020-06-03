@@ -65,11 +65,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+    <a class="" href="../properties.html">Properties of Voxel Models</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../methods.html">Analyzed Methods</a>
+    <a class="" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
                 </li>
     </ul>
 	    </li>
@@ -91,7 +91,7 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Encoding Methods</span>
+    <span class="caption-text">Geometry Encoding</span>
     <ul class="subnav">
                 <li class="">
                     
@@ -144,15 +144,41 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">File Formats</span>
+    <span class="caption-text">Attribute Encoding</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
+    <a class="" href="../attribute_compression.html">Attribute Compression</a>
                 </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Implementation</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../flvc/flvc.html">Free Lossless Voxel Compression (FLVC)</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Auxiliary File Formats</span>
+    <ul class="subnav">
                 <li class="">
                     
     <a class="" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
                 </li>
     </ul>
 	    </li>
@@ -179,7 +205,7 @@
     
       
         
-          <li>Encoding Methods &raquo;</li>
+          <li>Geometry Encoding &raquo;</li>
         
       
     
@@ -291,8 +317,9 @@ Hence, they can be safely combined with an <code>|</code> operation before makin
 Out of the six necessary conditional operations, we could optimize five away.
 During a microbenchmark of the original <script type="math/tex">max(abs(x), abs(y), abs(z)) > d</script> comparison vs. our optimized method, <strong>no
 performance difference could be found</strong>.
-However, microbenchmarks are to be taken with a grain of salt and depending on the architecture and the surrounding
-code, a performance improvement may happen.</p>
+However, keep in mind that <code>abs()</code> functions are often compiled to use a conditional move instruction which can be
+expensive on older architectures.
+So depending on the architecture, such a benefit could be seen.</p>
 <h2 id="octree-node-index">Octree Node Index</h2>
 <p>The conventional method of addressing positions within a 3D-container would be by using a vector
 <script type="math/tex">v = (x, y, z) \in \mathbb{Z}^3</script>.
@@ -319,18 +346,27 @@ The result will be a single number of octal digits, each of which represents the
 <h3 id="examples">Examples</h3>
 <p>This is how coordinates can be mapped to octree indices:
 <script type="math/tex; mode=display">\begin{align}
-& (6, 8, 9) = (0101_2, 1000_2, 1001_2) \\
-\xrightarrow{\text{interleave}} \quad& (0,1,1),(1,1,1),(0,0,0),(1,0,1) \\
-\xrightarrow{\text{concatenate}} \quad& 011,111,000,101_2 = 3705_8 = 1989
+& (6, 8, 9) = (\color{red}{0101_2}, \color{green}{1000_2}, \color{blue}{1001_2}) \\
+\xrightarrow{\text{interleave}} \quad&
+(\color{red}{0},\color{green}{1},\color{blue}{1}),
+(\color{red}{1},\color{green}{1},\color{blue}{1}),
+(\color{red}{0},\color{green}{0},\color{blue}{0}),
+(\color{red}{1},\color{green}{0},\color{blue}{1}) \\
+\xrightarrow{\text{concatenate}} \quad&
+\color{red}{0}\color{green}{1}\color{blue}{1},
+\color{red}{1}\color{green}{1}\color{blue}{1},
+\color{red}{0}\color{green}{0}\color{blue}{0},
+\color{red}{1}\color{green}{0}\color{blue}{1}_2 = 3705_8 = 1989
 \end{align}</script>
 </p>
 <p>Note that in the above example, <script type="math/tex">x</script> is used as the most significant bit of each octal digit, followed by <script type="math/tex">y</script> and <script type="math/tex">z</script>.
 This is how octree node indices can be mapped to coordinates:</p>
 <p>
 <script type="math/tex; mode=display">\begin{align}
-&25 = 31_8 = 011,001_2 \\ 
-\xrightarrow{\text{to vectors}} \quad& (0, 1, 1), (0, 0, 1) \\
-\xrightarrow{\text{deinterleave}} \quad& (00_2, 10_2, 11_2) = (0, 2, 3)
+&25 = 31_8 = \color{red}{0}\color{green}{1}\color{blue}{1},\color{red}{0}\color{green}{0}\color{blue}{1}_2 \\ 
+\xrightarrow{\text{to vectors}} \quad&
+(\color{red}{0}, \color{green}{1}, \color{blue}{1}), (\color{red}{0}, \color{green}{0}, \color{blue}{1}) \\
+\xrightarrow{\text{deinterleave}} \quad& (\color{red}{00_2}, \color{green}{10_2}, \color{blue}{11_2}) = (0, 2, 3)
 \end{align}</script>
 </p>
 <h3 id="implementation_1">Implementation</h3>

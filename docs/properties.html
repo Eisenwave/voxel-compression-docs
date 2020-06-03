@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Uncompressed Format";
-    var mkdocs_page_input_path = "uncompressed.md";
+    var mkdocs_page_name = "Properties of Voxel Models";
+    var mkdocs_page_input_path = "properties.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -63,9 +63,25 @@
 		
     <span class="caption-text">Basics</span>
     <ul class="subnav">
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="properties.html">Properties of Voxel Models</a>
+    <a class="current" href="properties.html">Properties of Voxel Models</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#properties-of-voxel-models">Properties of Voxel Models</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#geometricspatial-locality">Geometric/Spatial Locality</a></li>
+        
+            <li><a class="toctree-l4" href="#colorattribute-locality">Color/Attribute Locality</a></li>
+        
+            <li><a class="toctree-l4" href="#color-sparsity">Color Sparsity</a></li>
+        
+        </ul>
+    
+
+    </ul>
                 </li>
                 <li class="">
                     
@@ -93,25 +109,9 @@
 		
     <span class="caption-text">Geometry Encoding</span>
     <ul class="subnav">
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="uncompressed.html">Uncompressed Format</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#uncompressed-format">Uncompressed Format</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#example-implementation">Example Implementation</a></li>
-        
-            <li><a class="toctree-l4" href="#justification-voxel-arrays-vs-voxel-lists">Justification - Voxel Arrays vs. Voxel Lists</a></li>
-        
-            <li><a class="toctree-l4" href="#serialization">Serialization</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="uncompressed.html">Uncompressed Format</a>
                 </li>
                 <li class="">
                     
@@ -199,11 +199,11 @@
     
       
         
-          <li>Geometry Encoding &raquo;</li>
+          <li>Basics &raquo;</li>
         
       
     
-    <li>Uncompressed Format</li>
+    <li>Properties of Voxel Models</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -213,98 +213,51 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="uncompressed-format">Uncompressed Format</h1>
-<p>The uncompressed format used for reference in this project is a 32-bit list of voxels.
-In this case a voxel is a triple of coordinates and an ARGB integer, meaning that voxels can be partially transparent.</p>
-<h2 id="example-implementation">Example Implementation</h2>
-<p>Here is a simple example implementation of a 32-bit voxel list in C++.</p>
-<pre><code class="cpp">struct voxel {
-    int32_t x;
-    int32_t y;
-    int32_t z;
-    uint8_t a;
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-}
-
-std::vector&lt;voxel&gt; voxel_list;
-</code></pre>
-
-<h2 id="justification-voxel-arrays-vs-voxel-lists">Justification - Voxel Arrays vs. Voxel Lists</h2>
-<p>There are at least two popular methods of representing voxels in an uncompressed way:</p>
-<ul>
-<li>3D-array of colors, aka. voxel array</li>
-<li>array of coordinate/color pairs, aka. voxel list</li>
-</ul>
-<p>The first method is often used in software on a small scale.
-Arrays allow for random access in <script type="math/tex">O(1)</script>.
-They are also used in other research, such as <a href="related/literature.html#high-resolution-sparse-voxel-dags">High Resolution Sparse Voxel DAGs</a>.
-Despite its popularity, arrays are unsuitable for measuring compression ratios because the entropy of the voxel data
-poorly correlates with the size of this representation.
-For instance, two voxels at <script type="math/tex">(1, 1, 1)</script> and <script type="math/tex">(1000, 1000, 1000)</script> require 1 gigavoxel of space due to all the empty space
-between the two voxels.
-However, in the best case where all voxels are present, this method has only constant overhead: that which is necessary
-to store the dimensions of the array.</p>
-<p>The second representation -which is the one used here- will require space that linearly scales with the amount of
-non-empty voxels.
-Note that in the worst case, this could require four times the space of the first method due to the coordinates
-being stored explicitly.
-This kind of overhead is still preferable to the potential (near) complete waste of space of the first method.</p>
-<p>To summarize, here is a quick overview:</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Voxel Array</th>
-<th>Voxel List</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>worst case overhead (space)</td>
-<td>
-<script type="math/tex">O(\infty)</script>
-<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></td>
-<td>
-<script type="math/tex">O(4n)</script>
-<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup></td>
-</tr>
-<tr>
-<td>best case overhead (space)</td>
-<td>
-<script type="math/tex">\Omega(1)</script>
-</td>
-<td>
-<script type="math/tex">\Omega(4n)</script>
-<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></td>
-</tr>
-<tr>
-<td>random access (time)</td>
-<td>
-<script type="math/tex">O(1)</script>
-</td>
-<td>
-<script type="math/tex">O(n)</script>
-</td>
-</tr>
-</tbody>
-</table>
-<h2 id="serialization">Serialization</h2>
-<p>Serialization of this representation is trivial because the data structure in memory is similar of not identical to its
-serialized counterpart.
-Here, the <a href="file_formats/vl32.html">VL32</a> file format is used.</p>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>Unbounded because two voxels can be infinitely far apart, creating infinite wasted space / overhead&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-<li id="fn:2">
-<p>The constant factor of 4 is irrelevant in this notation, but illustrates the extent of the overhead&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
+                <h1 id="properties-of-voxel-models">Properties of Voxel Models</h1>
+<p>The cornerstone of compression is discovering and eliminating redundancies in data.
+We must first recognize these redundancies by observing the nature of voxel models.
+There are plenty of properties which we can exploit, as described in the following sections.</p>
+<h2 id="geometricspatial-locality">Geometric/Spatial Locality</h2>
+<p><img alt="Voxel Noise" src="img/perlin_noise_mve.png" /><br>
+<em>Normalized 3D Perlin Noise with a threshold of 0.4</em></p>
+<p>Voxels rarely come alone.
+All 3D models will typically take some distinguished shape.
+There will be large areas with filled geometry (voxels) and large empty areas, <em>air</em>, or <em>void</em>.
+In artistic circles these are often described as <a href="https://en.wikipedia.org/wiki/Negative_space">negative space</a>.</p>
+<p><img alt="Voxel Noise" src="img/voxel_noise_mve.png" /><br>
+<em>Uniform voxel noise with a probability of 0.1 that a voxel is set</em></p>
+<p>The only kind of model which has no spatial locality whatsoever would be uniformly distributed noise. (see above)
+These kinds of models are the absolute exception and are rarely if ever seen.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Compression schemes have to be able to describe large volumes of positive and negative space efficiently.</p>
+<h2 id="colorattribute-locality">Color/Attribute Locality</h2>
+<p><img alt="Ragged Cluster " src="img/ragged_cluster_magica.png" />
+<em>"Ragged Cluster" model visualized in Magica Voxel</em></p>
+<p>Color and other attributes such as normals correlate with geometry.
+This means that the color distance between neighboring voxels is significantly lower than the distance of random points
+in RGB space.</p>
+<p>In fact, this correlation is dramatically high.
+For the above model, the average euclidean distance of any unique pair of neighboring voxel colors
+<script type="math/tex">(0, 0, 0) \le (r, g, b) \le (255, 255, 255)</script>
+is <script type="math/tex">8.56</script>.
+Normalized for positions in a unit cube instead this is <script type="math/tex">0.03357</script>.</p>
+<p>For uniform random colors, this distance would be equal to
+<a href="https://mathworld.wolfram.com/RobbinsConstant.html">Robbin's Constant</a> which is roughly equal to <script type="math/tex">0.66170</script>, almost
+20 times higher.</p>
+<h3 id="conclusion_1">Conclusion</h3>
+<p>Compression schemes should make use of geometric encoding and attach attributes on top of that.
+Alternatively voxel compression schemes should encode attributes in a fashion very similar to geometry.</p>
+<h2 id="color-sparsity">Color Sparsity</h2>
+<p>While in principle, plenty of software supports 24-bit True Color RGB or even wider standards, only a small amount of
+colors are actually used.
+Especially in the field of <em>Voxel Art</em>, the 3D-equivalent to <a href="https://en.wikipedia.org/wiki/Pixel_art">Pixel Art</a>,
+small palettes are used.
+To name an example, <a href="https://ephtracy.github.io/">Magica Voxel</a> supports 255 unique colors but each individual color
+is a 24-bit True Color.</p>
+<h3 id="conclusion_2">Conclusion</h3>
+<p>Compression schemes should be aware of potentially very low color counts and exploit these by building a palette.
+A palette will not always be beneficial since in principle, any amount of colors should be present.
+However, in many cases this will be beneficial.</p>
               
             </div>
           </div>
@@ -321,10 +274,10 @@ Here, the <a href="file_formats/vl32.html">VL32</a> file format is used.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="related/literature.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="index.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="rle/rle.html" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="statistical_tests.html" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

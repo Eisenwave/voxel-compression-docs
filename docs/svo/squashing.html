@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "32-Bit Voxel List (VL32)";
-    var mkdocs_page_input_path = "file_formats/vl32.md";
+    var mkdocs_page_name = "Squashed SVOs";
+    var mkdocs_page_input_path = "svo/squashing.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -103,11 +103,11 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../svo/svo.html">Sparse Voxel Octree</a>
+    <a class="" href="svo.html">Sparse Voxel Octree</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../svo/construction.html">SVO Construction</a>
+    <a class="" href="construction.html">SVO Construction</a>
                 </li>
                 <li class="">
                     
@@ -146,31 +146,17 @@
 		
     <span class="caption-text">Auxiliary File Formats</span>
     <ul class="subnav">
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="vl32.html">32-Bit Voxel List (VL32)</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#32-bit-voxel-list-vl32">32-Bit Voxel List (VL32)</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#specification">Specification</a></li>
-        
-            <li><a class="toctree-l4" href="#use-case">Use Case</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="vlascii.html">ASCII Voxel List (VLASCII)</a>
+    <a class="" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="structlang.html">Structure Language (StructLang)</a>
+    <a class="" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
                 </li>
     </ul>
 	    </li>
@@ -196,12 +182,8 @@
     <li><a href="../index.html">Docs</a> &raquo;</li>
     
       
-        
-          <li>Auxiliary File Formats &raquo;</li>
-        
-      
     
-    <li>32-Bit Voxel List (VL32)</li>
+    <li>Squashed SVOs</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -211,42 +193,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="32-bit-voxel-list-vl32">32-Bit Voxel List (VL32)</h1>
-<p>VL32 is a simple, binary, intermediate file format used in the code of this research project.</p>
-<p><strong>Extension:</strong> <code>.vl32</code><br>
-<strong>Media Type:</strong> <code>model/x-vl32</code></p>
-<h2 id="specification">Specification</h2>
-<p>VL32 can be specified in only a few lines of StructLang:</p>
-<pre><code class="rust">def u8 = unsigned 8_bit integer
-def i32 = big_endian twos_complement 32_bit integer
-
-struct main {
-    voxel[] voxels
-}
-
-struct voxel {
-    i32 x
-    i32 y
-    i32 z
-    argb32 color
-}
-
-struct argb32 {
-    u8 alpha
-    u8 red
-    u8 green
-    u8 blue
-}
-</code></pre>
-
-<p>Voxels with a color that has an <code>alpha</code> of zero are treated as void.</p>
-<h2 id="use-case">Use Case</h2>
-<p>VL32 is largely used for benchmarking compression efficiency.
-Any compression effort should yield significantly higher entropy than this format.</p>
-<p>One of the significant advantages is that there doesn't need to be any header information.
-When reading, voxels are simply loaded until the EOF is reached.
-Also there is no difference in data size between the file encoded on disk and its typical in-memory representation,
-such as a <code>std::vector</code> of voxels.</p>
+                <h1 id="squashed-svos">Squashed SVOs</h1>
               
             </div>
           </div>
@@ -263,10 +210,6 @@ such as a <code>std::vector</code> of voxels.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../flvc/flvc.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="vlascii.html" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
