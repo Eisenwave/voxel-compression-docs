@@ -5,23 +5,22 @@ fed to the constructing algorithm.
 Within the scope of this project, the [uncompressed format is a list of voxels](../uncompressed.md), but there are
 further subtle differences.
 
-#### Summary of Construction
+##### Summary of Construction
 
 The following process must be repeated for all voxels $v := (p := (x, y, z),  c) \in (\mathbb{Z}^3, \mathbb{N})$ in the
 list.
 
-1. Test signed input position $p$ against current SVO dimensions $d$.
-2. If the position is outside of our boundaries, enlarge the SVO to fit $p$.
-3. Subtract the new most negative corner $p_{min}$ of the SVO from $p$ to obtain $p_{\text{normalized}}$.
-4. Convert $p_{\text{normalized}}$ to the octree node index $n$.
-5. Use $n$ to traverse the SVO and insert the voxel at the correct location.
-6. Optional: If only one octant is used, cut branches belonging to other octants recursively.
-   This step reduces the SVO's depth by at least one layer when applicable.
+1. [Test signed input position](#efficient-boundary-test) $p$ against current SVO dimensions $d$.
+2. If the position is outside of our boundaries, [enlarge the SVO to fit $p$.](#octree-growth)
+3. [Subtract $p_{min}$ of the SVO](#position-normalization) from $p$ to obtain $p_{\text{normalized}}$.
+4. Convert $p_{\text{normalized}}$ to the [octree node index](#octree-node-index) $n$.
+5. Use $n$ to [traverse the SVO](#traversing-the-octree) and insert the voxel at the correct location.
+6. Optional: If only one octant is used, [cut branches belonging to other octants](#octree-optimization) recursively.
 
 !!! note
     To handle signed values, the octree must be extended into both positive and negative octants.
 
-#### Coordinate System
+##### Coordinate System
 
 There are two coordinate systems with which we must concern ourselves with:
 
@@ -41,7 +40,7 @@ It also helps us optimize our [boundary test](#efficient-boundary-test).
 
 As a result, for example, an SVO that can contain 4x4x4 voxels will have space from $(-2, -2, -2)$ to $(1, 1, 1)$.
 
-#### Special Case Where Voxel Coordinates Are Positive
+##### Special Case Where Voxel Coordinates Are Positive
 
 If the voxels are sorted with the first voxel being the most negative corner of the model, we have a global $p_{min}$
 (see step 3.).
@@ -119,6 +118,60 @@ performance difference could be found**.
 However, keep in mind that `abs()` functions are often compiled to use a conditional move instruction which can be
 expensive on older architectures.
 So depending on the architecture, such a benefit could be seen.
+
+## Octree Growth
+
+If we do find that a point which is to be inserted does not fit within the current octree, we must enlarge it.
+
+### Single-Octant Growth
+
+![Simple Growth](../img/graph/simple_growth.svg)<br>
+*Figure 1: Simple (Single-Octant) Octree Growth*
+
+If only one octant is used, e.g. all positions are unsigned, then we can enlarge the octree into just one direction.
+The current root node goes into the lowest corner (with index 0) of the new, higher-level root node.
+
+### Unilateral Octree Growth
+
+![Unilateral Growth](../img/graph/unilateral_growth.svg)<br>
+*Figure 2: Unilateral Octree Growth*
+
+If we use signed positions, we must grow our octree unilaterally.
+This means that each node receives a new parent.
+The four new parents are then moved into the root node at the location of their children.
+Here is an implementation in pseudo-C++:
+
+```cpp
+for (size_t i = 0; i < 8; ++i) {
+    if (root.has(i)) {
+        auto parent = make_new_branch();
+        parent[~i & 0b111] = root.extract(i);
+        root[i] = parent;
+    }
+}
+```
+Within each new parent, the current nodes end up positioned in the opposite corner of where they were before.
+In one index from 0 to 7, each bit represents a three-dimensional coordinate.
+So index `4 = 0b010` represents $(0, 1, 0)$.
+By flipping all bits of the index we can quickly calculate the position inside the new parent.
+
+Note that for [squashed octrees](svo.md#squashed-octrees), this beautifully simple case no longer applies.
+We still create exactly eight new parents, but each parent will receive up to 4 of the 16 first-level branches.
+This and other problems make unilateral growth for squashed octrees a lengthy and complicated process.
+
+## Position Normalization
+
+Once the octree has grown to a size at which it can contain our new position $p = (x, y, z)$, we must normalize our
+position.
+In this case normalization means that we simply subtract $(x_{\text{min}}, y_{\text{min}}, z_{\text{min}})$ from $p$ to
+obtain $p_{\text{normalized}}$.
+This is necessary because internally, octrees don't have any concept of "negative" or "positive" positions, just
+indices within nodes which are all unsigned.
+
+The minimum coordinate for all dimensions is $-2^d$, where $d$ is the unilateral depth of the
+octree.
+Once we subtract this minimum from our position, the position will be unsigned and ready for calculation of the
+octree node index.
 
 ## Octree Node Index
 
@@ -256,3 +309,28 @@ struct svo_leaf_node {
 ```
 
 This code will need to be adjusted so that the nodes are either polymorphic or type unions are used.
+
+## Octree Optimization
+
+![Octree Optimization](../img/graph/octree_optimization.svg)<br>
+*Figure 3: Octree Optimization (visualized using a Quadtree)*
+
+Once an octree has been fully constructed, unused octants can be optimized or "cut away" recursively.
+This can be especially helpful for octrees where all voxels reside very far from the origin.
+For instance, we could be encoding voxels with coordinates ranging from 100,000 to 100,050.
+Many almost completely empty octree layers would need to be traversed to get to these locations.
+Trimming away such almost completely layers accelerates encoding and decoding.
+
+### Algorithm
+
+1. $s \gets (0,0,0)$
+2. If the root node $r$ has exactly one branch $b$:
+    - $s \gets s + 2^d$
+    - $r \gets b$
+    - repeat 2.
+
+$2^d$ is the negated minimum point of our current octree, as described in
+[Position Normalization](#position-normalization).
+
+After this process has been completed, we simply store $s$ alongside the octree.
+When decoding, $s$ is added back onto all found positions.
