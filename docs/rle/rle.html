@@ -108,9 +108,11 @@
         
             <li><a class="toctree-l4" href="#viability-for-voxel-compression">Viability for Voxel Compression</a></li>
         
+            <li><a class="toctree-l4" href="#in-band-vs-out-of-band-signaling">In-Band- vs Out-Of-Band- Signaling</a></li>
+        
             <li><a class="toctree-l4" href="#existing-implementations">Existing Implementations</a></li>
         
-            <li><a class="toctree-l4" href="#in-band-vs-out-of-band-signaling">In-Band- vs Out-Of-Band- Signaling</a></li>
+            <li><a class="toctree-l4" href="#our-experiments">Our Experiments</a></li>
         
         </ul>
     
@@ -221,45 +223,6 @@ value and a count or "run-length".</p>
 Due to <a href="../uncompressed.html">voxel arrays</a> often containing huge amounts of empty space, they also contain long runs of
 <code>0x0</code> RGB values (or whatever other value represents empty voxels) which could be run-length-compressed.
 This mitigates their greatest downside compared to <a href="../uncompressed.html">voxel lists</a>, their empty-space-overhead.</p>
-<h2 id="existing-implementations">Existing Implementations</h2>
-<h3 id="binvox">Binvox</h3>
-<p>The <a href="https://www.patrickmin.com/binvox/binvox.html">Binvox</a> file format provides simple compression
-for geometry-only voxel data.
-It uses <a href="#out-of-band-signaling">out-of-band signaling</a>
-After a text header, the binary voxel data can be specified as follows:</p>
-<pre><code class="rust">struct binvox_data {
-    marker[]
-}
-
-struct marker {
-    u8 count
-    u8 bit_value
-}
-</code></pre>
-
-<h4 id="criticism">Criticism</h4>
-<p>Binvox run-length encodes only individual bits.
-But to store their values, it uses an entire byte which wastes 7 bits.
-Almost half (7 out of 16) bits for each marker are thus wasted.</p>
-<h3 id="qubicle-binary">Qubicle Binary</h3>
-<p>The <a href="//getqubicle.com/learn/article.php?id=22">Qubicle Binary</a> (QB) file format has an option for compressing models
-using RLE.
-It is still in use, although it has been superseded by the
-<a href="//getqubicle.com/learn/article.php?id=47">Qubicle Binary Tree</a> (QBT) file format which uses <a href="//www.zlib.net/">zlib</a>
-instead of custom RLE.</p>
-<p>Models are mode of <em>matrices</em>, which are arrays, usually sized 128<sup>3</sup> or smaller<sup id="fnref:matrix_size"><a class="footnote-ref" href="#fn:matrix_size">1</a></sup>.
-When compressing <em>matrices</em>, each <em>slice</em> (xy-plane) is being run-length-encoded.
-The RLE implementation uses <a href="#in-band-signaling">in-band signaling</a>.
-The <code>CODEFLAG = 2</code> escape sequence signals a following pair of count and data, whereas the <code>NEXTSLICEFLAG = 6</code> signals
-the end of the current <em>slice</em>.</p>
-<h4 id="criticism_1">Criticism</h4>
-<p>This implementation is deeply flawed, in that it fails to exploit an obvious non-conflicting escape sequence:
-A color with an alpha of zero is invisible, regardless of its other components.
-In the QB format, the escape sequences correspond due pitch black colors with an alpha of <code>2</code> or <code>6</code> respectively,
-which is almost invisible.
-Alpha channels can also be used to store visibility maps instead, where such values would be far more common.
-Such a problem could have been easily mitigated by using different values for the escape sequences or by not storing
-colors in RGBA or BGRA format.</p>
 <h2 id="in-band-vs-out-of-band-signaling">In-Band- vs Out-Of-Band- Signaling</h2>
 <p>The main distinction in RLE methods can be made between <em>In-Band Signaling</em> And <em>Out-Of-Band Signaling</em>.</p>
 <h3 id="in-band-signaling">In-Band Signaling</h3>
@@ -292,6 +255,83 @@ If there are not just a handful of values but an entire bit per byte which is un
 <a href="//en.wikipedia.org/wiki/ASCII">ASCII</a>), then this method becomes especially viable.</p>
 <p>Otherwise, OOB signaling is preferable, as it gives much more flexibility to the implementing developer and doesn't 
 produce any conflicts with the data to be compressed.</p>
+<h2 id="existing-implementations">Existing Implementations</h2>
+<h3 id="binvox">Binvox</h3>
+<p>The <a href="https://www.patrickmin.com/binvox/binvox.html">Binvox</a> file format provides simple compression
+for geometry-only voxel data.
+It uses <a href="#out-of-band-signaling">out-of-band signaling</a>
+After a text header, the binary voxel data can be specified as follows:</p>
+<pre><code class="rust">struct binvox_data {
+    marker[]
+}
+
+struct marker {
+    u8 count
+    u8 bit_value
+}
+</code></pre>
+
+<h4 id="criticism">Criticism</h4>
+<p>Binvox run-length encodes only streaks of <code>0</code>-bits or <code>1</code>-bits.
+But to store their values, it uses an entire byte which wastes 7 bits.
+Almost half (7 out of 16) bits for each marker are thus wasted.</p>
+<p>Also the worst case is a recurring pattern of <code>010101...</code>.
+For such a worst case, Binvox increases the required storage space by a factor of 16!</p>
+<h3 id="qubicle-binary">Qubicle Binary</h3>
+<p>The <a href="//getqubicle.com/learn/article.php?id=22">Qubicle Binary</a> (QB) file format has an option for compressing models
+using RLE.
+It is still in use, although it has been superseded by the
+<a href="//getqubicle.com/learn/article.php?id=47">Qubicle Binary Tree</a> (QBT) file format which uses <a href="//www.zlib.net/">zlib</a>
+instead of custom RLE.</p>
+<p>Models are made of <em>matrices</em>, which are arrays, usually sized 128<sup>3</sup> or smaller<sup id="fnref:matrix_size"><a class="footnote-ref" href="#fn:matrix_size">1</a></sup>.
+When compressing <em>matrices</em>, each <em>slice</em> (xy-plane) is being run-length-encoded.
+The RLE implementation uses <a href="#in-band-signaling">in-band signaling</a>.
+The <code>CODEFLAG = 2</code> escape sequence signals a following pair of count and data, whereas the <code>NEXTSLICEFLAG = 6</code> signals
+the end of the current <em>slice</em>.</p>
+<h4 id="criticism_1">Criticism</h4>
+<p>This implementation is flawed, in that it fails to exploit an obvious non-conflicting escape sequence:
+A color with an alpha of zero is invisible, regardless of its other components.
+In the QB format, the escape sequences correspond to pitch black colors with an alpha of <code>2</code> or <code>6</code> respectively,
+which is almost invisible.
+Alpha channels can also be used to store visibility maps instead, where such values would be far more common.</p>
+<p>Such a problem could have been easily mitigated by using different values for the escape sequences or by not storing
+colors in RGBA or BGRA format.
+An example of a better constant would be 1<sup>31</sup>, which is interpreted as an invisible color but with a red value
+of 128.</p>
+<h2 id="our-experiments">Our Experiments</h2>
+<p>There are countless ways to implement RLE.
+We implemented a few experimental methods ourselves to see how much one could improve upon the original designs.</p>
+<h3 id="compact-binvox">Compact Binvox</h3>
+<pre><code class="rust">struct marker {
+    bit value
+    i7 count
+}
+</code></pre>
+
+<p>Instead of wasting 7 bits, we simply integrate the bit-value into the uppermost bit of the count.
+If we read the <code>marker</code> as a signed two's complement integer, we can easily obtain the bit using <code>marker &lt; 0</code> and the
+count using <code>marker &amp; 0x7f</code>.</p>
+<h3 id="complete-binvox">Complete Binvox</h3>
+<pre><code class="rust">struct marker {
+    u8 count
+    u8 value
+}
+</code></pre>
+
+<p>Instead of wasting 7 bits, we allow for an entire byte to be repeated <code>count</code> times.</p>
+<h3 id="0x00-and-0xff-escape-sequences"><code>0x00</code> and <code>0xff</code> Escape Sequences</h3>
+<p>This method uses in-band signaling.
+We encode our bits as usual, but when we encounter an escape sequence, the following byte is used as our count.
+We have two escape sequences:</p>
+<ul>
+<li><code>0x00</code> indicates that the following byte encodes the number of zero-bits</li>
+<li><code>0xff</code> indicates that the following byte encodes the number of one-bits</li>
+</ul>
+<p>The obvious advantage of this method is that our escape sequences don't conflict with high-entropy data.
+We preserve any bytes which have both <code>0</code> and <code>1</code> in them and only affect fully empty/filled bytes, which occur in a
+low-entropy context anyways.</p>
+<h3 id="zlib">Zlib</h3>
+<p>TODO complete this</p>
 <div class="footnote">
 <hr />
 <ol>

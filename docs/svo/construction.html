@@ -122,9 +122,15 @@
         
             <li><a class="toctree-l4" href="#efficient-boundary-test">Efficient Boundary Test</a></li>
         
+            <li><a class="toctree-l4" href="#octree-growth">Octree Growth</a></li>
+        
+            <li><a class="toctree-l4" href="#position-normalization">Position Normalization</a></li>
+        
             <li><a class="toctree-l4" href="#octree-node-index">Octree Node Index</a></li>
         
             <li><a class="toctree-l4" href="#traversing-the-octree">Traversing the Octree</a></li>
+        
+            <li><a class="toctree-l4" href="#octree-optimization">Octree Optimization</a></li>
         
         </ul>
     
@@ -224,23 +230,22 @@
 fed to the constructing algorithm.
 Within the scope of this project, the <a href="../uncompressed.html">uncompressed format is a list of voxels</a>, but there are
 further subtle differences.</p>
-<h4 id="summary-of-construction">Summary of Construction</h4>
+<h5 id="summary-of-construction">Summary of Construction</h5>
 <p>The following process must be repeated for all voxels <script type="math/tex">v := (p := (x, y, z),  c) \in (\mathbb{Z}^3, \mathbb{N})</script> in the
 list.</p>
 <ol>
-<li>Test signed input position <script type="math/tex">p</script> against current SVO dimensions <script type="math/tex">d</script>.</li>
-<li>If the position is outside of our boundaries, enlarge the SVO to fit <script type="math/tex">p</script>.</li>
-<li>Subtract the new most negative corner <script type="math/tex">p_{min}</script> of the SVO from <script type="math/tex">p</script> to obtain <script type="math/tex">p_{\text{normalized}}</script>.</li>
-<li>Convert <script type="math/tex">p_{\text{normalized}}</script> to the octree node index <script type="math/tex">n</script>.</li>
-<li>Use <script type="math/tex">n</script> to traverse the SVO and insert the voxel at the correct location.</li>
-<li>Optional: If only one octant is used, cut branches belonging to other octants recursively.
-   This step reduces the SVO's depth by at least one layer when applicable.</li>
+<li><a href="#efficient-boundary-test">Test signed input position</a> <script type="math/tex">p</script> against current SVO dimensions <script type="math/tex">d</script>.</li>
+<li>If the position is outside of our boundaries, <a href="#octree-growth">enlarge the SVO to fit <script type="math/tex">p</script>.</a></li>
+<li><a href="#position-normalization">Subtract <script type="math/tex">p_{min}</script> of the SVO</a> from <script type="math/tex">p</script> to obtain <script type="math/tex">p_{\text{normalized}}</script>.</li>
+<li>Convert <script type="math/tex">p_{\text{normalized}}</script> to the <a href="#octree-node-index">octree node index</a> <script type="math/tex">n</script>.</li>
+<li>Use <script type="math/tex">n</script> to <a href="#traversing-the-octree">traverse the SVO</a> and insert the voxel at the correct location.</li>
+<li>Optional: If only one octant is used, <a href="#octree-optimization">cut branches belonging to other octants</a> recursively.</li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To handle signed values, the octree must be extended into both positive and negative octants.</p>
 </div>
-<h4 id="coordinate-system">Coordinate System</h4>
+<h5 id="coordinate-system">Coordinate System</h5>
 <p>There are two coordinate systems with which we must concern ourselves with:</p>
 <ul>
 <li><em>world coordinate system (signed)</em></li>
@@ -255,7 +260,7 @@ one octant.
 This allows us to perform the optimisation from step 6 for only unsigned coordinates.
 It also helps us optimize our <a href="#efficient-boundary-test">boundary test</a>.</p>
 <p>As a result, for example, an SVO that can contain 4x4x4 voxels will have space from <script type="math/tex">(-2, -2, -2)</script> to <script type="math/tex">(1, 1, 1)</script>.</p>
-<h4 id="special-case-where-voxel-coordinates-are-positive">Special Case Where Voxel Coordinates Are Positive</h4>
+<h5 id="special-case-where-voxel-coordinates-are-positive">Special Case Where Voxel Coordinates Are Positive</h5>
 <p>If the voxels are sorted with the first voxel being the most negative corner of the model, we have a global <script type="math/tex">p_{min}</script>
 (see step 3.).
 All voxels can then be translated by <script type="math/tex">-p_{min}</script>, yielding only positions that belong in the first octant.
@@ -320,6 +325,47 @@ performance difference could be found</strong>.
 However, keep in mind that <code>abs()</code> functions are often compiled to use a conditional move instruction which can be
 expensive on older architectures.
 So depending on the architecture, such a benefit could be seen.</p>
+<h2 id="octree-growth">Octree Growth</h2>
+<p>If we do find that a point which is to be inserted does not fit within the current octree, we must enlarge it.</p>
+<h3 id="single-octant-growth">Single-Octant Growth</h3>
+<p><img alt="Simple Growth" src="../img/graph/simple_growth.svg" /><br>
+<em>Figure 1: Simple (Single-Octant) Octree Growth</em></p>
+<p>If only one octant is used, e.g. all positions are unsigned, then we can enlarge the octree into just one direction.
+The current root node goes into the lowest corner (with index 0) of the new, higher-level root node.</p>
+<h3 id="unilateral-octree-growth">Unilateral Octree Growth</h3>
+<p><img alt="Unilateral Growth" src="../img/graph/unilateral_growth.svg" /><br>
+<em>Figure 2: Unilateral Octree Growth</em></p>
+<p>If we use signed positions, we must grow our octree unilaterally.
+This means that each node receives a new parent.
+The four new parents are then moved into the root node at the location of their children.
+Here is an implementation in pseudo-C++:</p>
+<pre><code class="cpp">for (size_t i = 0; i &lt; 8; ++i) {
+    if (root.has(i)) {
+        auto parent = make_new_branch();
+        parent[~i &amp; 0b111] = root.extract(i);
+        root[i] = parent;
+    }
+}
+</code></pre>
+
+<p>Within each new parent, the current nodes end up positioned in the opposite corner of where they were before.
+In one index from 0 to 7, each bit represents a three-dimensional coordinate.
+So index <code>4 = 0b010</code> represents <script type="math/tex">(0, 1, 0)</script>.
+By flipping all bits of the index we can quickly calculate the position inside the new parent.</p>
+<p>Note that for <a href="svo.html#squashed-octrees">squashed octrees</a>, this beautifully simple case no longer applies.
+We still create exactly eight new parents, but each parent will receive up to 4 of the 16 first-level branches.
+This and other problems make unilateral growth for squashed octrees a lengthy and complicated process.</p>
+<h2 id="position-normalization">Position Normalization</h2>
+<p>Once the octree has grown to a size at which it can contain our new position <script type="math/tex">p = (x, y, z)</script>, we must normalize our
+position.
+In this case normalization means that we simply subtract <script type="math/tex">(x_{\text{min}}, y_{\text{min}}, z_{\text{min}})</script> from <script type="math/tex">p</script> to
+obtain <script type="math/tex">p_{\text{normalized}}</script>.
+This is necessary because internally, octrees don't have any concept of "negative" or "positive" positions, just
+indices within nodes which are all unsigned.</p>
+<p>The minimum coordinate for all dimensions is <script type="math/tex">-2^d</script>, where <script type="math/tex">d</script> is the unilateral depth of the
+octree.
+Once we subtract this minimum from our position, the position will be unsigned and ready for calculation of the
+octree node index.</p>
 <h2 id="octree-node-index">Octree Node Index</h2>
 <p>The conventional method of addressing positions within a 3D-container would be by using a vector
 <script type="math/tex">v = (x, y, z) \in \mathbb{Z}^3</script>.
@@ -444,6 +490,35 @@ struct svo_leaf_node {
 </code></pre>
 
 <p>This code will need to be adjusted so that the nodes are either polymorphic or type unions are used.</p>
+<h2 id="octree-optimization">Octree Optimization</h2>
+<p><img alt="Octree Optimization" src="../img/graph/octree_optimization.svg" /><br>
+<em>Figure 3: Octree Optimization (visualized using a Quadtree)</em></p>
+<p>Once an octree has been fully constructed, unused octants can be optimized or "cut away" recursively.
+This can be especially helpful for octrees where all voxels reside very far from the origin.
+For instance, we could be encoding voxels with coordinates ranging from 100,000 to 100,050.
+Many almost completely empty octree layers would need to be traversed to get to these locations.
+Trimming away such almost completely layers accelerates encoding and decoding.</p>
+<h3 id="algorithm">Algorithm</h3>
+<ol>
+<li>
+<script type="math/tex">s \gets (0,0,0)</script>
+</li>
+<li>If the root node <script type="math/tex">r</script> has exactly one branch <script type="math/tex">b</script>:<ul>
+<li>
+<script type="math/tex">s \gets s + 2^d</script>
+</li>
+<li>
+<script type="math/tex">r \gets b</script>
+</li>
+<li>repeat 2.</li>
+</ul>
+</li>
+</ol>
+<p>
+<script type="math/tex">2^d</script> is the negated minimum point of our current octree, as described in
+<a href="#position-normalization">Position Normalization</a>.</p>
+<p>After this process has been completed, we simply store <script type="math/tex">s</script> alongside the octree.
+When decoding, <script type="math/tex">s</script> is added back onto all found positions.</p>
               
             </div>
           </div>
