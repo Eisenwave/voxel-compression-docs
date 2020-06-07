@@ -175,31 +175,53 @@ octree node index.
 
 ## Octree Node Index
 
-The conventional method of addressing positions within a 3D-container would be by using a vector
-$v = (x, y, z) \in \mathbb{Z}^3$.
-Finding a voxel within an octree using $v$ would cumbersome, since it requires recursively testing whether
-each coordinate is in the lower or the upper half of current subtree.
-As long as the tree's dimensions are a power of 2, this is actually simplified since this test can be reduced to
+After obtaining an unsigned position $p_{\text{normalized}} = (x, y, z) \in \mathbb{N}^3$ within the octree,
+we must find out where to store this position in the data structure.
+
+Find the correct insertion point equires recursively testing whether each coordinate is in the lower or the upper half
+of current subtree.
+As long as the tree's dimensions are a power of 2, this can be reduced to
 checking whether a bit is set.
 For example, 128 is in the upper half of the 256-tree, because the most 128-bit is set, which is not the case for 127.
 
-### Idea
+We do not want to make this test at every level; It would be more convenient to pre-calculate a complete path through
+the octree that leads straight to the insertion point.
 
-Binary numbers can generally be interpreted as locations in binary trees:
+### Approach in One Dimension
+
+![Octree Node Index](../img/graph/octree_node_index.svg)<br>
+*Figure: Binary Numbers Form a Binary Tree Implicitly*
+
+As seen in the above Figure, the lower bit indicates whether the position is left or right in the lower subtree and the
+higher bit indicates whether the position is left or right in the upper subtree.
+To navigate the above binary tree, we can use the following pseudo-code:
+```c++
+void insert(size_t index, rgb32_t color)
+{
+    auto &branch = root[(index >> 1) & 1]; // use upper bit to get branch
+    auto &leaf = branch[(index >> 0) & 1]; // use lower bit to get leaf
+    leaf.color = color;
+}
 ```
-     _**_
-    /    \
-  0*     1*
-  / \    / \
-00  01  10  11
-```
-As we can see, the lower bit indicates whether the position is left or right in the lower subtree and the higher bit
-indicates whether the position is left or right in the upper subtree.
+
+### Approach in Three Dimensions
+
 The same pattern occurs for octal digits and octrees.
 $(x, y, z)$ can thus be seen as three positions in separate binary trees which we want to combine into an octree.
-
 To convert $(x, y, z)$ to a position in an octree, the bits of $(x, y, z)$ can simply be interleaved.
 The result will be a single number of octal digits, each of which represents the position within one octree node.
+
+Just like we can use the bits of a binary number to navigate the above binary tree, we can use the digits of the octal
+number to navigate the octree at every level.
+```c++
+void insert(size_t index, rgb32_t color)
+{
+    auto &branch = root[(index >> 3) & 0b111]; // use upper digit to get branch
+    // ... repeat this process for however many levels of branches there are
+    auto &leaf = branch[(index >> 0) & 0b111]; // use lower digit to get leaf
+    leaf.color = color;
+}
+```
 
 ### Examples
 
@@ -309,28 +331,3 @@ struct svo_leaf_node {
 ```
 
 This code will need to be adjusted so that the nodes are either polymorphic or type unions are used.
-
-## Octree Optimization
-
-![Octree Optimization](../img/graph/octree_optimization.svg)<br>
-*Figure 3: Octree Optimization, where b is a sub-branch (visualized using a Quadtree)*
-
-Once an octree has been fully constructed, unused octants can be optimized or "cut away" recursively.
-This can be especially helpful for octrees where all voxels reside very far from the origin.
-For instance, we could be encoding voxels with coordinates ranging from 100,000 to 100,050.
-Many almost completely empty octree layers would need to be traversed to get to these locations.
-Trimming away such almost completely layers accelerates encoding and decoding.
-
-### Algorithm
-
-1. $s \gets (0,0,0)$
-2. If the root node $r$ has exactly one branch $b$:
-    - $s \gets s + 2^{d-2}$
-    - $r \gets b$
-    - repeat 2.
-
-$2^d$ is the negated minimum point of our current octree, as described in
-[Position Normalization](#position-normalization).
-
-After this process has been completed, we simply store $s$ alongside the octree.
-When decoding, $s$ is added back onto all found positions.

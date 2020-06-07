@@ -53,9 +53,12 @@ In neither case there is an upper bound to this.
 
 In practice, octrees perform significantly better at encoding sparse data than arrays.
 
-## Construction
+## Construction and Optimization
 
 How an octree can be constructed from a list voxels is thorougly explained in [SVO Construction](construction.md).
+
+After the octree has been constructed, it will often be necessary to optimize its structure.
+See [SVO Optimization](optimization.md).
 
 ## Serialization
 

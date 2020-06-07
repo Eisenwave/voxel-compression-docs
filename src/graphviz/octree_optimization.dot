@@ -45,7 +45,7 @@ digraph g {
     </TABLE>
     >,fontname="monospace"]
     
-    c [shape=box,label="b",fontname="monospace"]
+    c [shape=square,label="b",fontname="monospace"]
     
     a -> b [style=dotted,minlen=2,fontname="monospace"]
     b -> c [style=dotted,minlen=2,fontname="monospace"]

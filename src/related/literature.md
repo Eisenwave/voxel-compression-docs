@@ -1,6 +1,8 @@
-# Literature References
+# References
 
-##### Efficient Sparse Voxel Octrees
+## Literature
+
+### Efficient Sparse Voxel Octrees
 
 **Authors:** Samuli Laine, Tero Karras<br>
 **Publisher:** NVIDIA Research<br>
@@ -11,7 +13,7 @@ http://graphics.cs.williams.edu/i3d10/)<br>
 [PDF](https://research.nvidia.com/sites/default/files/pubs/2010-02_Efficient-Sparse-Voxel/laine2010i3d_paper.pdf)<br>
 **Last Viewed:** 2020-05-04
 
-##### Geometry and Attribute Compression for Voxel Scenes
+### Geometry and Attribute Compression for Voxel Scenes
 
 **Authors:** Bas Dado, Timothy R. Kol, Pablo Bauszat, Jean-Marc Thiery, Elmar Eisemann<br>
 **Publisher:** Delft University of Technology<br>
@@ -23,7 +25,7 @@ https://www.researchgate.net/profile/Timothy_Kol/publication/303597840_Geometry_
 <br>
 **Last Viewed:** 2020-05-04
 
-##### High Resolution Sparse Voxel DAGs
+### High Resolution Sparse Voxel DAGs
 
 **Authors:** Viktor Kämpe, Erik Sintorn, Ulf Assarsson<br>
 **Publisher:** Chalmers University of Technology<br>
@@ -33,7 +35,7 @@ https://www.researchgate.net/profile/Timothy_Kol/publication/303597840_Geometry_
 [PDF](https://dl.acm.org/doi/pdf/10.1145/2461912.2462024?download=true)<br>
 **Last Viewed:** 2020-05-04
 
-##### VOLA: A Compact Volumetric Format for 3D Mapping and Embedded Systems
+### VOLA: A Compact Volumetric Format for 3D Mapping and Embedded Systems
 
 **Authors:** Jonathan Byrne, Léonie Buckley, Sam Caulfield, David Moloney<br>
 **Publisher:** Advanced Architecture Group, Intel, Ireland<br>
@@ -47,7 +49,19 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 <br>
 **Last Viewed:** 2020-05-04
 
-##### Qubicle File Specification Articles
+### Symmetry-aware Sparse Voxel DAGs (SSVDAGs) for compression-domain tracing of high-resolution geometric scenes 
+
+**Authors:** Alberto Jaspe Villanueva, Fabio Marton, Enrico Gobbetti, CRS4<br>
+**Publication Date:** 2017-05-12<br>
+**Published In:** Journal of Computer Graphics Techniques (JCGT), vol. 6, no. 2<br>
+**Links:** [Computer Graphics Techniques](http://jcgt.org/published/0006/02/01/),
+[Full-Text PDF](http://jcgt.org/published/0006/02/01/paper.pdf),
+[Low-Resolution PDF](http://jcgt.org/published/0006/02/01/paper-lowres.pdf),
+[Video Demo](http://jcgt.org/published/0006/02/01/jcgt-ssvdags-demo.mp4)
+
+## Specifications
+
+### Qubicle File Specification Articles
 
 **Authors:** Minddesk Software GmbH<br>
 **Publication Dates:** 2015-10-02, 2016-01-11<br>
@@ -57,16 +71,28 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 <br>
 **Last Viewed:** 2020-05-04
 
-##### Binvox Voxel File Format Specification
+### Binvox Voxel File Format Specification
 
 **Author:** Patrick Min<br>
+**Publication Date:** N/A<br>
 **Last Modification Date:** 2015-12-17<br>
 **Published at:** [patrickmin.com](https://www.patrickmin.com)<br>
 **Links:** [Website](https://www.patrickmin.com/binvox/binvox.html),
 [Parent Page](https://www.patrickmin.com/binvox/index.php)<br>
 **Last Viewed:** 2020-06-03
 
-##### Compressing Voxel Worlds
+### SVX Format Specification
+
+**Author:** Alan Hudson (?)<br>
+**Publication Date:** N/A<br>
+**Last Modification Date:** N/A<br>
+**Published at:** [Absolutely Fabulous 3D Printing](https://abfab3d.com)<br>
+**Links:** [Website](https://abfab3d.com/svx-format/)<br>
+**Last Viewed:** 2020-06-04
+
+## Web
+
+### Compressing Voxel Worlds
 
 **Author:** Steven Pigeon<br>
 **Publication Date:** 2011 or prior<br>
@@ -74,14 +100,6 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 **Links:** [HBFS Page](https://hbfs.wordpress.com/2011/03/22/compressing-voxel-worlds/)<br>
 **Last Viewed:** 2020-05-30
 
-##### Symmetry-aware Sparse Voxel DAGs (SSVDAGs) for compression-domain tracing of high-resolution geometric scenes 
 
-**Authors:** Alberto Jaspe Villanueva, Fabio Marton, Enrico Gobbetti, CRS4<br>
-**Publication Date:** 2017-05-12<br>
-**Published In:** Journal of Computer Graphics Techniques (JCGT), vol. 6, no. 2<br>
-**Links:** [Computer Graphics Techniques](http://jcgt.org/published/0006/02/01/),
-[Full-Text PDF](http://jcgt.org/published/0006/02/01/paper.pdf),
-[Low-Resolution PDF](http://jcgt.org/published/0006/02/01/paper-lowres.pdf),
-[Video Demo](http://jcgt.org/published/0006/02/01/jcgt-ssvdags-demo.mp4)
 
 <div style="margin-top: 20em"></div>
