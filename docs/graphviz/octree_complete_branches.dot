@@ -1,0 +1,46 @@
+digraph g {
+//    splines=false
+    bgcolor=transparent
+    node [shape = record]
+    root [label="<f0> 1 |<f1> 1 |<f2> 1 |<f3> 1|<f4> 1|<f5> 1|<f6> 1|<f7> 1"]
+    
+    b0 [label="<f0> 1 |<f1> 1 |<f2> 1 |<f3> 1|<f4> 1|<f5> 1|<f6> 1|<f7> 1"]
+    bx [label="..."]
+    b7 [label="<f0> 1 |<f1> 1 |<f2> 1 |<f3> 1|<f4> 1|<f5> 1|<f6> 1|<f7> 1"]
+    
+    c0 [shape=none, label=<<font face="monospace" color="#d13232">#d33</font>>]
+    c1 [shape=none, label=<<font face="monospace" color="#6c6e3b">#663</font>>]
+//    c2 [shape=none, label=<<font face="monospace" color="#46c2a3">#4ca</font>>]
+//    c3 [shape=none, label=<<font face="monospace" color="#1d4ba8">#14a</font>>]
+//    c4 [shape=none, label=<<font face="monospace" color="#000000">#000</font>>]
+//    c5 [shape=none, label=<<font face="monospace" color="#5c5c5c">#555</font>>]
+    cx [shape=none, label="..."]
+    c6 [shape=none, label=<<font face="monospace" color="#c70000">#c00</font>>]
+    c7 [shape=none, label=<<font face="monospace" color="#c2065a">#c05</font>>]
+    
+    c70 [shape=none, label=<<font face="monospace" color="#1d6bd1">#16d</font>>]
+    c7x [shape=none, label="..."]
+    c77 [shape=none, label=<<font face="monospace" color="#c98a2a">#c82</font>>]
+    
+    root:f0 -> b0
+    root -> bx [style=bold]
+    root:f7 -> b7
+    
+    b0:f0 -> c0
+    b0:f1 -> c1
+//    b0:f2 -> c2
+//    b0:f3 -> c3
+//    b0:f4 -> c4
+//    b0:f5 -> c5
+//    b0:f2 -> cx
+//    b0:f3 -> cx
+//    b0:f4 -> cx
+//    b0:f5 -> cx
+    b0 -> cx [style=bold]
+    b0:f6 -> c6
+    b0:f7 -> c7
+    
+    b7:f0 -> c70
+    b7 -> c7x [style=bold]
+    b7:f7 -> c77
+} 

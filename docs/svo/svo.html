@@ -84,7 +84,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../related/literature.html">Literature References</a>
+    <a class="" href="../related/literature.html">References</a>
                 </li>
     </ul>
 	    </li>
@@ -112,7 +112,7 @@
         
             <li><a class="toctree-l4" href="#extreme-cases-and-limits">Extreme Cases And Limits</a></li>
         
-            <li><a class="toctree-l4" href="#construction">Construction</a></li>
+            <li><a class="toctree-l4" href="#construction-and-optimization">Construction and Optimization</a></li>
         
             <li><a class="toctree-l4" href="#serialization">Serialization</a></li>
         
@@ -126,6 +126,10 @@
                 <li class="">
                     
     <a class="" href="construction.html">SVO Construction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="optimization.html">SVO Optimization</a>
                 </li>
                 <li class="">
                     
@@ -297,8 +301,10 @@ For arrays, this produces infinite space requirements because all space between 
 For octrees, more layers are necessary to encode positions further from the origin.
 In neither case there is an upper bound to this.</p>
 <p>In practice, octrees perform significantly better at encoding sparse data than arrays.</p>
-<h2 id="construction">Construction</h2>
+<h2 id="construction-and-optimization">Construction and Optimization</h2>
 <p>How an octree can be constructed from a list voxels is thorougly explained in <a href="construction.html">SVO Construction</a>.</p>
+<p>After the octree has been constructed, it will often be necessary to optimize its structure.
+See <a href="optimization.html">SVO Optimization</a>.</p>
 <h2 id="serialization">Serialization</h2>
 <p><img alt="SVO" src="../img/graph/octree.svg" /><br>
 <em>Figure 0: A Sparse Voxel Octree, encoded in memory</em></p>
