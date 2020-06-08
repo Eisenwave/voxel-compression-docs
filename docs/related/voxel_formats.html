@@ -97,13 +97,25 @@
         
             <li><a class="toctree-l4" href="#kv6">KV6</a></li>
         
+            <li><a class="toctree-l4" href="#png-stack">PNG Stack</a></li>
+        
+            <li><a class="toctree-l4" href="#minecraft-schematic">Minecraft Schematic</a></li>
+        
+            <li><a class="toctree-l4" href="#minecraft-structure">Minecraft Structure</a></li>
+        
             <li><a class="toctree-l4" href="#qubicle-exchange-format">Qubicle Exchange Format</a></li>
         
             <li><a class="toctree-l4" href="#qubicle-binary">Qubicle Binary</a></li>
         
             <li><a class="toctree-l4" href="#simple-voxels">Simple Voxels</a></li>
         
+            <li><a class="toctree-l4" href="#sproxel-csv">Sproxel CSV</a></li>
+        
+            <li><a class="toctree-l4" href="#sproxel-enhanced-png">Sproxel Enhanced PNG</a></li>
+        
             <li><a class="toctree-l4" href="#voxel-model">Voxel Model</a></li>
+        
+            <li><a class="toctree-l4" href="#zoxel">Zoxel</a></li>
         
         </ul>
     
@@ -371,6 +383,147 @@
 </tr>
 </tbody>
 </table>
+<h2 id="png-stack">PNG Stack</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.png</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>image/png</code></td>
+</tr>
+<tr>
+<td>Software</td>
+<td>various</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>stack of images</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>PNG</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>PNG</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>PNG</td>
+</tr>
+</tbody>
+</table>
+<h2 id="minecraft-schematic">Minecraft Schematic</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.schematic</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>application/x-schematic+nbt</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>various Minecraft-related</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary, based on NBT</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel array</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>MC block-based</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>implicit, global, MC blocks</td>
+</tr>
+</tbody>
+</table>
+<h2 id="minecraft-structure">Minecraft Structure</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.mcstructure</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>application/x-minecraft-structure+nbt</code></td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Minecraft</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary, based on NBT</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel list</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>MC block-based</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>global, MC blocks</td>
+</tr>
+</tbody>
+</table>
 <h2 id="qubicle-exchange-format">Qubicle Exchange Format</h2>
 <table>
 <thead>
@@ -512,7 +665,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="voxel-model">Voxel Model</h2>
+<h2 id="sproxel-csv">Sproxel CSV</h2>
 <table>
 <thead>
 <tr>
@@ -522,9 +675,99 @@
 </thead>
 <tbody>
 <tr>
-<td>Abbreviation</td>
-<td>VOX</td>
+<td>Pattern</td>
+<td><code>*.csv</code></td>
 </tr>
+<tr>
+<td>Media-Type</td>
+<td><code>text/x-sproxel+csv</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Sproxel</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>CSV-based</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel array</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGBA32</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sproxel-enhanced-png">Sproxel Enhanced PNG</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.csv</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>image/x-sproxel+png</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Sproxel</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>PNG-based</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>stack of slices within single PNG</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>PNG</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>PNG</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>PNG</td>
+</tr>
+</tbody>
+</table>
+<h2 id="voxel-model">Voxel Model</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>Pattern</td>
 <td><code>*.vox</code></td>
@@ -560,6 +803,53 @@
 <tr>
 <td>Palette</td>
 <td>global, 256 colors of which one is reserved</td>
+</tr>
+</tbody>
+</table>
+<h2 id="zoxel">Zoxel</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.zox</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>text/x-zoxel+json</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Zoxel</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>text, JSON-based</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel list</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGBA32</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>none</td>
 </tr>
 </tbody>
 </table>
