@@ -100,6 +100,42 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 [SLAB6 Download](http://www.advsys.net/ken/slab6.zip)<br>
 **Last Viewed:** 2020-06-07
 
+### Zoxel File Format Specification
+
+**Author:** Graham King<br>
+**Publication Date:** 2013-05-16<br>
+**Last Modification Date:** 2013-11-29<br>
+**Published at:** [Zoxel Repository](https://github.com/grking/zoxel)<br>
+**Links:** [Wiki Page](https://github.com/grking/zoxel/wiki/Zoxel-File-Format)<br>
+**Last Viewed:** 2020-06-08
+
+### Schematic File Format
+
+**Authors:** Minecraft Wiki<br>
+**Publication Date:** N/A<br>
+**Last Modification Date:** 2020-05-10<br>
+**Published at:** [Minecraft Wiki](https://minecraft.gamepedia.com)<br>
+**Links:** [Wiki Page](https://minecraft.gamepedia.com/Schematic_file_format)<br>
+**Last Viewed:** 2020-06-08
+
+### Structure Block File Format
+
+**Authors:** Minecraft Wiki<br>
+**Publication Date:** N/A<br>
+**Last Modification Date:** 2020-05-25<br>
+**Published at:** [Minecraft Wiki](https://minecraft.gamepedia.com)<br>
+**Links:** [Wiki Page](https://minecraft.gamepedia.com/Structure_block_file_format)<br>
+**Last Viewed:** 2020-06-08
+
+### Sproxel User Manual
+
+**Author:** androo.gardner@gmail.com (?)<br>
+**Publication Date:** N/A<br>
+**Last Modification Date** N/A<br>
+**Published at:** [Sproxel at Google Code](https://code.google.com/archive/p/sproxel)<br>
+**Links:** [Wiki Page](https://code.google.com/archive/p/sproxel/wikis/UserManual.wiki)<br>
+**Last Viewed:** 2020-06-08
+
 ## Web
 
 ### Compressing Voxel Worlds
