@@ -84,6 +84,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../related/voxel_formats.html">List of Voxel File Formats</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../related/literature.html">References</a>
                 </li>
     </ul>
@@ -306,8 +310,8 @@ When encoding this model, we see the following results:</p>
 <p>So how could we accomplish a seemingly miraculous drop from 24x worse to nearly identical for octrees?
 By simply using the <em>degenerate case</em> of a zero-node to encode a complete subtree.</p>
 <p><img alt="Complete Branch Optimization" src="../img/graph/octree_complete_branches_optimization.svg" /><br>
-<em>Figure 4: The Tree from Figure 1, after optimization.</em></p>
-<p>Compare the above figure to <em>Figure 1</em>. We are eliminating one layer of nodes and going from the root directly to
+<em>Figure 4: The Tree from Figure 2, after optimization.</em></p>
+<p>Compare the above figure to <em>Figure 2</em>. We are eliminating one layer of nodes and going from the root directly to
 the color information.
 Of course, the above data only includes geometry bytes, not color bytes.
 By eliminating such layers, we can save ourselves 8 nodes on the second level from the bottom, 64 nodes on the third,

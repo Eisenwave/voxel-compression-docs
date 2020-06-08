@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Overview over Related Work";
-    var mkdocs_page_input_path = "related/overview.md";
+    var mkdocs_page_name = "List of Voxel File Formats";
+    var mkdocs_page_input_path = "related/voxel_formats.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -78,19 +78,37 @@
 		
     <span class="caption-text">Related Work</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="overview.html">Overview over Related Work</a>
+                </li>
                 <li class=" current">
                     
-    <a class="current" href="overview.html">Overview over Related Work</a>
+    <a class="current" href="voxel_formats.html">List of Voxel File Formats</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#overview-over-related-work">Overview over Related Work</a></li>
+    <li class="toctree-l3"><a href="#list-of-voxel-file-formats">List of Voxel File Formats</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#binvox">Binvox</a></li>
+        
+            <li><a class="toctree-l4" href="#kvx">KVX</a></li>
+        
+            <li><a class="toctree-l4" href="#kv6">KV6</a></li>
+        
+            <li><a class="toctree-l4" href="#qubicle-exchange-format">Qubicle Exchange Format</a></li>
+        
+            <li><a class="toctree-l4" href="#qubicle-binary">Qubicle Binary</a></li>
+        
+            <li><a class="toctree-l4" href="#simple-voxels">Simple Voxels</a></li>
+        
+            <li><a class="toctree-l4" href="#voxel-model">Voxel Model</a></li>
+        
+        </ul>
     
 
     </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="voxel_formats.html">List of Voxel File Formats</a>
                 </li>
                 <li class="">
                     
@@ -201,7 +219,7 @@
         
       
     
-    <li>Overview over Related Work</li>
+    <li>List of Voxel File Formats</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -211,7 +229,340 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="overview-over-related-work">Overview over Related Work</h1>
+                <h1 id="list-of-voxel-file-formats">List of Voxel File Formats</h1>
+<h2 id="binvox">Binvox</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.binvox</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-binvox</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Binvox</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary with text header</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel array</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>run-length encoding</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="kvx">KVX</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.kvx</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-kvx</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Voxlap</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>map of voxel columns per mipmap level</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGB666</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>global, 256 colors</td>
+</tr>
+</tbody>
+</table>
+<h2 id="kv6">KV6</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.kv6</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-kv6</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>SLAB6</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>map of voxel columns</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGB666 in palette, RGB24 otherwise</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>optional, global, 256 colors</td>
+</tr>
+</tbody>
+</table>
+<h2 id="qubicle-exchange-format">Qubicle Exchange Format</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.qef</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>text/x-qef+plain</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Qubicle</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>text, line-based</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel list</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>floating-point RGB</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>global</td>
+</tr>
+</tbody>
+</table>
+<h2 id="qubicle-binary">Qubicle Binary</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.qb</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-qb</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Qubicle</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel array</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>optional run-length encoding</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGB24</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="simple-voxels">Simple Voxels</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.svx</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>application/x-svx+zip</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Shapeways</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>zip-archive with manifest.xml and images</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>stack of images</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>depends on image format</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>depends on image format</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>no global, only within image</td>
+</tr>
+</tbody>
+</table>
+<h2 id="voxel-model">Voxel Model</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abbreviation</td>
+<td>VOX</td>
+</tr>
+<tr>
+<td>Pattern</td>
+<td><code>*.vox</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-vox</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>MagicaVoxel</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary with RIFF-style chunks</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>multiple, since 0.99.5 with names</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>8-bit voxel lists</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGB24</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>global, 256 colors of which one is reserved</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
@@ -228,10 +579,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../statistical_tests.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="overview.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="voxel_formats.html" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="literature.html" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

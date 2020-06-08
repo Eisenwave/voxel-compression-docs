@@ -84,6 +84,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../related/voxel_formats.html">List of Voxel File Formats</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../related/literature.html">References</a>
                 </li>
     </ul>
@@ -321,22 +325,77 @@ To fully encode an SVO, two steps must be performed:</p>
 <li>Depth-First Search (DFS)</li>
 <li>Breadth-First Search (BFS)</li>
 </ul>
+<p>We improve upon Depth-First Search using our own novel method, Accelerated Depth-First Search (ADFS).
+The main points of comparison are as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Space</th>
+<th>Data Structure</th>
+<th>Bulk-Read Possible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DFS</td>
+<td>
+<script type="math/tex">O(\log{v})</script>
+</td>
+<td>Stack of Nodes</td>
+<td>never</td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>
+<script type="math/tex">O(v)</script>
+</td>
+<td>Queue</td>
+<td>for entire layer</td>
+</tr>
+<tr>
+<td>ADFS</td>
+<td>
+<script type="math/tex">O(\log{v})</script>
+</td>
+<td>Stack of Node Lists</td>
+<td>for direct children</td>
+</tr>
+</tbody>
+</table>
 <h4 id="depth-first">Depth-First</h4>
 <p><img alt="depth-first-tree" src="../img/graph/depth_first.svg" /><br>
 <em>Figure 1: Tree, traversed depth-first</em></p>
 <p>DFS can be performed using only a stack to keep track of the node number at each level.
 On the deepest level, the next node is chosen until the end is reached and the next parent node is chosen.
 This low memory cost (which is in fact <script type="math/tex">O(\log{n})</script> where n is the number of nodes) is highly advantageous when encoding
-enormous models. </p>
+enormous models.</p>
 <h4 id="breadth-first">Breadth-First</h4>
 <p><img alt="breadth-first-tree" src="../img/graph/breadth_first.svg" /><br>
 <em>Figure 2: Tree, traversed breadth-first</em></p>
 <p>BFS comes with a higher cost since a typical algorithm appends all branches to a queue for every traversed node.
 This means that in the worst case, which is at the beginning of serialization eight nodes are appended on every level
 before any node is popped from the queue, resulting in a higher memory cost.</p>
-<h4 id="why-to-serialize-octrees-depth-first">Why To Serialize Octrees Depth-First</h4>
+<h4 id="accelerated-depth-first">Accelerated Depth-First</h4>
+<p><img alt="depth-first-tree" src="../img/graph/acc_depth_first.svg" /><br>
+<em>Figure 3: Tree, traversed depth-first</em></p>
+<p>In <em>Figure 3</em>, the labels symbolize <code>order of visitation</code><strong>/</strong><code>order of storage</code>.</p>
+<p>Accelerated Depth-First works identically to DFS, however all direct children of the current node are stored first.
+So for example, we store all direct children (2, 3, 4) of the root node (1), but then continue onward to 2 as though we
+were performing regular DFS.</p>
+<p>When we are decoding a format in which a node contains the connections to its child nodes,
+we can count the number of connections and read multiple nodes simultaneously.
+This is the main benefit of this method.
+Regular DFS requires us to inspect one connection at a time, then go one node deeper into the tree if it is set.
+A bulk-read is never possible.</p>
+<p>An obvious prerequisite is that the nodes are encoded in a fixed-length format, otherwise we can't
+safely perform such a bulk-read.
+We can still use just a stack as a data structure, but we need to store a list at every depth with the cached nodes.</p>
+<p>This approach was specially invented for this research project.
+Any previous use of it is unknown to me.</p>
+<h4 id="why-to-serialize-octrees-depth-first-and-not-breadth-first">Why To Serialize Octrees Depth-First and not Breadth-First</h4>
 <p><img alt="octree-serial" src="../img/graph/octree_serial.svg" /><br>
-<em>Figure 3: A serialized octree, depth-first</em></p>
+<em>Figure 4: A serialized octree, depth-first</em></p>
 <p>The scheme more practical for encoding octrees is depth-first.
 This is due to the fact that only a stack is necessary to keep track of the current position.
 The size or depth of the octree would need to double in all dimensions to necessitate a stack greater by one element.

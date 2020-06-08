@@ -1,16 +1,24 @@
 digraph g {
-//    splines=false
+    splines=false
     bgcolor=transparent
     node [shape = record]
     root [label="00000000"]
     
-    c0 [shape=none, label=<<font face="monospace" color="#d13232">#d33</font>>]
-    c1 [shape=none, label=<<font face="monospace" color="#6c6e3b">#663</font>>]
-    cx [shape=none, label="..."]
-    clast [shape=none, label=<<font face="monospace" color="#c98a2a">#c82</font>>]
+    c00 [shape=none, label=<<font face="monospace" color="#d13232">#d33</font>>]
+    c01 [shape=none, label=<<font face="monospace" color="#6c6e3b">#663</font>>]
+    c0x [shape=none, label="..."]
+    c06 [shape=none, label=<<font face="monospace" color="#c70000">#c00</font>>]
+    c07 [shape=none, label=<<font face="monospace" color="#c2065a">#c05</font>>]
     
-    root -> c0
-    root -> c1
-    root -> cx [style=bold]
-    root -> clast
+    cxx [shape=none, label="..."]
+    
+    c77 [shape=none, label=<<font face="monospace" color="#c98a2a">#c82</font>>]
+    
+    root -> c00
+    root -> c01
+    root -> c0x [style=bold]
+    root -> c06
+    root -> cxx
+    root -> c07
+    root -> c77
 } 
