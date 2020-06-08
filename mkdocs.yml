@@ -25,6 +25,7 @@ nav:
       - statistical_tests.md
   - Related Work:
       - related/overview.md
+      - related/voxel_formats.md
       - related/literature.md
   - Geometry Encoding:
       - uncompressed.md

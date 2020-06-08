@@ -90,6 +90,16 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 **Links:** [Website](https://abfab3d.com/svx-format/)<br>
 **Last Viewed:** 2020-06-04
 
+### SLAB6 Project Page (KVX, KV6 Documentation)
+
+**Author:** Ken Silverman<br>
+**Publication Date:** 2000 or earlier (?)<br>
+**Last Modification Date:** 2011-03-22<br>
+**Published at:** [Ken Silverman's Projects Page](http://www.advsys.net/ken/download.htm)<br>
+**Links:** [Website](http://www.advsys.net/ken/download.htm#slab6),
+[SLAB6 Download](http://www.advsys.net/ken/slab6.zip)<br>
+**Last Viewed:** 2020-06-07
+
 ## Web
 
 ### Compressing Voxel Worlds
