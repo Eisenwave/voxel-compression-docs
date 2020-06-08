@@ -79,6 +79,15 @@ There are two well-known strategies for traversing trees completely:
 - Depth-First Search (DFS)
 - Breadth-First Search (BFS)
 
+We improve upon Depth-First Search using our own novel method, Accelerated Depth-First Search (ADFS).
+The main points of comparison are as follows:
+
+| Method | Space | Data Structure | Bulk-Read Possible
+| ----- | ----- | ----- | ----- |
+| DFS  | $O(\log{v})$ | Stack of Nodes      | never
+| BFS  | $O(v)$       | Queue               | for entire layer
+| ADFS | $O(\log{v})$ | Stack of Node Lists | for direct children
+
 #### Depth-First
 
 ![depth-first-tree](../img/graph/depth_first.svg)<br>
@@ -87,7 +96,7 @@ There are two well-known strategies for traversing trees completely:
 DFS can be performed using only a stack to keep track of the node number at each level.
 On the deepest level, the next node is chosen until the end is reached and the next parent node is chosen.
 This low memory cost (which is in fact $O(\log{n})$ where n is the number of nodes) is highly advantageous when encoding
-enormous models. 
+enormous models.
 
 #### Breadth-First
 
@@ -98,10 +107,34 @@ BFS comes with a higher cost since a typical algorithm appends all branches to a
 This means that in the worst case, which is at the beginning of serialization eight nodes are appended on every level
 before any node is popped from the queue, resulting in a higher memory cost.
 
-#### Why To Serialize Octrees Depth-First
+#### Accelerated Depth-First
+
+![depth-first-tree](../img/graph/acc_depth_first.svg)<br>
+*Figure 3: Tree, traversed depth-first*
+
+In *Figure 3*, the labels symbolize `order of visitation`**/**`order of storage`.
+
+Accelerated Depth-First works identically to DFS, however all direct children of the current node are stored first.
+So for example, we store all direct children (2, 3, 4) of the root node (1), but then continue onward to 2 as though we
+were performing regular DFS.
+
+When we are decoding a format in which a node contains the connections to its child nodes,
+we can count the number of connections and read multiple nodes simultaneously.
+This is the main benefit of this method.
+Regular DFS requires us to inspect one connection at a time, then go one node deeper into the tree if it is set.
+A bulk-read is never possible.
+
+An obvious prerequisite is that the nodes are encoded in a fixed-length format, otherwise we can't
+safely perform such a bulk-read.
+We can still use just a stack as a data structure, but we need to store a list at every depth with the cached nodes.
+
+This approach was specially invented for this research project.
+Any previous use of it is unknown to me.
+
+#### Why To Serialize Octrees Depth-First and not Breadth-First
 
 ![octree-serial](../img/graph/octree_serial.svg)<br>
-*Figure 3: A serialized octree, depth-first*
+*Figure 4: A serialized octree, depth-first*
 
 The scheme more practical for encoding octrees is depth-first.
 This is due to the fact that only a stack is necessary to keep track of the current position.

@@ -76,9 +76,9 @@ So how could we accomplish a seemingly miraculous drop from 24x worse to nearly 
 By simply using the *degenerate case* of a zero-node to encode a complete subtree.
 
 ![Complete Branch Optimization](../img/graph/octree_complete_branches_optimization.svg)<br>
-*Figure 4: The Tree from Figure 1, after optimization.*
+*Figure 4: The Tree from Figure 2, after optimization.*
 
-Compare the above figure to *Figure 1*. We are eliminating one layer of nodes and going from the root directly to
+Compare the above figure to *Figure 2*. We are eliminating one layer of nodes and going from the root directly to
 the color information.
 Of course, the above data only includes geometry bytes, not color bytes.
 By eliminating such layers, we can save ourselves 8 nodes on the second level from the bottom, 64 nodes on the third,
