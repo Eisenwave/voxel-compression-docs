@@ -59,6 +59,21 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 [Low-Resolution PDF](http://jcgt.org/published/0006/02/01/paper-lowres.pdf),
 [Video Demo](http://jcgt.org/published/0006/02/01/jcgt-ssvdags-demo.mp4)
 
+### A Computer Oriented Geodetic Data Base And a New Technique in File Sequencing
+
+**Author:** G.M. Morton<br>
+**Publication Date:** 1996-03-01<br>
+**Published In:** Journal of Computer Graphics Techniques (JCGT), vol. 6, no. 2<br>
+**Links:** [PDF](https://dominoweb.draco.res.ibm.com/reports/Morton1966.pdf)
+
+### Über die stetige Abbildung einer Linie auf ein Flächenstück {abc}
+
+**Author:** David Hilbert<br>
+**Publication Date: 1891-03-04**<br>
+**Published In:** Mathematische Annalen, 38th volume, 3rd booklet<pdf>
+**Links:** [DigiZeitschriften](http://www.digizeitschriften.de/dms/img/?PID=GDZPPN002253135),
+[PDF](http://www.digizeitschriften.de/download/PPN235181684_0038/PPN235181684_0038___log40.pdf)
+
 ## Specifications
 
 ### Qubicle File Specification Articles

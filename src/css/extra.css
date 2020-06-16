@@ -42,6 +42,10 @@ h3 {
     counter-reset: subsubsection;
 }
 
+h5 {
+    margin-bottom: 0.5em;
+}
+
 h2::before {
     counter-increment: section;
     content: counter(section) ". ";

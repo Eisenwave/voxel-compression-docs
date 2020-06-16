@@ -1,6 +1,6 @@
 # List of Voxel File Formats
 
-## Binvox
+###### Binvox
 
 | Stat | Value |
 | ----- | ----- |
@@ -9,13 +9,13 @@ Media-Type     | `model/x-binvox` (unofficial)
 Magic          | `#binvox 1` (of which 1 is version)
 Software       | Binvox
 Structure      | binary with text header
-Volumes        | single
+Volumes        | single1
 Voxel-Encoding | voxel array
 Compression    | run-length encoding
 Color Support  | none
 Palette        | none
 
-## KVX
+##### KVX
 
 | Stat | Value |
 | ----- | ----- |
@@ -30,7 +30,7 @@ Compression    | none
 Color Support  | RGB666
 Palette        | global, 256 colors
 
-## KV6
+##### KV6
 
 | Stat | Value |
 | ----- | ----- |
@@ -45,7 +45,7 @@ Compression    | none
 Color Support  | RGB666 in palette, RGB24 otherwise
 Palette        | optional, global, 256 colors
 
-## PNG Stack
+##### PNG Stack
 
 | Stat | Value |
 | ----- | ----- |
@@ -60,7 +60,7 @@ Compression    | PNG
 Color Support  | PNG
 Palette        | PNG
 
-## Minecraft Schematic
+##### Minecraft Schematic
 
 | Stat | Value |
 | ----- | ----- |
@@ -75,7 +75,7 @@ Compression    | none
 Color Support  | MC block-based
 Palette        | implicit, global, MC blocks
 
-## Minecraft Structure
+##### Minecraft Structure
 
 | Stat | Value |
 | ----- | ----- |
@@ -90,7 +90,7 @@ Compression    | none
 Color Support  | MC block-based
 Palette        | global, MC blocks
 
-## Qubicle Exchange Format
+##### Qubicle Exchange Format
 
 | Stat | Value |
 | ----- | ----- |
@@ -105,7 +105,7 @@ Compression    | none
 Color Support  | floating-point RGB
 Palette        | global
 
-## Qubicle Binary
+##### Qubicle Binary
 
 | Stat | Value |
 | ----- | ----- |
@@ -120,7 +120,7 @@ Compression    | optional run-length encoding
 Color Support  | RGB24
 Palette        | none
 
-## Qubicle Binary Tree
+##### Qubicle Binary Tree
 
 | Stat | Value |
 | ----- | ----- |
@@ -135,7 +135,7 @@ Compression    | zlib
 Color Support  | RGB24, RGBA32 with palette
 Palette        | optional, global
 
-## Simple Voxels
+##### Simple Voxels
 | Stat | Value |
 | ----- | ----- |
 Pattern        | `*.svx`
@@ -149,7 +149,7 @@ Compression    | depends on image format
 Color Support  | depends on image format
 Palette        | no global, only within image
 
-## Sproxel CSV
+##### Sproxel CSV
 | Stat | Value |
 | ----- | ----- |
 Pattern        | `*.csv`
@@ -163,7 +163,7 @@ Compression    | none
 Color Support  | RGBA32
 Palette        | none
 
-## Sproxel Enhanced PNG
+##### Sproxel Enhanced PNG
 | Stat | Value |
 | ----- | ----- |
 Pattern        | `*.csv`
@@ -177,7 +177,7 @@ Compression    | PNG
 Color Support  | PNG
 Palette        | PNG
 
-## Voxel Model
+##### Voxel Model
 
 | Stat | Value |
 | ----- | ----- |
@@ -192,7 +192,7 @@ Compression    | none
 Color Support  | RGB24
 Palette        | global, 256 colors of which one is reserved
 
-## Zoxel
+##### Zoxel
 
 | Stat | Value |
 | ----- | ----- |
