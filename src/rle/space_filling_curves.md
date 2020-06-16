@@ -13,6 +13,9 @@ In such a case, we are applying the inverse function:
 
 $$c^{-1}: \mathbb{Z}^N \rightarrow \mathbb{N},\; N \in \mathbb{N}$$
 
+For the sake of simplicity, we will only be discussing three-dimensional space-filling curves
+$c:\mathbb{N} \rightarrow \mathbb{Z}^3$
+
 ## Motivation
 
 In the previous [RLE](rle.md) methods, we have filled space using nested iteration.
@@ -35,6 +38,8 @@ The only curves without jumps are curves of which all points are direct neighbor
     Just by permuting coordinates we could obtain six variations of each of our curves.
     The three chosen examples were selected because they have significant advantages and disadvantages over one-another
     and thus act as a good proxy for comparison of all space-filling curves.
+!!! note
+    Z-Order Curves are also known as *Lebesgue curve*, *Morton Space-Filling Curve*, *Morton Order* or *Morton code*.
 
 ### Nested Iteration
 
@@ -75,18 +80,18 @@ A *jump* occurs once every `limit_x` coordinates, where `x` jumps from `limit_x 
 ![Nested Iteration](../img/z_order.svg)<br>
 *Figure 2: Z-Order Curve in Two Dimensions*
 
-Z-Order curves have already been presented as a possible solution
+Z-Order Curves have already been presented as a possible solution
 [in 1996 by G.H. Morton](../related/literature.md#a-computer-oriented-geodetic-data-base-and-a-new-technique-in-file-sequencing).
 They have the significant advantage of a higher spatial locality.
 Z-Order Curves can be constructed iteratively by repeating the *z-pattern* each 2<sup>N</sup> iterations, recursively.
 
 For three dimension, they can be defined as follows:
 $$\begin{align}
-c(i) &= \text{deinterleave3}(i) \\
-c^{-1}(x, y, z)  &= \text{interleave3}(x, y, z)
+c(i) &= \text{deinterleave}_3(i) \\
+c^{-1}(x, y, z)  &= \text{interleave}_3(x, y, z)
 \end{align}$$
 
-The operations `interleave3` and `deinterleave3` are the basis for
+The operations $\text{interleave}_3$ and $\text{deinterleave}_3$ are the basis for
 [Octree Node Indices](../svo/construction.md#octree-node-index).
 They (de)interleave the bits of the three coordinates, producing a single index which consists of a series of
 octal digits.
@@ -259,7 +264,7 @@ Bitwise formats can not do this and need a separate marker for every single tran
     It is not required for a RLE format to encode 8-bit values to take advantage of a higher $t_f$.
     Any number of bits greater than one is sufficient.
 
-### Summary
+## Summary
 
 We compared *nested iteration*, *Z-Order Curves* and *Hilbert Curves* for use in RLE.
 The impact of different space-filling curves was dramatic.
@@ -270,7 +275,9 @@ Surprisingly, the previously better-performing bitwise formats did not see any b
 In fact, they became more redundant when using the latter space-filling curves.
 This phenomenon was investigated and explained by demonstrating that only the number of transitions affects the number
 of markers and thus the data size for bitwise formats.
+In particular, *Z-Order Curves* negatively impact the number of transitions.
 
-In total, we were able to achieve an improvement using *Hilbert Curves* and *In-Band* over the previously best method,
-*Compact Binvox* with *Nested Iteration*.
-Unfortunately, the computational effort of *Hilbert Curves* makes it questionable whether this method should be used.
+In total, we were able to achieve a reduction of 13% in data size using *Hilbert Curves* and *In-Band* over the
+previously best method, *Compact Binvox* with *Nested Iteration*.
+Unfortunately, the computational effort of *Hilbert Curves* puts into question whether a use of this method is
+desired.

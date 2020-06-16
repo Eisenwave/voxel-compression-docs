@@ -120,6 +120,8 @@
         
             <li><a class="toctree-l4" href="#impact-on-run-length-encoding">Impact on Run-Length Encoding</a></li>
         
+            <li><a class="toctree-l4" href="#summary">Summary</a></li>
+        
         </ul>
     
 
@@ -239,6 +241,9 @@ In such a case, we are applying the inverse function:</p>
 <p>
 <script type="math/tex; mode=display">c^{-1}: \mathbb{Z}^N \rightarrow \mathbb{N},\; N \in \mathbb{N}</script>
 </p>
+<p>For the sake of simplicity, we will only be discussing three-dimensional space-filling curves
+<script type="math/tex">c:\mathbb{N} \rightarrow \mathbb{Z}^3</script>
+</p>
 <h2 id="motivation">Motivation</h2>
 <p>In the previous <a href="rle.html">RLE</a> methods, we have filled space using nested iteration.
 Using alternative space-filling curves improves spatial locality over nested iterations.
@@ -257,6 +262,10 @@ The only curves without jumps are curves of which all points are direct neighbor
 Just by permuting coordinates we could obtain six variations of each of our curves.
 The three chosen examples were selected because they have significant advantages and disadvantages over one-another
 and thus act as a good proxy for comparison of all space-filling curves.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Z-Order Curves are also known as <em>Lebesgue curve</em>, <em>Morton Space-Filling Curve</em>, <em>Morton Order</em> or <em>Morton code</em>.</p>
 </div>
 <h3>Nested Iteration</h3>
 <p><img alt="Nested Iteration" src="../img/nested_iter.svg" /><br>
@@ -290,17 +299,17 @@ A <em>jump</em> occurs once every <code>limit_x</code> coordinates, where <code>
 <h3>Z-Order Curves</h3>
 <p><img alt="Nested Iteration" src="../img/z_order.svg" /><br>
 <em>Figure 2: Z-Order Curve in Two Dimensions</em></p>
-<p>Z-Order curves have already been presented as a possible solution
+<p>Z-Order Curves have already been presented as a possible solution
 <a href="../related/literature.html#a-computer-oriented-geodetic-data-base-and-a-new-technique-in-file-sequencing">in 1996 by G.H. Morton</a>.
 They have the significant advantage of a higher spatial locality.
 Z-Order Curves can be constructed iteratively by repeating the <em>z-pattern</em> each 2<sup>N</sup> iterations, recursively.</p>
 <p>For three dimension, they can be defined as follows:
 <script type="math/tex; mode=display">\begin{align}
-c(i) &= \text{deinterleave3}(i) \\
-c^{-1}(x, y, z)  &= \text{interleave3}(x, y, z)
+c(i) &= \text{deinterleave}_3(i) \\
+c^{-1}(x, y, z)  &= \text{interleave}_3(x, y, z)
 \end{align}</script>
 </p>
-<p>The operations <code>interleave3</code> and <code>deinterleave3</code> are the basis for
+<p>The operations <script type="math/tex">\text{interleave}_3</script> and <script type="math/tex">\text{deinterleave}_3</script> are the basis for
 <a href="../svo/construction.html#octree-node-index">Octree Node Indices</a>.
 They (de)interleave the bits of the three coordinates, producing a single index which consists of a series of
 octal digits.
@@ -555,7 +564,7 @@ Bitwise formats can not do this and need a separate marker for every single tran
 <p>It is not required for a RLE format to encode 8-bit values to take advantage of a higher <script type="math/tex">t_f</script>.
 Any number of bits greater than one is sufficient.</p>
 </div>
-<h3>Summary</h3>
+<h2 id="summary">Summary</h2>
 <p>We compared <em>nested iteration</em>, <em>Z-Order Curves</em> and <em>Hilbert Curves</em> for use in RLE.
 The impact of different space-filling curves was dramatic.
 Bytewise formats such as <em>Complete Binvox</em> and <em>In-Band</em> performed worse with just nested iteration but saw
@@ -563,10 +572,12 @@ reductions in data of nearly 60% when using the latter methods.</p>
 <p>Surprisingly, the previously better-performing bitwise formats did not see any benefit.
 In fact, they became more redundant when using the latter space-filling curves.
 This phenomenon was investigated and explained by demonstrating that only the number of transitions affects the number
-of markers and thus the data size for bitwise formats.</p>
-<p>In total, we were able to achieve an improvement using <em>Hilbert Curves</em> and <em>In-Band</em> over the previously best method,
-<em>Compact Binvox</em> with <em>Nested Iteration</em>.
-Unfortunately, the computational effort of <em>Hilbert Curves</em> makes it questionable whether this method should be used.</p>
+of markers and thus the data size for bitwise formats.
+In particular, <em>Z-Order Curves</em> negatively impact the number of transitions.</p>
+<p>In total, we were able to achieve a reduction of 13% in data size using <em>Hilbert Curves</em> and <em>In-Band</em> over the
+previously best method, <em>Compact Binvox</em> with <em>Nested Iteration</em>.
+Unfortunately, the computational effort of <em>Hilbert Curves</em> puts into question whether a use of this method is
+desired.</p>
               
             </div>
           </div>
