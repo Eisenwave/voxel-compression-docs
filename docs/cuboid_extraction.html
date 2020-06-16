@@ -107,6 +107,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="rle/space_filling_curves.html">Space-Filling Curves</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="svo/svo.html">Sparse Voxel Octree</a>
                 </li>
                 <li class="">
@@ -158,7 +162,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="attribute_compression.html">Attribute Compression</a>
+    <a class="" href="attribute_compression.html">SVO Attribute Compression</a>
                 </li>
     </ul>
 	    </li>
@@ -272,7 +276,7 @@ One axis is being used as a height-axis, ideally the smallest one if the model i
 We then use a sweeping-plane approach where at each coordinate, we draw a heightmap which extends into our
 chosen direction.
 Finding the largest volume in the model is reduced to finding the maximum of the largest volumes for all heightmaps.</p>
-<h3 id="constructing-heightmaps-from-voxel-models">Constructing Heightmaps from Voxel-Models</h3>
+<h3>Constructing Heightmaps from Voxel-Models</h3>
 <p>Here is an illustration of how this is done, in 2 dimensions, where "up" in text is the height axis:</p>
 <pre><code>   0123456789    0123456789
 
@@ -290,7 +294,7 @@ Finding the largest volume in the model is reduced to finding the maximum of the
 Each slice from <code>0</code> to <code>7</code> is one histogram in 2 dimensions or a heightmap in 3 dimensions.
 We can construct these very efficiently by just taking the heightmap at one height above and incrementing each height,
 unless we find an empty voxel (<code>0</code>).</p>
-<h3 id="constructing-bitmaps-from-heightmaps">Constructing Bitmaps from Heightmaps</h3>
+<h3>Constructing Bitmaps from Heightmaps</h3>
 <p>Finding the largest cuboid in a voxel-model has been reduced to finding the largest cuboid in all its heightmaps.
 The problem is once again reduced to finding the largest area of <code>1</code>s in a bitmap, which can be done in <code>O(n*n)</code>.
 This is done by looking at all different height-values of the heightmap.
@@ -308,7 +312,7 @@ sweeping-line algorithm and searching for the greatest area in the resulting his
 https://www.geeksforgeeks.org/maximum-size-rectangle-binary-sub-matrix-1s/</p>
 <p>The volume of the greatest cuboid is then the current height multiplied with the size of the greatest area of <code>1</code> which
 we find.</p>
-<h3 id="expected-values">Expected values</h3>
+<h3>Expected values</h3>
 <p>To understand the following approaches, one must realize that the highest cuboid is not necessarily the largest.
 For example, a very flat pyramid may have a shape which is only great in volume towards the base.
 For an <code>n*n</code> heightmap with <code>n</code> height, we can find the cuboid with the largest volume for all heights by finding the

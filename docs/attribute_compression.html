@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Attribute Compression";
+    var mkdocs_page_name = "SVO Attribute Compression";
     var mkdocs_page_input_path = "attribute_compression.md";
     var mkdocs_page_url = null;
   </script>
@@ -107,6 +107,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="rle/space_filling_curves.html">Space-Filling Curves</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="svo/svo.html">Sparse Voxel Octree</a>
                 </li>
                 <li class="">
@@ -134,10 +138,18 @@
     <ul class="subnav">
                 <li class=" current">
                     
-    <a class="current" href="attribute_compression.html">Attribute Compression</a>
+    <a class="current" href="attribute_compression.html">SVO Attribute Compression</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#attribute-compression">Attribute Compression</a></li>
+    <li class="toctree-l3"><a href="#svo-attribute-compression">SVO Attribute Compression</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#image-based-approach">Image-Based Approach</a></li>
+        
+            <li><a class="toctree-l4" href="#octree-coupled-approach">Octree-Coupled Approach</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -201,7 +213,7 @@
         
       
     
-    <li>Attribute Compression</li>
+    <li>SVO Attribute Compression</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -211,7 +223,80 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="attribute-compression">Attribute Compression</h1>
+                <h1 id="svo-attribute-compression">SVO Attribute Compression</h1>
+<p>Geometry is the most important attribute, as it gives the model shape.
+However, it does not inherently make up the majority of a model's information.
+Whether a voxel exists or not is only a single-bit information, whereas the colors are often times a 24-bit information.
+Add an alpha channel to that and various other material properties and it is plain to see that effort has to be put
+into compressing these attributes as well.</p>
+<h2 id="image-based-approach">Image-Based Approach</h2>
+<p>Storing a 24-bit RGB color for every voxel would be very expensive.
+What some formats such as PNG instead do is store a delta between neighboring colors.
+Instead of storing deltas we could also store whether neighboring colors are exactly identical, but such a naive
+approach would become very ineffective when introducing small amounts of noise into the colors.</p>
+<h3>Primer on PNG Filtering</h3>
+<pre><code>c|b
+-+-
+a|x
+</code></pre>
+
+<p><code>x</code> is the color to encode and <code>a, b, c</code> are its neighbors.
+In the <a href="https://www.w3.org/TR/2003/REC-PNG-20031110/#9Filters">Filtering Section</a> of the PNG specification we can
+see that the colors are converted to a delta-based representation relative to their neighbors.</p>
+<p>This step however does not reduce the size of the data as "both the inputs and outputs fit into bytes".
+It is merely a pre-processing step which increases redundancy in the image bytes and thus improves
+<a href="https://www.w3.org/TR/2003/REC-PNG-20031110/#10Compression">DEFLATE compression, the next step</a>.</p>
+<h3>Problems in Three Dimensions</h3>
+<p>Regardless of whether we want to naively store exact matches between neighbors or a delta, we run into the same
+problems.</p>
+<ol>
+<li>We might not always have a neighbor.</li>
+<li>We need to cache vast amounts of data to reference neighbors.</li>
+</ol>
+<p>In image formats at most, a pixel may have a zero-alpha value but it still exists in the data.
+In our octree format voxels might simply not exist at all.
+There is a distinct difference between an invisible voxel and a missing voxel.
+However, we could still treat missing voxels as zero-colors.
+Hence, this is the smaller of the problems.</p>
+<p>The latter problem is of higher significance.
+Due to our geometry encoding scheme, we would need to cache a significant portion of our model when reading it.
+For instance, a voxel which lies at the origin could reference three other octants as neighbors and obtain its colors
+from them.
+Therefore, we must cache these octants during the reading process.
+Image pixels are typically stored in such a way that you only need to store the previous and the current line to obtain
+the negative neighbors of any pixel.</p>
+<p>Since we are forced to store neighbors for random access, we have two options:</p>
+<ol>
+<li>Store neighbors in an array, having <script type="math/tex">O(1)</script> random access but <script type="math/tex">O(\infty)</script> spatial cost</li>
+<li>Store neighbors in an octree, having <script type="math/tex">O(\log{n})</script> random access and <script type="math/tex">O(v+\log{v})</script> spatial cost</li>
+</ol>
+<h3>Conclusion</h3>
+<p>Our geometry-data is not arranged in a way that allows for fast random access of previously read neighbors and a low
+spatial cost.
+Unfortunately, we can thus not trivially extend traditional image-based approaches into three dimensions.
+We must use an approach which is coupled to the octree structure instead.</p>
+<h2 id="octree-coupled-approach">Octree-Coupled Approach</h2>
+<p><img alt="Duck" src="img/duck_raw.png" /><br>
+<em>Figure 1: A Duck Model</em></p>
+<p>Observe the above figure.
+We can see that not only are there few colors in total, but we can see distinct shapes with an equal or similar color.
+As described in <a href="properties.html#colorattribute-locality">Properties of Voxel Models</a>, voxels which are located closely
+to each other also tend to have similar colors.
+Our goal is to use the existing octree structure and add information to it, so that we encode attribute information
+for more than one voxel at a time.</p>
+<p>We exploit the fact that as we split up the model into smaller and smaller subtrees, the range of colors
+within that subtrees will also get narrower.
+By range we refer to a subsection of RGB-space.
+For example, the entire model or its root node has a color range from
+<span style="color: #181311; font-weight: bold">(24, 19, 17)</span>
+to
+<span style="color: #d4a211; font-weight:bold">(212, 162, 17)</span>.
+We can obtain this range using the component-wise minimum and maximum of all colors.</p>
+<p><img alt="Duck Octants" src="img/duck_octants.png" /><br>
+<em>Figure 2: The Octants of a Duck Model</em></p>
+<p>When we split up the model into multiple octants, we see narrower ranges for most octants.
+For example, octants 0, 1, 2, 3, 5 and 7 contain only yellow, which is
+<span style="color: #c7a200; font-weight: bold">(199, 162, 0)</span>.</p>
               
             </div>
           </div>

@@ -107,6 +107,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../rle/space_filling_curves.html">Space-Filling Curves</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../svo/svo.html">Sparse Voxel Octree</a>
                 </li>
                 <li class="">
@@ -134,7 +138,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../attribute_compression.html">Attribute Compression</a>
+    <a class="" href="../attribute_compression.html">SVO Attribute Compression</a>
                 </li>
     </ul>
 	    </li>
@@ -223,7 +227,7 @@
 <strong>Media Type:</strong> <code>model/x-flvc</code><br>
 <strong>Magic Bytes:</strong> <code>"\xff\x11\x33\xccflvc"</code> = <code>ff 11 33 cc 66 6c 76 63</code></p>
 <h2 id="specification">Specification</h2>
-<h3 id="structlang-type-definitions">StructLang Type Definitions</h3>
+<h3>StructLang Type Definitions</h3>
 <pre><code class="rust">def u8 = unsigned integer&lt;8&gt;
 def u16 = big_endian unsigned integer&lt;16&gt;
 def u32 = big_endian unsigned integer&lt;32&gt;
@@ -237,7 +241,7 @@ def i64 = big_endian twos_complement integer&lt;64&gt;
 def ascii = unsigned hi_pad integer&lt;7&gt;
 </code></pre>
 
-<h3 id="enumerations-and-constants">Enumerations And Constants</h3>
+<h3>Enumerations And Constants</h3>
 <pre><code class="rust">enum attribute_modifier : u16 {
     // this attribute has no spatial locality
     // should be used for random unique ids etc.
@@ -270,7 +274,7 @@ enum builtin_identifiers : string16 {
 }
 </code></pre>
 
-<h3 id="helper-structs">Helper Structs</h3>
+<h3>Helper Structs</h3>
 <pre><code class="rust">struct vec3&lt;T&gt; {
     T x
     T y
@@ -285,7 +289,7 @@ struct string16 {
 
 <p>Note that <code>vec3</code> is a template.
 e.g. <code>vec3&lt;u32&gt;</code> would be a <code>vec3</code> of <code>u32</code>.</p>
-<h3 id="file-structure">File Structure</h3>
+<h3>File Structure</h3>
 <pre><code class="rust">struct main {
     u64 magic = 0xff11_33cc_666c_7663
     u8 version_major = 0

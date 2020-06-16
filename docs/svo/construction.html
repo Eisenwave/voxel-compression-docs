@@ -107,6 +107,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../rle/space_filling_curves.html">Space-Filling Curves</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="svo.html">Sparse Voxel Octree</a>
                 </li>
                 <li class=" current">
@@ -117,12 +121,6 @@
     <li class="toctree-l3"><a href="#svo-construction">SVO Construction</a></li>
     
         <ul>
-        
-            <li><a class="toctree-l4" href="#summary-of-construction">Summary of Construction</a></li>
-        
-            <li><a class="toctree-l4" href="#coordinate-system">Coordinate System</a></li>
-        
-            <li><a class="toctree-l4" href="#special-case-where-voxel-coordinates-are-positive">Special Case Where Voxel Coordinates Are Positive</a></li>
         
             <li><a class="toctree-l4" href="#efficient-boundary-test">Efficient Boundary Test</a></li>
         
@@ -160,7 +158,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../attribute_compression.html">Attribute Compression</a>
+    <a class="" href="../attribute_compression.html">SVO Attribute Compression</a>
                 </li>
     </ul>
 	    </li>
@@ -236,7 +234,7 @@
 fed to the constructing algorithm.
 Within the scope of this project, the <a href="../uncompressed.html">uncompressed format is a list of voxels</a>, but there are
 further subtle differences.</p>
-<h5 id="summary-of-construction">Summary of Construction</h5>
+<h5>Summary of Construction</h5>
 <p>The following process must be repeated for all voxels <script type="math/tex">v := (p := (x, y, z),  c) \in (\mathbb{Z}^3, \mathbb{N})</script> in the
 list.</p>
 <ol>
@@ -251,7 +249,7 @@ list.</p>
 <p class="admonition-title">Note</p>
 <p>To handle signed values, the octree must be extended into both positive and negative octants.</p>
 </div>
-<h5 id="coordinate-system">Coordinate System</h5>
+<h5>Coordinate System</h5>
 <p>There are two coordinate systems with which we must concern ourselves with:</p>
 <ul>
 <li><em>world coordinate system (signed)</em></li>
@@ -266,7 +264,7 @@ one octant.
 This allows us to perform the optimisation from step 6 for only unsigned coordinates.
 It also helps us optimize our <a href="#efficient-boundary-test">boundary test</a>.</p>
 <p>As a result, for example, an SVO that can contain 4x4x4 voxels will have space from <script type="math/tex">(-2, -2, -2)</script> to <script type="math/tex">(1, 1, 1)</script>.</p>
-<h5 id="special-case-where-voxel-coordinates-are-positive">Special Case Where Voxel Coordinates Are Positive</h5>
+<h5>Special Case Where Voxel Coordinates Are Positive</h5>
 <p>If the voxels are sorted with the first voxel being the most negative corner of the model, we have a global <script type="math/tex">p_{min}</script>
 (see step 3.).
 All voxels can then be translated by <script type="math/tex">-p_{min}</script>, yielding only positions that belong in the first octant.
@@ -292,7 +290,7 @@ abs_{\text{SVO}}(n) =
 \end{cases}
 </script>
 </p>
-<h3 id="implementation">Implementation</h3>
+<h3>Implementation</h3>
 <pre><code class="cpp">uint32_t abs_svo(int32_t n)
 {
     return n &lt; 0 ? (-n -1) : n;
@@ -307,7 +305,7 @@ bool comp_against_svo_bounds(int32_t x, int32_t y, int32_t z, uint32_t d)
 <p>Such an implementation eliminates five out of six conditional operations on modern compilers, leaving only the final
 <code>&gt;=</code> comparison.
 See <a href="https://godbolt.org/z/K2CCmU">this Compiler Explorer page</a> for an example.</p>
-<h4 id="compiler-optimization-of-abs_svo">Compiler Optimization of <code>abs_svo</code></h4>
+<h4>Compiler Optimization of <code>abs_svo</code></h4>
 <p>Using <script type="math/tex">abs_{\text{SVO}}</script> actually works in ours and the compiler's favor.
 This is due to the fact that negating a number in two's complement requires a bitwise negation and an increment.
 Due to our decrement of the negated number, we eliminate this need.</p>
@@ -318,12 +316,12 @@ Due to our decrement of the negated number, we eliminate this need.</p>
   retn          # return from the function
 </code></pre>
 
-<h4 id="manual-optimization-of-comparison-with-d">Manual Optimization of Comparison with <code>d</code></h4>
+<h4>Manual Optimization of Comparison with <code>d</code></h4>
 <p>This only works because <script type="math/tex">d</script> is an SVO dimension and thus always guaranteed to be a power of two.
 The most significant bit of lower numbers is lower than the single bit of a greater power of two.
 To name an example, 128 will have the 128-bit set, whereas all lower numbers will consist only of less significant bits.
 Hence, they can be safely combined with an <code>|</code> operation before making the comparison.</p>
-<h3 id="summary">Summary</h3>
+<h3>Summary</h3>
 <p>The overly pessimistic initial comparison could be fixed with -surprisingly- no performance impact.
 Out of the six necessary conditional operations, we could optimize five away.
 During a microbenchmark of the original <script type="math/tex">max(abs(x), abs(y), abs(z)) > d</script> comparison vs. our optimized method, <strong>no
@@ -333,12 +331,12 @@ expensive on older architectures.
 So depending on the architecture, such a benefit could be seen.</p>
 <h2 id="octree-growth">Octree Growth</h2>
 <p>If we do find that a point which is to be inserted does not fit within the current octree, we must enlarge it.</p>
-<h3 id="single-octant-growth">Single-Octant Growth</h3>
+<h3>Single-Octant Growth</h3>
 <p><img alt="Simple Growth" src="../img/graph/simple_growth.svg" /><br>
 <em>Figure 1: Simple (Single-Octant) Octree Growth</em></p>
 <p>If only one octant is used, e.g. all positions are unsigned, then we can enlarge the octree into just one direction.
 The current root node goes into the lowest corner (with index 0) of the new, higher-level root node.</p>
-<h3 id="unilateral-octree-growth">Unilateral Octree Growth</h3>
+<h3>Unilateral Octree Growth</h3>
 <p><img alt="Unilateral Growth" src="../img/graph/unilateral_growth.svg" /><br>
 <em>Figure 2: Unilateral Octree Growth</em></p>
 <p>If we use signed positions, we must grow our octree unilaterally.
@@ -382,7 +380,7 @@ checking whether a bit is set.
 For example, 128 is in the upper half of the 256-tree, because the most 128-bit is set, which is not the case for 127.</p>
 <p>We do not want to make this test at every level; It would be more convenient to pre-calculate a complete path through
 the octree that leads straight to the insertion point.</p>
-<h3 id="approach-in-one-dimension">Approach in One Dimension</h3>
+<h3>Approach in One Dimension</h3>
 <p><img alt="Octree Node Index" src="../img/graph/octree_node_index.svg" /><br>
 <em>Figure: Binary Numbers Form a Binary Tree Implicitly</em></p>
 <p>As seen in the above Figure, the lower bit indicates whether the position is left or right in the lower subtree and the
@@ -396,7 +394,7 @@ To navigate the above binary tree, we can use the following pseudo-code:</p>
 }
 </code></pre>
 
-<h3 id="approach-in-three-dimensions">Approach in Three Dimensions</h3>
+<h3>Approach in Three Dimensions</h3>
 <p>The same pattern occurs for octal digits and octrees.
 <script type="math/tex">(x, y, z)</script> can thus be seen as three positions in separate binary trees which we want to combine into an octree.
 To convert <script type="math/tex">(x, y, z)</script> to a position in an octree, the bits of <script type="math/tex">(x, y, z)</script> can simply be interleaved.
@@ -412,7 +410,7 @@ number to navigate the octree at every level.</p>
 }
 </code></pre>
 
-<h3 id="examples">Examples</h3>
+<h3>Examples</h3>
 <p>This is how coordinates can be mapped to octree indices:
 <script type="math/tex; mode=display">\begin{align}
 & (6, 8, 9) = (\color{red}{0101_2}, \color{green}{1000_2}, \color{blue}{1001_2}) \\
@@ -438,7 +436,7 @@ This is how octree node indices can be mapped to coordinates:</p>
 \xrightarrow{\text{deinterleave}} \quad& (\color{red}{00_2}, \color{green}{10_2}, \color{blue}{11_2}) = (0, 2, 3)
 \end{align}</script>
 </p>
-<h3 id="implementation_1">Implementation</h3>
+<h3>Implementation</h3>
 <p>The following C++17 implementation shows how three coordinates <script type="math/tex">(x, y, z)</script> can be efficiently interleaved using
 binary Magic Numbers.
 The implementation expands upon one of the
@@ -493,7 +491,7 @@ Most notably, the <code>masks</code> lookup table would need to be generated com
 <p>Once a nonexistent branch is found in step 2, all deeper branches will also be missing.
 In such a case, we can enter a different code path that handles this case.</p>
 </div>
-<h3 id="node-implementation">Node Implementation</h3>
+<h3>Node Implementation</h3>
 <p>An SVO will need to store our voxel colors at some level.
 We can reduce memory consumption and cache misses by using a small voxel array at the second-to-final depth:</p>
 <pre><code class="c++">// a regular node

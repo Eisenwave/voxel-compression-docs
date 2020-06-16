@@ -105,6 +105,10 @@
                     
     <a class="" href="../rle/rle.html">Run-Length Encoding</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../rle/space_filling_curves.html">Space-Filling Curves</a>
+                </li>
                 <li class=" current">
                     
     <a class="current" href="svo.html">Sparse Voxel Octree</a>
@@ -152,7 +156,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../attribute_compression.html">Attribute Compression</a>
+    <a class="" href="../attribute_compression.html">SVO Attribute Compression</a>
                 </li>
     </ul>
 	    </li>
@@ -290,16 +294,16 @@ of voxels.</p>
 </tr>
 </tbody>
 </table>
-<h5 id="empty-octree">Empty Octree</h5>
+<h5>Empty Octree</h5>
 <p>Entirely empty models can be encoded using just the root note, which then encodes that no subtrees exist.</p>
-<h5 id="tightly-filled-octree">Tightly Filled Octree</h5>
+<h5>Tightly Filled Octree</h5>
 <p>Entirely filled models will have some overhead compared to an array of voxels.
 For every eight nodes, there is one parent node.
 We can calculate the maximum possible overhead by summing up this <script type="math/tex">\frac{1}{8}</script> overhead infinitely:
 <script type="math/tex; mode=display">\sum_{n=1}^\infty{\frac{1}{8}^n} = \frac{1}{7}</script>
 So at worst, our data will increase by <script type="math/tex">\frac{1}{7}</script>, which is much better than a 100% increase such as for binary
 trees.</p>
-<h5 id="stretched-octree">Stretched Octree</h5>
+<h5>Stretched Octree</h5>
 <p>The <em>stretched</em> case is a case where a finite amount of voxels are placed infinitely far apart.
 For arrays, this produces infinite space requirements because all space between these points must be filled.
 For octrees, more layers are necessary to encode positions further from the origin.
@@ -319,7 +323,7 @@ To fully encode an SVO, two steps must be performed:</p>
 <li>Linearize nodes by traversing the SVO's nodes in a deterministic, reversible order.</li>
 <li>Serialize each node to binary data.</li>
 </ol>
-<h3 id="traversal-order">Traversal Order</h3>
+<h3>Traversal Order</h3>
 <p>There are two well-known strategies for traversing trees completely:</p>
 <ul>
 <li>Depth-First Search (DFS)</li>
@@ -363,20 +367,20 @@ The main points of comparison are as follows:</p>
 </tr>
 </tbody>
 </table>
-<h4 id="depth-first">Depth-First</h4>
+<h4>Depth-First</h4>
 <p><img alt="depth-first-tree" src="../img/graph/depth_first.svg" /><br>
 <em>Figure 1: Tree, traversed depth-first</em></p>
 <p>DFS can be performed using only a stack to keep track of the node number at each level.
 On the deepest level, the next node is chosen until the end is reached and the next parent node is chosen.
 This low memory cost (which is in fact <script type="math/tex">O(\log{n})</script> where n is the number of nodes) is highly advantageous when encoding
 enormous models.</p>
-<h4 id="breadth-first">Breadth-First</h4>
+<h4>Breadth-First</h4>
 <p><img alt="breadth-first-tree" src="../img/graph/breadth_first.svg" /><br>
 <em>Figure 2: Tree, traversed breadth-first</em></p>
 <p>BFS comes with a higher cost since a typical algorithm appends all branches to a queue for every traversed node.
 This means that in the worst case, which is at the beginning of serialization eight nodes are appended on every level
 before any node is popped from the queue, resulting in a higher memory cost.</p>
-<h4 id="accelerated-depth-first">Accelerated Depth-First</h4>
+<h4>Accelerated Depth-First</h4>
 <p><img alt="depth-first-tree" src="../img/graph/acc_depth_first.svg" /><br>
 <em>Figure 3: Tree, traversed depth-first</em></p>
 <p>In <em>Figure 3</em>, the labels symbolize <code>order of visitation</code><strong>/</strong><code>order of storage</code>.</p>
@@ -393,7 +397,7 @@ safely perform such a bulk-read.
 We can still use just a stack as a data structure, but we need to store a list at every depth with the cached nodes.</p>
 <p>This approach was specially invented for this research project.
 Any previous use of it is unknown to me.</p>
-<h4 id="why-to-serialize-octrees-depth-first-and-not-breadth-first">Why To Serialize Octrees Depth-First and not Breadth-First</h4>
+<h4>Why To Serialize Octrees Depth-First and not Breadth-First</h4>
 <p><img alt="octree-serial" src="../img/graph/octree_serial.svg" /><br>
 <em>Figure 4: A serialized octree, depth-first</em></p>
 <p>The scheme more practical for encoding octrees is depth-first.
@@ -403,23 +407,23 @@ Overall, this is a very low memory profile.</p>
 <p>For breadth first, we would always load information about the entire next deeper layer into our queue, then move on.
 To be fair, this does allow us to discard the previous layer entirely once we move deeper, but the memory cost is still
 unnecessarily high.</p>
-<h3 id="node-encoding">Node Encoding</h3>
+<h3>Node Encoding</h3>
 <p>In the above graphs, the 1-bit encoding was demonstrated due to its simplicity.
 However, there is a variety of different encodings to choose from.</p>
-<h4 id="single-bit-format">Single-Bit Format</h4>
+<h4>Single-Bit Format</h4>
 <ul>
 <li><code>0</code> stands for air-subtree</li>
 <li><code>1</code> stands for partially or entirely filled voxel-subtree</li>
 </ul>
 <p>8 Bits per octree-node, thus this format is byte-aligned.</p>
-<h4 id="2-bit-format">2-Bit Format</h4>
+<h4>2-Bit Format</h4>
 <ul>
 <li><code>00</code> stands for air-subtree</li>
 <li><code>01</code> stands for solid subtree</li>
 <li><code>10</code> stands for partially filled subtree</li>
 <li><code>11</code> variable purpose</li>
 </ul>
-<h4 id="15-bit-format">1.5-Bit Format</h4>
+<h4>1.5-Bit Format</h4>
 <ul>
 <li><code>00</code> stands for air-subtree</li>
 <li><code>01</code> stands for solid subtree</li>
@@ -427,7 +431,7 @@ However, there is a variety of different encodings to choose from.</p>
 </ul>
 <p>Variable amount of bits per octree-node, neither bit- nor byte-aligned.
 On the last level (node = voxel), the single-bit format is used because there are no subtrees.</p>
-<h5 id="11-for-rawarray-subtrees"><code>11</code> for Raw/Array Subtrees</h5>
+<h5><code>11</code> for Raw/Array Subtrees</h5>
 <p>Useful to encode subtrees completely filled with high-entropy content.
 On the second-to-last level, <code>11</code> for raw-subtrees there is no difference between <code>10</code> and <code>11</code>, so reverting to
 the 1.5-bit format is viable.
@@ -435,7 +439,7 @@ On the last level, the single-bit format should be used.</p>
 <p>As long as the 1.5-bit format is not used, this encoding is completely byte-aligned:
 * alignment to <code>16</code>-bit boundaries on most levels
 * alignment to <code>8</code>-bit boundaries on last level</p>
-<h5 id="11-for-pointers-to-subtrees-on-the-same-level"><code>11</code> for Pointers to Subtrees on the Same Level</h5>
+<h5><code>11</code> for Pointers to Subtrees on the Same Level</h5>
 <p>Useful for encoding multiple similar subtrees.
 Similarities between structures could be effectively exploited.
 Verifying whether subtrees are equal down to the base level has very high complexity: <code>O(n^2 * 8^n)</code>.
@@ -443,7 +447,7 @@ The comparison depth could be reduced down to a limited number of levels or the 
 the pointer: <code>{u32 indexOfOtherTree, u8 depth}</code>.</p>
 <p>Instead of the pointer, a tree could instead encode all the places where it is additionally used.
 This would make decoding easier, since remembering trees on the same level is not necessary.</p>
-<h3 id="degenerate-cases">Degenerate Cases</h3>
+<h3>Degenerate Cases</h3>
 <p>If you paid close attention to <em>Figure 1</em> and <em>Figure 3</em>, you will have noticed that they contain a <code>00000000</code> node.
 Such nodes can in principle exist, but are a waste of space.
 After all, they could be trimmed away one layer above by simply encoding a <code>0</code>-bit.
@@ -462,7 +466,7 @@ This term comes from "tetrahexaconta" (Greek for 64) and "tree".
 It builds on the idea of octrees but expands the branching factor from 8 to 8<sup>2</sup>, or 64.
 In almost all regards, a squashed octree is implemented identically to a regular octree.
 However, we divide space into a 4x4x4 cube instead of a 2x2x2 cube with each layer.</p>
-<h3 id="motivation">Motivation</h3>
+<h3>Motivation</h3>
 <p>When serializing or deserializing an octree, we must do so node by node.
 This involves generating a bitmask (see above sections on node encoding).
 For a tetrahexacontree and under use of the 1-bit format, we fill exactly one CPU register on a 64-bit architecture
@@ -479,7 +483,7 @@ VOLA uses a 1-bit format for its nodes while squashing two layers into one.
 So VOLA uses a tetrahexacontree.
 Unfortunately the paper fails to mention how performance and compression efficiency can be gained or lost this way.
 Therefore, we run our own tests in the following subsections.</p>
-<h3 id="performance-benefits">Performance Benefits</h3>
+<h3>Performance Benefits</h3>
 <p>Squashed SVOs lead to very significant performance benefits.
 For instance, when storing our <em>Ragged Cluster</em> model voxel-by-voxel in our SVO, this took:</p>
 <ul>
@@ -487,7 +491,7 @@ For instance, when storing our <em>Ragged Cluster</em> model voxel-by-voxel in o
 <li>for a squashed SVO: 1048-1288 ms</li>
 </ul>
 <p>It would be a realistic estimate to say that a 100% speedup is possible.</p>
-<h3 id="spatial-costs">Spatial Costs</h3>
+<h3>Spatial Costs</h3>
 <p>The costs of one squash are almost neglegible.
 For instance, our <em>Ragged Cluster</em> model requires:</p>
 <ul>
@@ -496,7 +500,7 @@ For instance, our <em>Ragged Cluster</em> model requires:</p>
 </ul>
 <p>That is a mere 0.196% increase in bits.
 However, while by a slim margin, a tetrahexacontree will almost always perform slightly worse:</p>
-<h4 id="best-case-for-regular-octrees">Best Case for Regular Octrees</h4>
+<h4>Best Case for Regular Octrees</h4>
 <p>In the best case which is an entirely empty node, an octree requires only one byte of space to encode that each of the
 8 child-nodes are empty.
 A tetrahexacontree will however require eight times the space, meaning 64 bits that are all <code>0</code>.
@@ -504,16 +508,16 @@ However, octrees are very good at trimming away large empty volumes.
 For our <em>Ragged Cluser</em>, <strong>the average sub-branch count was 6.901</strong>, meaning that in each node we would most likely see
 7 out of 8 bits set.
 So this best case is rarely encountered.</p>
-<h4 id="best-case-for-squashed-octrees">Best Case for Squashed Octrees</h4>
+<h4>Best Case for Squashed Octrees</h4>
 <p>The only case where a squashed octree is more efficient than a regular octree is  the case where all sub-branches exist.
 This would be one root-node and 8 branches for a regular octree.
 Thanks to the squash, this this would only be a single node for a tetrahexacontree, but eight times as large.
 For our <em>Ragged Cluser</em>, <strong>the average squashed sub-branch count was 35.78</strong>.
 So we are far from encountering this completely-filled case.</p>
-<h3 id="squashing-more-than-one-layer">Squashing More than One Layer</h3>
+<h3>Squashing More than One Layer</h3>
 <p>In principle we squash even more layers, to receive a tree with a branching factor of 512 and higher.
 However, we would not receive architectural benefits anymore and would lose out on even more compression efficiency.</p>
-<h3 id="conclusion">Conclusion</h3>
+<h3>Conclusion</h3>
 <p>Tetrahexacontrees provide nearly identical spatial costs while providing a very significant performance improvement.
 This result does have broad implications for the use of octrees in computer graphics in general.
 Many ray casting algorithms would likely benefits from higher branching factors.</p>
@@ -545,7 +549,7 @@ format and use a higher branching factor in our encoding scheme.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../rle/rle.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../rle/space_filling_curves.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="construction.html" style="color: #fcfcfc">Next &raquo;</a></span>

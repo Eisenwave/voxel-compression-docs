@@ -121,6 +121,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="rle/space_filling_curves.html">Space-Filling Curves</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="svo/svo.html">Sparse Voxel Octree</a>
                 </li>
                 <li class="">
@@ -148,7 +152,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="attribute_compression.html">Attribute Compression</a>
+    <a class="" href="attribute_compression.html">SVO Attribute Compression</a>
                 </li>
     </ul>
 	    </li>
@@ -225,7 +229,7 @@ A description of an algorithm and/or pseudocude is used to provide a potential t
 <h2 id="spatial-locality-of-different-methods-of-iteration-over-voxel-models">Spatial Locality of Different Methods of Iteration Over Voxel Models</h2>
 <p>There are various different ways of iterating over a voxel model.
 We will consider only two or three, which are relevant to us.</p>
-<h4 id="nested-loop-iteration">Nested Loop Iteration</h4>
+<h4>Nested Loop Iteration</h4>
 <p>This is the traditional method of iterating over multi-dimensional arrays.</p>
 <pre><code class="c">char data[SIZE_X][SIZE_Y][SIZE_Z];
 for (size_t x = 0; x &lt; SIZE_X; ++x)
@@ -239,7 +243,7 @@ axes of iteration are in the right order.
 The distances between two positions are at best <code>1</code> and at worst <code>SIZE_X + SIZEY</code>.
 However, the spatial locality is much worse when looking at more than one position.
 For say, 10 positions the distance between the first and last will be 10, which is comparably far.</p>
-<h4 id="z-order-iteration">Z-Order Iteration</h4>
+<h4>Z-Order Iteration</h4>
 <p>Z-Order iteration traverses space with much higher locality.
 It works by traversing all nodes of an octree depth-first.
 3D-Vectors can be converted into "octree positions" by interleaving the bits of the coordinates into a single number.</p>
@@ -251,7 +255,7 @@ for (size_t x = 0; x &lt; SIZE_X; ++x)
 )
 </code></pre>
 
-<h4 id="hilbert-curve-iteration">Hilbert-Curve Iteration</h4>
+<h4>Hilbert-Curve Iteration</h4>
 <p>Hilbert-Curves have even higher locality than Z-Order iterations, but are considerably better in locality.
 See https://slideplayer.com/slide/3370293/ for construction.
 In short, space is filled in the following order, which is a Gray Code.</p>
@@ -262,7 +266,7 @@ In short, space is filled in the following order, which is a Gray Code.</p>
 This pattern is repeated recursively, but the smaller building blocks have to be mirrored and rotated to fit together
 seemlessly into a larger block.
 The tremendously useful property here is that the distance between two points in the iteration is at most <code>1</code>.</p>
-<h3 id="testing-spatial-locality">Testing Spatial Locality</h3>
+<h3>Testing Spatial Locality</h3>
 <p>Spatial locality can simply be tested by comparing the average distance between each pair of points, triple of points,
 etc. within an iteration.
 When more than two points are tested, the distances of each unique pair of points can be summed up or averaged.

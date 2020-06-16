@@ -123,6 +123,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="rle/space_filling_curves.html">Space-Filling Curves</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="svo/svo.html">Sparse Voxel Octree</a>
                 </li>
                 <li class="">
@@ -150,7 +154,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="attribute_compression.html">Attribute Compression</a>
+    <a class="" href="attribute_compression.html">SVO Attribute Compression</a>
                 </li>
     </ul>
 	    </li>
@@ -236,7 +240,7 @@ In artistic circles these are often described as <a href="https://en.wikipedia.o
 <em>Uniform voxel noise with a probability of 0.1 that a voxel is set</em></p>
 <p>The only kind of model which has no spatial locality whatsoever would be uniformly distributed noise. (see above)
 These kinds of models are the absolute exception and are rarely if ever seen.</p>
-<h3 id="conclusion">Conclusion</h3>
+<h3>Conclusion</h3>
 <p>Compression schemes have to be able to describe large volumes of positive and negative space efficiently.</p>
 <h2 id="colorattribute-locality">Color/Attribute Locality</h2>
 <p><img alt="Ragged Cluster " src="img/ragged_cluster_magica.png" />
@@ -252,7 +256,7 @@ Normalized for positions in a unit cube instead this is <script type="math/tex">
 <p>For uniform random colors, this distance would be equal to
 <a href="https://mathworld.wolfram.com/RobbinsConstant.html">Robbin's Constant</a> which is roughly equal to <script type="math/tex">0.66170</script>, almost
 20 times higher.</p>
-<h3 id="conclusion_1">Conclusion</h3>
+<h3>Conclusion</h3>
 <p>Compression schemes should make use of geometric encoding and attach attributes on top of that.
 Alternatively voxel compression schemes should encode attributes in a fashion very similar to geometry.</p>
 <h2 id="color-sparsity">Color Sparsity</h2>
@@ -262,7 +266,7 @@ Especially in the field of <em>Voxel Art</em>, the 3D-equivalent to <a href="htt
 small palettes are used.
 To name an example, <a href="https://ephtracy.github.io/">Magica Voxel</a> supports 255 unique colors but each individual color
 is a 24-bit True Color.</p>
-<h3 id="conclusion_2">Conclusion</h3>
+<h3>Conclusion</h3>
 <p>Compression schemes should be aware of potentially very low color counts and exploit these by building a palette.
 A palette will not always be beneficial since in principle, any amount of colors should be present.
 However, in many cases this will be beneficial.</p>

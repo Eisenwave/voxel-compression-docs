@@ -107,6 +107,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../rle/space_filling_curves.html">Space-Filling Curves</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="svo.html">Sparse Voxel Octree</a>
                 </li>
                 <li class="">
@@ -148,7 +152,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../attribute_compression.html">Attribute Compression</a>
+    <a class="" href="../attribute_compression.html">SVO Attribute Compression</a>
                 </li>
     </ul>
 	    </li>
@@ -239,7 +243,7 @@ For instance, we could be encoding voxels with coordinates ranging from 100,000 
 Many almost completely empty octree layers would need to be traversed to get to where such locations are stored.
 Trimming away such single-octant layers accelerates encoding and decoding.</p>
 <p>This is our first and only <em>top-down optimization</em>.</p>
-<h3 id="algorithm">Algorithm</h3>
+<h3>Algorithm</h3>
 <ol>
 <li>
 <script type="math/tex">s \gets (0,0,0)</script>

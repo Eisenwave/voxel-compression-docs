@@ -107,6 +107,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../rle/space_filling_curves.html">Space-Filling Curves</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../svo/svo.html">Sparse Voxel Octree</a>
                 </li>
                 <li class="">
@@ -134,7 +138,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../attribute_compression.html">Attribute Compression</a>
+    <a class="" href="../attribute_compression.html">SVO Attribute Compression</a>
                 </li>
     </ul>
 	    </li>
@@ -237,17 +241,17 @@ It uses a syntax similar to Rust and C to mathematically specify a syntax for bi
 Alternatively, a comment block which begins with <code>/*</code> and ends with <code>*/</code> can be used.</p>
 <h2 id="settings">Settings</h2>
 <p>Some global settings may be necessary to write a proper specification.</p>
-<h3 id="syntax">Syntax</h3>
+<h3>Syntax</h3>
 <pre><code class="ebnf">set = &quot;set&quot; identifier &quot;=&quot; value;
 </code></pre>
 
-<h3 id="examples">Examples</h3>
+<h3>Examples</h3>
 <pre><code class="rust">set byte_bits = 32
 set default_byte_order = big_endian
 set default_signed_representation = twos_complement
 </code></pre>
 
-<h3 id="list-of-settings">List of Settings</h3>
+<h3>List of Settings</h3>
 <table>
 <thead>
 <tr>
@@ -276,7 +280,7 @@ set default_signed_representation = twos_complement
 </table>
 <h2 id="type-definitions">Type Definitions</h2>
 <p>Definitions define data types.</p>
-<h3 id="syntax_1">Syntax</h3>
+<h3>Syntax</h3>
 <pre><code class="ebnf">def = &quot;def&quot; type &quot;=&quot; {modifier} base_type;
 </code></pre>
 
@@ -285,7 +289,7 @@ set default_signed_representation = twos_complement
 <li><code>modifier</code> a type modifier</li>
 <li><code>base_type</code> the base type which this type is specializing</li>
 </ul>
-<h3 id="example">Example</h3>
+<h3>Example</h3>
 <pre><code class="python">def i32 = signed 32_bit twos_complement integer
 def u8 = unsigned 8_bit integer
 def string = null_terminated u8[]
@@ -293,11 +297,11 @@ def string = null_terminated u8[]
 
 <h2 id="arrays">Arrays</h2>
 <p>Arrays are blocks of one type which are stored using a single variable.</p>
-<h3 id="syntax_2">Syntax</h3>
+<h3>Syntax</h3>
 <pre><code class="ebnf">array_type = type &quot;[&quot; size | &quot;&quot; &quot;]&quot;;
 </code></pre>
 
-<h3 id="examples_1">Examples</h3>
+<h3>Examples</h3>
 <pre><code class="rust">u8[4096] buffer     // a constant-sized array
 
 u32 size
@@ -310,14 +314,14 @@ u8[] endless_buffer // an array which extends until the end of the data
 <p>Defines a structure of other types.
 These types can also be structures.
 The first (uppermost) type in a struct is also the first element in the serialized data.</p>
-<h3 id="syntax_3">Syntax</h3>
+<h3>Syntax</h3>
 <pre><code class="ebnf">struct = &quot;struct&quot; identifier &quot;{&quot;
     type identifier
     ...
 &quot;}&quot;;
 </code></pre>
 
-<h3 id="example_1">Example</h3>
+<h3>Example</h3>
 <pre><code class="rust">struct Color {
     u8 red
     u8 green
@@ -327,13 +331,13 @@ The first (uppermost) type in a struct is also the first element in the serializ
 
 <h2 id="enumerations">Enumerations</h2>
 <p>Defines a list of constants of some type.</p>
-<h3 id="syntax_4">Syntax</h3>
+<h3>Syntax</h3>
 <pre><code class="ebnf">enum = &quot;enum&quot;, identifier, &quot;:&quot;, type, &quot;{&quot;,
     {identifier, &quot;=&quot;, value},
 &quot;}&quot;;
 </code></pre>
 
-<h3 id="examples_2">Examples</h3>
+<h3>Examples</h3>
 <pre><code class="rust">enum Size : string {
     SMALL = &quot;S&quot;
     MEDIUM = &quot;M&quot;
@@ -351,13 +355,13 @@ enum ArgbColor : u32 {
 <h2 id="templated-structures">Templated Structures</h2>
 <p>Sometimes a structure depends on content found in a header or other structures.
 Templates can change how a structure is laid out using variables.</p>
-<h3 id="syntax_5">Syntax</h3>
+<h3>Syntax</h3>
 <pre><code class="ebnf">struct = &quot;struct&quot; type &quot;&lt;&quot; type {identifier &quot;,&quot;} &quot;&gt;&quot; &quot;{&quot;
     ...
 &quot;}&quot;;
 </code></pre>
 
-<h3 id="example_2">Example</h3>
+<h3>Example</h3>
 <pre><code class="rust">struct varint&lt;u8 bits&gt; {
     if bits == 8 {
         u8 data
