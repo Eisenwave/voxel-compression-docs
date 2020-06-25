@@ -45,6 +45,21 @@ Compression    | none
 Color Support  | RGB666 in palette, RGB24 otherwise
 Palette        | optional, global, 256 colors
 
+##### SLABSPRI VOX
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.vox`
+Media-Type     | `model/x-slabspri-vox` (unofficial)
+Magic          | none
+Software       | SLABSPRI, SLAB6
+Structure      | binary
+Volumes        | single
+Voxel-Encoding | voxel array
+Compression    | none
+Color Support  | RGB666
+Palette        | global, 256-1 colors
+
 ##### PNG Stack
 
 | Stat | Value |
@@ -58,7 +73,7 @@ Volumes        | single
 Voxel-Encoding | stack of images
 Compression    | PNG
 Color Support  | PNG
-Palette        | PNG
+Palette        | per-image, optional, PNG
 
 ##### Minecraft Schematic
 
@@ -68,7 +83,7 @@ Pattern        | `*.schematic`
 Media-Type     | `application/x-schematic+nbt` (unofficial)
 Magic          | `\x10` (Compound Tag)
 Software       | various Minecraft-related
-Structure      | binary, based on NBT
+Structure      | binary, NBT subset
 Volumes        | single
 Voxel-Encoding | voxel array
 Compression    | none
@@ -83,10 +98,25 @@ Pattern        | `*.mcstructure`
 Media-Type     | `application/x-minecraft-structure+nbt`
 Magic          | `\x10` (Compound Tag)
 Software       | Minecraft
-Structure      | binary, based on NBT
+Structure      | binary, NBT subset
 Volumes        | single
 Voxel-Encoding | voxel list
 Compression    | none
+Color Support  | MC block-based
+Palette        | global, MC blocks
+
+##### Minecraft Region
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.mcr`
+Media-Type     | `application/x-minecraft-region`
+Magic          | none
+Software       | Minecraft
+Structure      | binary, uses NBT
+Volumes        | 32x32 chunks, each 16x256x16
+Voxel-Encoding | voxel array
+Compression    | GZip oor Zlib
 Color Support  | MC block-based
 Palette        | global, MC blocks
 
@@ -177,7 +207,7 @@ Compression    | PNG
 Color Support  | PNG
 Palette        | PNG
 
-##### Voxel Model
+##### Magica Voxel Model
 
 | Stat | Value |
 | ----- | ----- |
@@ -206,3 +236,106 @@ Voxel-Encoding | voxel list
 Compression    | none
 Color Support  | RGBA32
 Palette        | none
+
+##### Tiberian Sun Voxel Animation Format
+
+This format stores models for the video game Tiberian Sun by Westwood Studios.
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.3mp`
+Media-Type     | `model/x-tiberian-sun-vlx` (unofficial)
+Magic          | `Voxel Animation`
+Software       | Tiberian Sun
+Structure      | binary
+Volumes        | multiple (limbs)
+Voxel-Encoding | map of voxel columns per limb
+Compression    | none
+Color Support  | RGBA24
+Palette        | 256 colors
+
+##### Model 3D M3M
+TODO write this section
+
+##### Paint3D
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.3mp`
+Media-Type     | `model/x-3mp` (unofficial)
+Magic          | `3MP`
+Software       | Paint3D
+Structure      | binary
+Volumes        | single
+Voxel-Encoding | voxel array
+Compression    | optional RLE or zlib
+Color Support  | RGBA32
+Palette        | none
+
+##### VoxEdit Model
+
+This file format is proprietary and not much is known.
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.vxm`
+Media-Type     | `model/x-vxm` (unofficial)
+Magic          | ???
+Software       | VoxEdit
+Structure      | ???
+Volumes        | single
+Voxel-Encoding | ???
+Compression    | ???
+Color Support  | ???
+Palette        | ???
+
+##### Ace of Spades Map File Format (aka. Voxlap)
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.vxl`
+Media-Type     | `model/x-vxl` (unofficial)
+Magic          | none
+Software       | VoxEdit
+Structure      | binary
+Volumes        | single
+Voxel-Encoding | 512x512 map of voxel columns
+Compression    | none
+Color Support  | RGBA32
+Palette        | none
+
+##### BD Cubik Studio Project
+
+This is the file format used by the *BD Cubik Studio* abandondedware.
+It is proprietary and not much is known.
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.bdc|*.bdc3d`
+Media-Type     | `model/x-bdc` (unofficial)
+Magic          | ???
+Software       | BD Cubik Studio
+Structure      | binary
+Volumes        | multiple (free transform)
+Voxel-Encoding | textured cuboid
+Compression    | ???
+Color Support  | ???
+Palette        | none
+
+##### Cubik Studio Project
+
+This is the file format used by the new version of Cubik Studio.
+It is proprietary and not much is known.
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | ???
+Media-Type     | `model/x-cubik-studio` (unofficial)
+Magic          | ???
+Software       | Cubik Studio
+Structure      | binary
+Volumes        | multiple
+Voxel-Encoding | ???
+Compression    | ???
+Color Support  | ???
+Palette        | ???
