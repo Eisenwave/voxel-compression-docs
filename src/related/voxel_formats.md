@@ -1,64 +1,6 @@
 # List of Voxel File Formats
 
-###### Binvox
-
-| Stat | Value |
-| ----- | ----- |
-Pattern        | `*.binvox`
-Media-Type     | `model/x-binvox` (unofficial)
-Magic          | `#binvox 1` (of which 1 is version)
-Software       | Binvox
-Structure      | binary with text header
-Volumes        | single1
-Voxel-Encoding | voxel array
-Compression    | run-length encoding
-Color Support  | none
-Palette        | none
-
-##### KVX
-
-| Stat | Value |
-| ----- | ----- |
-Pattern        | `*.kvx`
-Media-Type     | `model/x-kvx` (unofficial)
-Magic          | none
-Software       | Voxlap
-Structure      | binary
-Volumes        | single
-Voxel-Encoding | map of voxel columns per mipmap level
-Compression    | none
-Color Support  | RGB666
-Palette        | global, 256 colors
-
-##### KV6
-
-| Stat | Value |
-| ----- | ----- |
-Pattern        | `*.kv6`
-Media-Type     | `model/x-kv6` (unofficial)
-Magic          | `Kvxl`
-Software       | SLAB6
-Structure      | binary
-Volumes        | single
-Voxel-Encoding | map of voxel columns
-Compression    | none
-Color Support  | RGB666 in palette, RGB24 otherwise
-Palette        | optional, global, 256 colors
-
-##### SLABSPRI VOX
-
-| Stat | Value |
-| ----- | ----- |
-Pattern        | `*.vox`
-Media-Type     | `model/x-slabspri-vox` (unofficial)
-Magic          | none
-Software       | SLABSPRI, SLAB6
-Structure      | binary
-Volumes        | single
-Voxel-Encoding | voxel array
-Compression    | none
-Color Support  | RGB666
-Palette        | global, 256-1 colors
+## Image-Based
 
 ##### PNG Stack
 
@@ -74,6 +16,8 @@ Voxel-Encoding | stack of images
 Compression    | PNG
 Color Support  | PNG
 Palette        | per-image, optional, PNG
+
+## Minecraft
 
 ##### Minecraft Schematic
 
@@ -120,6 +64,8 @@ Compression    | GZip oor Zlib
 Color Support  | MC block-based
 Palette        | global, MC blocks
 
+## Qubicle
+
 ##### Qubicle Exchange Format
 
 | Stat | Value |
@@ -165,7 +111,111 @@ Compression    | zlib
 Color Support  | RGB24, RGBA32 with palette
 Palette        | optional, global
 
+## Video Game Formats
+
+##### Ace of Spades Map File Format (aka. Voxlap)
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.vxl`
+Media-Type     | `model/x-vxl` (unofficial)
+Magic          | none
+Software       | Ace of Spades
+Structure      | binary
+Volumes        | single
+Voxel-Encoding | 512x512 map of voxel columns
+Compression    | none
+Color Support  | RGBA32
+Palette        | none
+
+##### KVX
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.kvx`
+Media-Type     | `model/x-kvx` (unofficial)
+Magic          | none
+Software       | Voxlap
+Structure      | binary
+Volumes        | single
+Voxel-Encoding | map of voxel columns per mipmap level
+Compression    | none
+Color Support  | RGB666
+Palette        | global, 256 colors
+
+##### SLABSPRI VOX
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.vox`
+Media-Type     | `model/x-slabspri-vox` (unofficial)
+Magic          | none
+Software       | SLABSPRI.exe, SLAB6
+Structure      | binary
+Volumes        | single
+Voxel-Encoding | voxel array
+Compression    | none
+Color Support  | RGB666
+Palette        | global, 256-1 colors
+
+##### Tiberian Sun Voxel Animation Format
+
+This format stores models for the video game Tiberian Sun by Westwood Studios.
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.3mp`
+Media-Type     | `model/x-tiberian-sun-vlx` (unofficial)
+Magic          | `Voxel Animation`
+Software       | Tiberian Sun
+Structure      | binary
+Volumes        | multiple (limbs)
+Voxel-Encoding | map of voxel columns per limb
+Compression    | none
+Color Support  | RGBA24
+Palette        | 256 colors
+
+## Voxel Editing Software
+
+##### Binvox
+
+Binvox is the format used by the popular voxelizer software binvox.
+The software voxelizes meshes but only preserves geometry which is why the file format has no color support.
+Both the software and the file format are still being used.
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.binvox`
+Media-Type     | `model/x-binvox` (unofficial)
+Magic          | `#binvox 1` (of which 1 is version)
+Software       | Binvox
+Structure      | binary with text header
+Volumes        | single1
+Voxel-Encoding | voxel array
+Compression    | run-length encoding
+Color Support  | none
+Palette        | none
+
+##### KV6
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.kv6`
+Media-Type     | `model/x-kv6` (unofficial)
+Magic          | `Kvxl`
+Software       | SLAB6
+Structure      | binary
+Volumes        | single
+Voxel-Encoding | map of voxel columns
+Compression    | none
+Color Support  | RGB666 in palette, RGB24 otherwise
+Palette        | optional, global, 256 colors
+
 ##### Simple Voxels
+
+Simple Voxels is a file format introduced by Shapeways and largely oriented towards 3d printing.
+It takes the simple idea of an image stack and wraps this format within a zip-file, plus a manifest XML file.
+
 | Stat | Value |
 | ----- | ----- |
 Pattern        | `*.svx`
@@ -180,6 +230,7 @@ Color Support  | depends on image format
 Palette        | no global, only within image
 
 ##### Sproxel CSV
+
 | Stat | Value |
 | ----- | ----- |
 Pattern        | `*.csv`
@@ -194,6 +245,10 @@ Color Support  | RGBA32
 Palette        | none
 
 ##### Sproxel Enhanced PNG
+
+This format uses custom PNG header fields to encode the 3d-dimensions of the model in the image.
+It stores slices of the model in the same image.
+
 | Stat | Value |
 | ----- | ----- |
 Pattern        | `*.csv`
@@ -208,6 +263,9 @@ Color Support  | PNG
 Palette        | PNG
 
 ##### Magica Voxel Model
+
+The main format used by the extremely popular free voxel-editor MagicaVoxel.
+Due to its RIFF nature, it is comparably extendable and encodes various metadata in addition to the voxels itself.
 
 | Stat | Value |
 | ----- | ----- |
@@ -237,23 +295,6 @@ Compression    | none
 Color Support  | RGBA32
 Palette        | none
 
-##### Tiberian Sun Voxel Animation Format
-
-This format stores models for the video game Tiberian Sun by Westwood Studios.
-
-| Stat | Value |
-| ----- | ----- |
-Pattern        | `*.3mp`
-Media-Type     | `model/x-tiberian-sun-vlx` (unofficial)
-Magic          | `Voxel Animation`
-Software       | Tiberian Sun
-Structure      | binary
-Volumes        | multiple (limbs)
-Voxel-Encoding | map of voxel columns per limb
-Compression    | none
-Color Support  | RGBA24
-Palette        | 256 colors
-
 ##### Model 3D M3M
 TODO write this section
 
@@ -272,6 +313,25 @@ Compression    | optional RLE or zlib
 Color Support  | RGBA32
 Palette        | none
 
+## Experimental/Research
+
+## 32-Bit Voxel List
+
+| Stat | Value |
+| ----- | ----- |
+Pattern        | `*.vl32`
+Media-Type     | `model/x-vl32` (unofficial)
+Magic          | none
+Software       | voxel-io
+Structure      | binary
+Volumes        | single
+Voxel-Encoding | voxel list
+Compression    | none
+Color Support  | RGBA32
+Palette        | none
+
+## Proprietary
+
 ##### VoxEdit Model
 
 This file format is proprietary and not much is known.
@@ -288,21 +348,6 @@ Voxel-Encoding | ???
 Compression    | ???
 Color Support  | ???
 Palette        | ???
-
-##### Ace of Spades Map File Format (aka. Voxlap)
-
-| Stat | Value |
-| ----- | ----- |
-Pattern        | `*.vxl`
-Media-Type     | `model/x-vxl` (unofficial)
-Magic          | none
-Software       | VoxEdit
-Structure      | binary
-Volumes        | single
-Voxel-Encoding | 512x512 map of voxel columns
-Compression    | none
-Color Support  | RGBA32
-Palette        | none
 
 ##### BD Cubik Studio Project
 
