@@ -1,6 +1,6 @@
 # Space-Filling Curves
 
-A space-filling curve is a curve which's range contains the entirety of a hypercube
+A space-filling curve is a curve which's range contains the entirety of a hypercube.
 When filling space with a curve, we are generally applying a bijective function:
 
 $$c: \mathbb{N} \rightarrow \mathbb{Z}^N,\; N \in \mathbb{N}$$
@@ -148,7 +148,7 @@ An efficient implementation of this
 
 The implementation builds on our approach for Z-Order Curves.
 It can also be optimized by caching portions of our Morton (Z-Order) index, but the final conversion to our Hilbert
-index must happen in its entirety every loop.
+index must happen in its entirety every iteration.
 ```cpp
 voxel container[limit * limit * limit];
 for (unsigned z = 0; z < limit; ++z) {
