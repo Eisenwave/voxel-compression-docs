@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1000" height="800" viewBox="0 0 80 64" fill="#eee" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient id="grad-io1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#cf0c0c;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#fc8505;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="grad-io2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#eb802f;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#e2eb2f;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="grad-mem1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#249e11;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#23dece;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <g fill="none">
+        <polygon id="arrow" points="0,0 1,1 2,0 2,9 1,10 0,9"/>
+    </g>
+
+    <g transform="scale(1 1)" fill="url(#grad-io1)">
+        <use xlink:href="#arrow"/>
+        <text x="4" y="6" font-size="4" font-family="sans-serif" font-weight="bold" fill="black">
+            I love SVG!
+        </text>
+    </g>
+    <g transform="translate(0, 9)" fill="url(#grad-io2)">
+        <use xlink:href="#arrow"/>
+    </g>
+    <g transform="translate(0, 18)" fill="url(#grad-mem1)">
+        <use xlink:href="#arrow"/>
+    </g>
+
+
+
+</svg>

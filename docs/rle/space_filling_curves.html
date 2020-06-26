@@ -228,7 +228,7 @@
             <div class="section">
               
                 <h1 id="space-filling-curves">Space-Filling Curves</h1>
-<p>A space-filling curve is a curve which's range contains the entirety of a hypercube
+<p>A space-filling curve is a curve which's range contains the entirety of a hypercube.
 When filling space with a curve, we are generally applying a bijective function:</p>
 <p>
 <script type="math/tex; mode=display">c: \mathbb{N} \rightarrow \mathbb{Z}^N,\; N \in \mathbb{N}</script>
@@ -359,7 +359,7 @@ An efficient implementation of this
 <em>Figure 4: A Hilbert Curve in Three Dimension - Michael Trott, in The Mathematica GuideBook for Programming</em></p>
 <p>The implementation builds on our approach for Z-Order Curves.
 It can also be optimized by caching portions of our Morton (Z-Order) index, but the final conversion to our Hilbert
-index must happen in its entirety every loop.</p>
+index must happen in its entirety every iteration.</p>
 <pre><code class="cpp">voxel container[limit * limit * limit];
 for (unsigned z = 0; z &lt; limit; ++z) {
     for (unsigned y = 0; y &lt; limit; ++y) {

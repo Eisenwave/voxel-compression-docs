@@ -89,6 +89,26 @@
             
     <li class="toctree-l3"><a href="#list-of-voxel-file-formats">List of Voxel File Formats</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l4" href="#image-based">Image-Based</a></li>
+        
+            <li><a class="toctree-l4" href="#minecraft">Minecraft</a></li>
+        
+            <li><a class="toctree-l4" href="#qubicle">Qubicle</a></li>
+        
+            <li><a class="toctree-l4" href="#video-game-formats">Video Game Formats</a></li>
+        
+            <li><a class="toctree-l4" href="#voxel-editing-software">Voxel Editing Software</a></li>
+        
+            <li><a class="toctree-l4" href="#experimentalresearch">Experimental/Research</a></li>
+        
+            <li><a class="toctree-l4" href="#32-bit-voxel-list">32-Bit Voxel List</a></li>
+        
+            <li><a class="toctree-l4" href="#proprietary">Proprietary</a></li>
+        
+        </ul>
+    
 
     </ul>
                 </li>
@@ -216,159 +236,7 @@
             <div class="section">
               
                 <h1 id="list-of-voxel-file-formats">List of Voxel File Formats</h1>
-<h6>Binvox</h6>
-<table>
-<thead>
-<tr>
-<th>Stat</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pattern</td>
-<td><code>*.binvox</code></td>
-</tr>
-<tr>
-<td>Media-Type</td>
-<td><code>model/x-binvox</code> (unofficial)</td>
-</tr>
-<tr>
-<td>Magic</td>
-<td><code>#binvox 1</code> (of which 1 is version)</td>
-</tr>
-<tr>
-<td>Software</td>
-<td>Binvox</td>
-</tr>
-<tr>
-<td>Structure</td>
-<td>binary with text header</td>
-</tr>
-<tr>
-<td>Volumes</td>
-<td>single1</td>
-</tr>
-<tr>
-<td>Voxel-Encoding</td>
-<td>voxel array</td>
-</tr>
-<tr>
-<td>Compression</td>
-<td>run-length encoding</td>
-</tr>
-<tr>
-<td>Color Support</td>
-<td>none</td>
-</tr>
-<tr>
-<td>Palette</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<h5>KVX</h5>
-<table>
-<thead>
-<tr>
-<th>Stat</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pattern</td>
-<td><code>*.kvx</code></td>
-</tr>
-<tr>
-<td>Media-Type</td>
-<td><code>model/x-kvx</code> (unofficial)</td>
-</tr>
-<tr>
-<td>Magic</td>
-<td>none</td>
-</tr>
-<tr>
-<td>Software</td>
-<td>Voxlap</td>
-</tr>
-<tr>
-<td>Structure</td>
-<td>binary</td>
-</tr>
-<tr>
-<td>Volumes</td>
-<td>single</td>
-</tr>
-<tr>
-<td>Voxel-Encoding</td>
-<td>map of voxel columns per mipmap level</td>
-</tr>
-<tr>
-<td>Compression</td>
-<td>none</td>
-</tr>
-<tr>
-<td>Color Support</td>
-<td>RGB666</td>
-</tr>
-<tr>
-<td>Palette</td>
-<td>global, 256 colors</td>
-</tr>
-</tbody>
-</table>
-<h5>KV6</h5>
-<table>
-<thead>
-<tr>
-<th>Stat</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pattern</td>
-<td><code>*.kv6</code></td>
-</tr>
-<tr>
-<td>Media-Type</td>
-<td><code>model/x-kv6</code> (unofficial)</td>
-</tr>
-<tr>
-<td>Magic</td>
-<td><code>Kvxl</code></td>
-</tr>
-<tr>
-<td>Software</td>
-<td>SLAB6</td>
-</tr>
-<tr>
-<td>Structure</td>
-<td>binary</td>
-</tr>
-<tr>
-<td>Volumes</td>
-<td>single</td>
-</tr>
-<tr>
-<td>Voxel-Encoding</td>
-<td>map of voxel columns</td>
-</tr>
-<tr>
-<td>Compression</td>
-<td>none</td>
-</tr>
-<tr>
-<td>Color Support</td>
-<td>RGB666 in palette, RGB24 otherwise</td>
-</tr>
-<tr>
-<td>Palette</td>
-<td>optional, global, 256 colors</td>
-</tr>
-</tbody>
-</table>
+<h2 id="image-based">Image-Based</h2>
 <h5>PNG Stack</h5>
 <table>
 <thead>
@@ -416,10 +284,11 @@
 </tr>
 <tr>
 <td>Palette</td>
-<td>PNG</td>
+<td>per-image, optional, PNG</td>
 </tr>
 </tbody>
 </table>
+<h2 id="minecraft">Minecraft</h2>
 <h5>Minecraft Schematic</h5>
 <table>
 <thead>
@@ -447,7 +316,7 @@
 </tr>
 <tr>
 <td>Structure</td>
-<td>binary, based on NBT</td>
+<td>binary, NBT subset</td>
 </tr>
 <tr>
 <td>Volumes</td>
@@ -498,7 +367,7 @@
 </tr>
 <tr>
 <td>Structure</td>
-<td>binary, based on NBT</td>
+<td>binary, NBT subset</td>
 </tr>
 <tr>
 <td>Volumes</td>
@@ -522,6 +391,58 @@
 </tr>
 </tbody>
 </table>
+<h5>Minecraft Region</h5>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.mcr</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>application/x-minecraft-region</code></td>
+</tr>
+<tr>
+<td>Magic</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Minecraft</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary, uses NBT</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>32x32 chunks, each 16x256x16</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel array</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>GZip oor Zlib</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>MC block-based</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>global, MC blocks</td>
+</tr>
+</tbody>
+</table>
+<h2 id="qubicle">Qubicle</h2>
 <h5>Qubicle Exchange Format</h5>
 <table>
 <thead>
@@ -675,7 +596,321 @@
 </tr>
 </tbody>
 </table>
+<h2 id="video-game-formats">Video Game Formats</h2>
+<h5>Ace of Spades Map File Format (aka. Voxlap)</h5>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.vxl</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-vxl</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Ace of Spades</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>512x512 map of voxel columns</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGBA32</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h5>KVX</h5>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.kvx</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-kvx</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Voxlap</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>map of voxel columns per mipmap level</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGB666</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>global, 256 colors</td>
+</tr>
+</tbody>
+</table>
+<h5>SLABSPRI VOX</h5>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.vox</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-slabspri-vox</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>SLABSPRI.exe, SLAB6</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel array</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGB666</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>global, 256-1 colors</td>
+</tr>
+</tbody>
+</table>
+<h5>Tiberian Sun Voxel Animation Format</h5>
+<p>This format stores models for the video game Tiberian Sun by Westwood Studios.</p>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.3mp</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-tiberian-sun-vlx</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td><code>Voxel Animation</code></td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Tiberian Sun</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>multiple (limbs)</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>map of voxel columns per limb</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGBA24</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>256 colors</td>
+</tr>
+</tbody>
+</table>
+<h2 id="voxel-editing-software">Voxel Editing Software</h2>
+<h5>Binvox</h5>
+<p>Binvox is the format used by the popular voxelizer software binvox.
+The software voxelizes meshes but only preserves geometry which is why the file format has no color support.
+Both the software and the file format are still being used.</p>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.binvox</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-binvox</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td><code>#binvox 1</code> (of which 1 is version)</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Binvox</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary with text header</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single1</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel array</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>run-length encoding</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h5>KV6</h5>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.kv6</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-kv6</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td><code>Kvxl</code></td>
+</tr>
+<tr>
+<td>Software</td>
+<td>SLAB6</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>map of voxel columns</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGB666 in palette, RGB24 otherwise</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>optional, global, 256 colors</td>
+</tr>
+</tbody>
+</table>
 <h5>Simple Voxels</h5>
+<p>Simple Voxels is a file format introduced by Shapeways and largely oriented towards 3d printing.
+It takes the simple idea of an image stack and wraps this format within a zip-file, plus a manifest XML file.</p>
 <table>
 <thead>
 <tr>
@@ -778,6 +1013,8 @@
 </tbody>
 </table>
 <h5>Sproxel Enhanced PNG</h5>
+<p>This format uses custom PNG header fields to encode the 3d-dimensions of the model in the image.
+It stores slices of the model in the same image.</p>
 <table>
 <thead>
 <tr>
@@ -828,7 +1065,9 @@
 </tr>
 </tbody>
 </table>
-<h5>Voxel Model</h5>
+<h5>Magica Voxel Model</h5>
+<p>The main format used by the extremely popular free voxel-editor MagicaVoxel.
+Due to its RIFF nature, it is comparably extendable and encodes various metadata in addition to the voxels itself.</p>
 <table>
 <thead>
 <tr>
@@ -927,6 +1166,270 @@
 <tr>
 <td>Palette</td>
 <td>none</td>
+</tr>
+</tbody>
+</table>
+<h5>Model 3D M3M</h5>
+<p>TODO write this section</p>
+<h5>Paint3D</h5>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.3mp</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-3mp</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td><code>3MP</code></td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Paint3D</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel array</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>optional RLE or zlib</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGBA32</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="experimentalresearch">Experimental/Research</h2>
+<h2 id="32-bit-voxel-list">32-Bit Voxel List</h2>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.vl32</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-vl32</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>voxel-io</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>voxel list</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>RGBA32</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h2 id="proprietary">Proprietary</h2>
+<h5>VoxEdit Model</h5>
+<p>This file format is proprietary and not much is known.</p>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.vxm</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-vxm</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>VoxEdit</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>single</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>???</td>
+</tr>
+</tbody>
+</table>
+<h5>BD Cubik Studio Project</h5>
+<p>This is the file format used by the <em>BD Cubik Studio</em> abandondedware.
+It is proprietary and not much is known.</p>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td><code>*.bdc|*.bdc3d</code></td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-bdc</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>BD Cubik Studio</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>multiple (free transform)</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>textured cuboid</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<h5>Cubik Studio Project</h5>
+<p>This is the file format used by the new version of Cubik Studio.
+It is proprietary and not much is known.</p>
+<table>
+<thead>
+<tr>
+<th>Stat</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Media-Type</td>
+<td><code>model/x-cubik-studio</code> (unofficial)</td>
+</tr>
+<tr>
+<td>Magic</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Software</td>
+<td>Cubik Studio</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>binary</td>
+</tr>
+<tr>
+<td>Volumes</td>
+<td>multiple</td>
+</tr>
+<tr>
+<td>Voxel-Encoding</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Compression</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Color Support</td>
+<td>???</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
