@@ -33,6 +33,7 @@ nav:
       - uncompressed.md
       - rle/rle.md
       - rle/space_filling_curves.md
+      - rle/hilbert_curves.md
       - svo/svo.md
       - svo/construction.md
       - svo/optimization.md

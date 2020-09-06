@@ -8,25 +8,24 @@ FLVC is the file format produced based on the results of the presented research.
 
 ## Specification
 
-### StructLang Type Definitions
-
 ```rust
-def u8 = unsigned integer<8>
-def u16 = big_endian unsigned integer<16>
-def u32 = big_endian unsigned integer<32>
-def u64 = big_endian unsigned integer<64>
+// TYPE DEFINITIONS ============================================================
 
-def i8 = twos_complement integer<8>
-def i16 = big_endian twos_complement integer<16>
-def i32 = big_endian twos_complement integer<32>
-def i64 = big_endian twos_complement integer<64>
+type u8  = unsigned integer<8>
+type u16 = little_endian unsigned integer<16>
+type u32 = little_endian unsigned integer<32>
+type u64 = little_endian unsigned integer<64>
 
-def ascii = unsigned hi_pad integer<7>
-```
+type i8  = twos_complement integer<8>
+type i16 = little_endian twos_complement integer<16>
+type i32 = little_endian twos_complement integer<32>
+type i64 = little_endian twos_complement integer<64>
 
-### Enumerations And Constants
+type bool8 = max<1> u8
+type ascii = max<127> u8
 
-```rust
+// CONSTANTS ===================================================================
+
 enum attribute_modifier : u16 {
     // this attribute has no spatial locality
     // should be used for random unique ids etc.
@@ -57,35 +56,43 @@ enum builtin_identifiers : string16 {
     // attributes will be used as the normal of the voxel
     NORMAL = "normal"
 }
-```
 
-### Helper Structs
+// HELPER STRUCTS ==============================================================
 
-```rust
 struct vec3<T> {
     T x
     T y
     T z
 }
 
-struct string16 {
-    u16 size
+struct string8 {
+    nonzero u8 size
     ascii[size] content
 }
-```
 
-Note that `vec3` is a template.
-e.g. `vec3<u32>` would be a `vec3` of `u32`.
+struct string16 {
+    nonzero u16 size
+    ascii[size] content
+}
 
-### File Structure
+// HEADER ======================================================================
 
-```rust
 struct main {
+    // 8 bytes of file magic
     u64 magic = 0xff11_33cc_666c_7663
+    
+    // major version and minor version, currently 0.1
     u8 version_major = 0
     u8 version_minor = 1
+    
+    // header and zlib-encoded data
+    // (extern because can't be fully defined in StructLang)
     header header
-    content content
+    
+    // only store a zlib-encoded stream for non-empty SVOs.
+    if (!header.empty) {
+        extern zlib_stream content
+    }
 }
 
 struct header {
@@ -93,8 +100,12 @@ struct header {
     attribute_definition[attribute_count] attributes
     // Global offset which is applied to all voxels which we read.
     vec3<i32> offset
-    // The size of the SVO.
+    // The exact dimensions of the voxel volume.
+    // The SVO has to contain these dimensions, but may be larger internally.
+    // (SVOs can only have power-of-two dimensions)
     vec3<u32> size
+    // If true (1), the volume is empty.
+    bool8 empty
 }
 
 struct attribute_definition {
@@ -102,14 +113,14 @@ struct attribute_definition {
     u16 modifier_map
     // type of the attribute
     attribute_type atype
-    // Must be <= 3.
-    // If not zero, this indicates that the type is a fixed-size array-type or vector-type.
+    // If not zero, this indicates that the type is a fixed-size array-type or
+    // vector-type.
     // If zero, the type is a variable sized-array.
     u8 cardinality
     // unique identifier of the attribute
     // certain values such as "color" are builtin and reserved
     // (see enum builtin_identifiers)
-    string16 identifier
+    string8 identifier
 }
 ```
 `header.size` is not strictly necessary for decoding, but it can be helpful when converting directly to a 3D array

@@ -112,13 +112,24 @@ before any node is popped from the queue, resulting in a higher memory cost.
 ![depth-first-tree](../img/graph/acc_depth_first.svg)<br>
 *Figure 3: Tree, traversed depth-first*
 
-In *Figure 3*, the labels symbolize `order of visitation`**/**`order of storage`.
+In *Figure 3*, the labels symbolize `order of storage`**/**`order of visitation`.
 
-Accelerated Depth-First works identically to DFS, however all direct children of the current node are stored first.
-So for example, we store all direct children (2, 3, 4) of the root node (1), but then continue onward to 2 as though we
+Accelerated Depth-First is similar to DFS, however all direct children of the current node are stored first.
+So for example, we store all direct children (2, 3, 4) of the root node (1), but then continue onward to 2
+(without storing 2 again) as though we
 were performing regular DFS.
 
-When we are decoding a format in which a node contains the connections to its child nodes,
+##### Implementation
+
+The implementation is trivial if we are already capable of performing DFS.
+Instead of storing the node which we visit during DFS, we store all of its children.
+
+When we visit the next node, it has always already been written because it is the child of some previous node.
+Of course this is not true for the root node, which we need to store first.
+
+##### Advantages
+
+When we are decoding a format in which a node stores the connections to its child nodes,
 we can count the number of connections and read multiple nodes simultaneously.
 This is the main benefit of this method.
 Regular DFS requires us to inspect one connection at a time, then go one node deeper into the tree if it is set.
@@ -128,8 +139,9 @@ An obvious prerequisite is that the nodes are encoded in a fixed-length format, 
 safely perform such a bulk-read.
 We can still use just a stack as a data structure, but we need to store a list at every depth with the cached nodes.
 
-This approach was specially invented for this research project.
-Any previous use of it is unknown to me.
+!!! note
+    This approach was specially invented for this research project.
+    Any previous use of it is unknown to me.
 
 #### Why To Serialize Octrees Depth-First and not Breadth-First
 
