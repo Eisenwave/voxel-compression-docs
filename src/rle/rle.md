@@ -51,7 +51,7 @@ If there are not just a handful of values but an entire bit per byte which is un
 Otherwise, OOB signaling is preferable, as it gives much more flexibility to the implementing developer and doesn't 
 produce any conflicts with the data to be compressed.
 
-## Existing Implementations
+## Tested Implementations
 
 ### Binvox
 
@@ -127,7 +127,14 @@ Instead of wasting 7 bits, we simply integrate the bit-value into the uppermost 
 If we read the `marker` as a signed two's complement integer, we can easily obtain the bit using `marker < 0` and the
 count using `marker & 0x7f`.
 
-### Complete Binvox
+##### Example
+
+```
+in (bitstream):  00001111 0
+out (hex):       04 74 01
+```
+
+### Complete Binvox / Bytewise Binvox
 
 ```rust
 struct marker {
@@ -137,7 +144,14 @@ struct marker {
 ```
 Instead of wasting 7 bits, we allow for an entire byte to be repeated `count` times.
 
-### `0x00` and `0xff` Escape Sequences
+##### Example
+
+```
+in (bitstream):  00001111 0
+out (hex):       0f 01 00 01
+```
+
+### In-Band with `0x00` and `0xff` Escape Sequences
 
 This method uses in-band signaling.
 We encode our bits as usual, but when we encounter an escape sequence, the following byte is used as our count.
@@ -149,6 +163,41 @@ We have two escape sequences:
 The obvious advantage of this method is that our escape sequences don't conflict with high-entropy data.
 We preserve any bytes which have both `0` and `1` in them and only affect fully empty/filled bytes, which occur in a
 low-entropy context anyways.
+
+##### Example
+
+```
+in (bitstream):  00001111 0
+out (hex):       0f 00
+
+in (bitstream):  00...00 (64 zeros total)
+out (hex):       00 40
+```
+
+### Adaptive
+
+Contrary to in-band RLE, adaptive RLE addresses the issue of high-entropy sections by encoding those explicitly.
+In addition to markers for sequences of 0s and 1s, adaptive coding also allows for "raw" section markers where the
+following N bits are parsed as is.
+
+For this method, we use about one byte per run:
+```rust
+struct marker {
+    bit signal
+    if signal == 0 {
+        u8 raw_run_length
+        bit[raw_run_length] raw_data
+    }
+    else {
+        bit run_value
+        u7 run_length
+    }
+}
+```
+Notice that due to the variable length of `raw_data` and due to the length of the tokens preceding it, this format is
+not aligned to byte boundary.
+This, in addition to the large complexity of encoding and decoding means that this is the slowest of all methods.
+
 
 ### Zlib
 

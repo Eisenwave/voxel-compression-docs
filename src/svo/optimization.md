@@ -14,6 +14,7 @@ Their primary purpose is accelerating access to the deeper layers.
 *Bottom-up optimizations* have no impact on the boundaries of the octree as this solely depends on the maximum depth.
 Their primary purpose is decreasing the amount of nodes or reducing nodes in size.
 
+<span id="single-octant"></span>
 ## Single-Octant Optimization
 
 ![Octree Optimization](../img/graph/octree_optimization.svg)<br>
@@ -41,6 +42,7 @@ $2^d$ is the negated minimum point of our current octree, as described in
 After this process has been completed, we simply store $s$ alongside the octree.
 When decoding, $s$ is added back onto all found positions.
 
+<span id="complete"></span>
 ## Complete Branch Optimization
 
 ![Complete Branch Optimization](../img/graph/octree_complete_branches.svg)<br>

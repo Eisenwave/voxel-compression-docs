@@ -43,6 +43,7 @@ nav:
       - attribute_compression.md
   - Implementation:
       - flvc/flvc.md
+      - flvc/flvc_optimizations.md
   - Auxiliary File Formats:
       - file_formats/vl32.md
       - file_formats/vlascii.md

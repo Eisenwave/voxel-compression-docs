@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="img/favicon.ico">
 <title>Voxel Compression</title>
 
-  <link rel="stylesheet" href="css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="css/darcula.css" rel="stylesheet">
-  <link href="css/extra.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="css/darcula.css" rel="stylesheet" />
+  <link href="css/extra.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -25,12 +26,12 @@
   
   <script src="js/jquery-2.1.1.min.js" defer></script>
   <script src="js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -41,8 +42,9 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="icon icon-home"> VOXEL COMPRESSION</a>
+        <a href="." class="icon icon-home"> VOXEL COMPRESSION</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -51,155 +53,86 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="index.html">Compression of Voxel Models</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Basics</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="properties.html">Properties of Voxel Models</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
-                </li>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="index.html">Compression of Voxel Models</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Basics</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="properties.html">Properties of Voxel Models</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Related Work</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="related/overview.html">Overview over Related Work</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="related/voxel_formats.html">List of Voxel File Formats</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="related/literature.html">References</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Geometry Encoding</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="uncompressed.html">Uncompressed Format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="rle/rle.html">Run-Length Encoding</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="rle/space_filling_curves.html">Space-Filling Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="rle/hilbert_curves.html">3D Hilbert Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="svo/svo.html">Sparse Voxel Octree</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="svo/construction.html">SVO Construction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="svo/optimization.html">SVO Optimization</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="dag/dag.html">Directed Acyclic Graph</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="cuboid_extraction.html">Cuboid Extraction</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#absolutely-stupid-method">Absolutely Stupid Method</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#xyz-merge">XYZ-Merge</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#heightmap-based-approaches">Heightmap-Based Approaches</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#naive-method">Naive Method</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#modified-kadanes-algorithm">Modified Kadane's-Algorithm</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#golden-section-search-not-sure-if-this-actually-works">Golden-Section-Search (not sure if this actually works)</a>
+    </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Related Work</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="related/overview.html">Overview over Related Work</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="related/voxel_formats.html">List of Voxel File Formats</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="related/literature.html">References</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Geometry Encoding</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="uncompressed.html">Uncompressed Format</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="rle/rle.html">Run-Length Encoding</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="rle/space_filling_curves.html">Space-Filling Curves</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="svo/svo.html">Sparse Voxel Octree</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="svo/construction.html">SVO Construction</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="svo/optimization.html">SVO Optimization</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="dag/dag.html">Directed Acyclic Graph</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="cuboid_extraction.html">Cuboid Extraction</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#cuboid-extraction">Cuboid Extraction</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#motivation">Motivation</a></li>
-        
-            <li><a class="toctree-l4" href="#absolutely-stupid-method">Absolutely Stupid Method</a></li>
-        
-            <li><a class="toctree-l4" href="#xyz-merge">XYZ-Merge</a></li>
-        
-            <li><a class="toctree-l4" href="#heightmap-based-approaches">Heightmap-Based Approaches</a></li>
-        
-            <li><a class="toctree-l4" href="#naive-method">Naive Method</a></li>
-        
-            <li><a class="toctree-l4" href="#modified-kadanes-algorithm">Modified Kadane's-Algorithm</a></li>
-        
-            <li><a class="toctree-l4" href="#golden-section-search-not-sure-if-this-actually-works">Golden-Section-Search (not sure if this actually works)</a></li>
-        
-        </ul>
-    
-
-    </ul>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Attribute Encoding</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="attribute_compression.html">SVO Attribute Compression</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Implementation</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="flvc/flvc.html">Free Lossless Voxel Compression (FLVC)</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Auxiliary File Formats</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="file_formats/structlang.html">Structure Language (StructLang)</a>
-                </li>
-    </ul>
-	    </li>
-          
-        </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Attribute Encoding</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="attribute_compression.html">SVO Attribute Compression</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Implementation</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="flvc/flvc.html">Free Lossless Voxel Compression (FLVC)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="flvc/flvc_optimizations.html">FLVC Data Stream</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Auxiliary File Formats</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="file_formats/structlang.html">Structure Language (StructLang)</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -207,7 +140,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">VOXEL COMPRESSION</a>
+        <a href=".">VOXEL COMPRESSION</a>
       </nav>
 
       
@@ -215,7 +148,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
+    <li><a href=".">Docs</a> &raquo;</li>
     
       
         
@@ -228,6 +161,7 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -289,7 +223,6 @@ Finding the largest volume in the model is reduced to finding the maximum of the
 1  #########  -&gt; 7726232310
 0  ## ## #### -&gt; 8807303420
 </code></pre>
-
 <p>In this illustration, <code>#</code> would be encoded as <code>1</code> and <code></code> would be encoded as <code>0</code>
 Each slice from <code>0</code> to <code>7</code> is one histogram in 2 dimensions or a heightmap in 3 dimensions.
 We can construct these very efficiently by just taking the heightmap at one height above and incrementing each height,
@@ -306,7 +239,6 @@ In our bitmap of equal dimensions, <code>1</code> represents that the height at 
 500020   (h=3)  100000
 211141          000010
 </code></pre>
-
 <p>Finding the largest area of <code>1</code> in an <code>n*n</code> rectangle has <code>O(n^2)</code> complexity or <code>O(1)</code> per pixel, when using a
 sweeping-line algorithm and searching for the greatest area in the resulting histograms:
 https://www.geeksforgeeks.org/maximum-size-rectangle-binary-sub-matrix-1s/</p>
@@ -342,7 +274,6 @@ dynamically during the search.
 For a `n*n` map, Kadane's algorithm has a complexity of `O(n^3)` or `O(n)` per pixel.
 Whether this is usable has to be investigated further.
 </code></pre>
-
 <h2 id="golden-section-search-not-sure-if-this-actually-works">Golden-Section-Search (not sure if this actually works)</h2>
 <ul>
 <li>best known complexity</li>
@@ -365,7 +296,6 @@ way instead of iterating over all heights.</p>
  -+----------------------------------------------&gt;
   |0123456789abcdefghijklmnopqrstuvwxyzABCDEFGH
 </code></pre>
-
 <p>The greatest areas for each height are:</p>
 <pre><code>7:     07 (3:1, 3:7)
 6:     07 (3:1, 3:7) found by extruding (3:1, 3:6)
@@ -375,7 +305,6 @@ way instead of iterating over all heights.</p>
 &gt;&gt;&gt;&gt;2: 21 (w:1, C:3)
 &gt;&gt;1:   15 (o:1, C:1)
 </code></pre>
-
 <p>Note that the maximum volumes at each height only form a unimodal function if we extrude our found area as far up as
 possible.
 Searching for the maximum or minimum of a unimodal function can be done with logarithmic complexity.
@@ -392,7 +321,7 @@ The final complexity would thus be <code>O(n^2 * log_2 n)</code> or <code>O(log_
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -409,6 +338,11 @@ The final complexity would thus be <code>O(n^2 * log_2 n)</code> or <code>O(log_
       <script src="js/mathjax_config.js" defer></script>
       <script src="js/extra.js" defer></script>
       <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

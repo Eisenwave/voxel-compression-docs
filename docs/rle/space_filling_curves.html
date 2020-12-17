@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../img/favicon.ico">
 <title>Voxel Compression</title>
 
-  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="../css/darcula.css" rel="stylesheet">
-  <link href="../css/extra.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../css/darcula.css" rel="stylesheet" />
+  <link href="../css/extra.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -25,12 +26,12 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -41,8 +42,9 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../index.html" class="icon icon-home"> VOXEL COMPRESSION</a>
+        <a href=".." class="icon icon-home"> VOXEL COMPRESSION</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -51,149 +53,80 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../index.html">Compression of Voxel Models</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Basics</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../properties.html">Properties of Voxel Models</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
-                </li>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../index.html">Compression of Voxel Models</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Basics</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../properties.html">Properties of Voxel Models</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Related Work</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/overview.html">Overview over Related Work</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/voxel_formats.html">List of Voxel File Formats</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/literature.html">References</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Geometry Encoding</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../uncompressed.html">Uncompressed Format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="rle.html">Run-Length Encoding</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="space_filling_curves.html">Space-Filling Curves</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#comparison-of-space-filling-curves">Comparison of Space-Filling Curves</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#impact-on-run-length-encoding">Impact on Run-Length Encoding</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Related Work</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../related/overview.html">Overview over Related Work</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../related/voxel_formats.html">List of Voxel File Formats</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../related/literature.html">References</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Geometry Encoding</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../uncompressed.html">Uncompressed Format</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="rle.html">Run-Length Encoding</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="space_filling_curves.html">Space-Filling Curves</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#space-filling-curves">Space-Filling Curves</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#motivation">Motivation</a></li>
-        
-            <li><a class="toctree-l4" href="#comparison-of-space-filling-curves">Comparison of Space-Filling Curves</a></li>
-        
-            <li><a class="toctree-l4" href="#impact-on-run-length-encoding">Impact on Run-Length Encoding</a></li>
-        
-            <li><a class="toctree-l4" href="#summary">Summary</a></li>
-        
-        </ul>
-    
-
-    </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../svo/svo.html">Sparse Voxel Octree</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../svo/construction.html">SVO Construction</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../svo/optimization.html">SVO Optimization</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../dag/dag.html">Directed Acyclic Graph</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../cuboid_extraction.html">Cuboid Extraction</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Attribute Encoding</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../attribute_compression.html">SVO Attribute Compression</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Implementation</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../flvc/flvc.html">Free Lossless Voxel Compression (FLVC)</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Auxiliary File Formats</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
-                </li>
-    </ul>
-	    </li>
-          
-        </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="hilbert_curves.html">3D Hilbert Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/svo.html">Sparse Voxel Octree</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/construction.html">SVO Construction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/optimization.html">SVO Optimization</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../dag/dag.html">Directed Acyclic Graph</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../cuboid_extraction.html">Cuboid Extraction</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Attribute Encoding</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../attribute_compression.html">SVO Attribute Compression</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Implementation</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../flvc/flvc.html">Free Lossless Voxel Compression (FLVC)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../flvc/flvc_optimizations.html">FLVC Data Stream</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Auxiliary File Formats</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -201,7 +134,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">VOXEL COMPRESSION</a>
+        <a href="..">VOXEL COMPRESSION</a>
       </nav>
 
       
@@ -209,7 +142,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
         
@@ -222,6 +155,7 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -286,14 +220,13 @@ of any point.
 Nested iteration fills space by iterating over all coordinates, with <script type="math/tex">x</script> running the fastest, followed by
 progressively slower-running coordinates.</p>
 <p>The reverse-approach can be performed without any multiplication at all, using the following code:</p>
-<pre><code class="cpp">voxel container[limit_x * limit_y * limit_z];
+<pre><code class="language-cpp">voxel container[limit_x * limit_y * limit_z];
 size_t index = 0;
 for (unsigned z = 0; z &lt; limit_z; ++z)
     for (unsigned y = 0; y &lt; limit_y; ++y)
         for (unsigned x = 0; x &lt; limit_x; ++x, ++index)
             container[index] = voxel_at(x, y, z);
 </code></pre>
-
 <p>Notice how our container can have any shape, it is not limited to a hypercube.
 A <em>jump</em> occurs once every <code>limit_x</code> coordinates, where <code>x</code> jumps from <code>limit_x - 1</code> to <code>0</code>.</p>
 <h3>Z-Order Curves</h3>
@@ -316,20 +249,19 @@ octal digits.
 See the linked section for an efficient implementation and thorough explanation.</p>
 <p>The space-filling itself can be implemented very similarly to nested iteration.
 We can implemented Z-Order Curves as follows:</p>
-<pre><code class="cpp">voxel container[limit * limit * limit];
+<pre><code class="language-cpp">voxel container[limit * limit * limit];
 for (unsigned z = 0; z &lt; limit; ++z)
     for (unsigned y = 0; y &lt; limit; ++y)
         for (unsigned x = 0; x &lt; limit; ++x)
             container[interleave3(x, y, z)] = voxel_at(x, y, z);
 </code></pre>
-
 <p>Note that our container now needs to be a cube and also must have dimensions which are a power of two.</p>
 <p>Interleaving bits is still the most expensive arithmetic operation performed here.
 A typical implementation will interleave each coordinate with zeros first, then combine these partial results using a
 bitwise OR.
 Only <code>x</code> changes every iteration, so we can cache the results for <code>y</code> and <code>z</code>.
 We can perform fewer operations in total using the following code:</p>
-<pre><code class="cpp">voxel container[limit_x * limit_y * limit_z];
+<pre><code class="language-cpp">voxel container[limit_x * limit_y * limit_z];
 size_t index = 0;
 for (unsigned z = 0; z &lt; limit_z; ++z) {
     // assuming this is implemented as a special case which handles zero-inputs
@@ -343,7 +275,6 @@ for (unsigned z = 0; z &lt; limit_z; ++z) {
     }
 }
 </code></pre>
-
 <h3>Hilbert Curves</h3>
 <p><img alt="2D Hilbert" src="../img/hilbert.svg" /><br>
 <em>Figure 3: Hilbert Curve in Two Dimensions</em></p>
@@ -360,7 +291,7 @@ An efficient implementation of this
 <p>The implementation builds on our approach for Z-Order Curves.
 It can also be optimized by caching portions of our Morton (Z-Order) index, but the final conversion to our Hilbert
 index must happen in its entirety every iteration.</p>
-<pre><code class="cpp">voxel container[limit * limit * limit];
+<pre><code class="language-cpp">voxel container[limit * limit * limit];
 for (unsigned z = 0; z &lt; limit; ++z) {
     for (unsigned y = 0; y &lt; limit; ++y) {
         for (unsigned x = 0; x &lt; limit; ++x) {
@@ -371,7 +302,6 @@ for (unsigned z = 0; z &lt; limit; ++z) {
     }
 }
 </code></pre>
-
 <h3>Comparisons</h3>
 <table>
 <thead>
@@ -590,14 +520,14 @@ desired.</p>
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
         <span><a href="rle.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../svo/svo.html" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="hilbert_curves.html" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
@@ -607,6 +537,11 @@ desired.</p>
       <script src="../js/mathjax_config.js" defer></script>
       <script src="../js/extra.js" defer></script>
       <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

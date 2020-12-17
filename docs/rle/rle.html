@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../img/favicon.ico">
 <title>Voxel Compression</title>
 
-  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="../css/darcula.css" rel="stylesheet">
-  <link href="../css/extra.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../css/darcula.css" rel="stylesheet" />
+  <link href="../css/extra.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -25,12 +26,12 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -41,8 +42,9 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../index.html" class="icon icon-home"> VOXEL COMPRESSION</a>
+        <a href=".." class="icon icon-home"> VOXEL COMPRESSION</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -51,149 +53,80 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../index.html">Compression of Voxel Models</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Basics</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../properties.html">Properties of Voxel Models</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
-                </li>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../index.html">Compression of Voxel Models</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Basics</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../properties.html">Properties of Voxel Models</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Related Work</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/overview.html">Overview over Related Work</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/voxel_formats.html">List of Voxel File Formats</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/literature.html">References</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Geometry Encoding</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../uncompressed.html">Uncompressed Format</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="rle.html">Run-Length Encoding</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#viability-for-voxel-compression">Viability for Voxel Compression</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#in-band-vs-out-of-band-signaling">In-Band- vs Out-Of-Band- Signaling</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tested-implementations">Tested Implementations</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#our-experiments">Our Experiments</a>
+    </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Related Work</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../related/overview.html">Overview over Related Work</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../related/voxel_formats.html">List of Voxel File Formats</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../related/literature.html">References</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Geometry Encoding</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../uncompressed.html">Uncompressed Format</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="rle.html">Run-Length Encoding</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#run-length-encoding">Run-Length Encoding</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#viability-for-voxel-compression">Viability for Voxel Compression</a></li>
-        
-            <li><a class="toctree-l4" href="#in-band-vs-out-of-band-signaling">In-Band- vs Out-Of-Band- Signaling</a></li>
-        
-            <li><a class="toctree-l4" href="#existing-implementations">Existing Implementations</a></li>
-        
-            <li><a class="toctree-l4" href="#our-experiments">Our Experiments</a></li>
-        
-        </ul>
-    
-
-    </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="space_filling_curves.html">Space-Filling Curves</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../svo/svo.html">Sparse Voxel Octree</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../svo/construction.html">SVO Construction</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../svo/optimization.html">SVO Optimization</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../dag/dag.html">Directed Acyclic Graph</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../cuboid_extraction.html">Cuboid Extraction</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Attribute Encoding</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../attribute_compression.html">SVO Attribute Compression</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Implementation</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../flvc/flvc.html">Free Lossless Voxel Compression (FLVC)</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Auxiliary File Formats</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
-                </li>
-    </ul>
-	    </li>
-          
-        </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="space_filling_curves.html">Space-Filling Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="hilbert_curves.html">3D Hilbert Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/svo.html">Sparse Voxel Octree</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/construction.html">SVO Construction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/optimization.html">SVO Optimization</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../dag/dag.html">Directed Acyclic Graph</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../cuboid_extraction.html">Cuboid Extraction</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Attribute Encoding</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../attribute_compression.html">SVO Attribute Compression</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Implementation</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../flvc/flvc.html">Free Lossless Voxel Compression (FLVC)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../flvc/flvc_optimizations.html">FLVC Data Stream</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Auxiliary File Formats</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -201,7 +134,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">VOXEL COMPRESSION</a>
+        <a href="..">VOXEL COMPRESSION</a>
       </nav>
 
       
@@ -209,7 +142,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
         
@@ -222,6 +155,7 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -267,13 +201,13 @@ If there are not just a handful of values but an entire bit per byte which is un
 <a href="//en.wikipedia.org/wiki/ASCII">ASCII</a>), then this method becomes especially viable.</p>
 <p>Otherwise, OOB signaling is preferable, as it gives much more flexibility to the implementing developer and doesn't 
 produce any conflicts with the data to be compressed.</p>
-<h2 id="existing-implementations">Existing Implementations</h2>
+<h2 id="tested-implementations">Tested Implementations</h2>
 <h3>Binvox</h3>
 <p>The <a href="https://www.patrickmin.com/binvox/binvox.html">Binvox</a> file format provides simple compression
 for geometry-only voxel data.
 It uses <a href="#out-of-band-signaling">out-of-band signaling</a>
 After a text header, the binary voxel data can be specified as follows:</p>
-<pre><code class="rust">struct binvox_data {
+<pre><code class="language-rust">struct binvox_data {
     marker[]
 }
 
@@ -282,7 +216,6 @@ struct marker {
     u8 bit_value
 }
 </code></pre>
-
 <h4>Criticism</h4>
 <p>Binvox run-length encodes only streaks of <code>0</code>-bits or <code>1</code>-bits.
 But to store their values, it uses an entire byte which wastes 7 bits.
@@ -314,24 +247,30 @@ of 128.</p>
 <p>There are countless ways to implement RLE.
 We implemented a few experimental methods ourselves to see how much one could improve upon the original designs.</p>
 <h3>Compact Binvox</h3>
-<pre><code class="rust">struct marker {
+<pre><code class="language-rust">struct marker {
     bit value
     i7 count
 }
 </code></pre>
-
 <p>Instead of wasting 7 bits, we simply integrate the bit-value into the uppermost bit of the count.
 If we read the <code>marker</code> as a signed two's complement integer, we can easily obtain the bit using <code>marker &lt; 0</code> and the
 count using <code>marker &amp; 0x7f</code>.</p>
-<h3>Complete Binvox</h3>
-<pre><code class="rust">struct marker {
+<h5>Example</h5>
+<pre><code>in (bitstream):  00001111 0
+out (hex):       04 74 01
+</code></pre>
+<h3>Complete Binvox / Bytewise Binvox</h3>
+<pre><code class="language-rust">struct marker {
     u8 count
     u8 value
 }
 </code></pre>
-
 <p>Instead of wasting 7 bits, we allow for an entire byte to be repeated <code>count</code> times.</p>
-<h3><code>0x00</code> and <code>0xff</code> Escape Sequences</h3>
+<h5>Example</h5>
+<pre><code>in (bitstream):  00001111 0
+out (hex):       0f 01 00 01
+</code></pre>
+<h3>In-Band with <code>0x00</code> and <code>0xff</code> Escape Sequences</h3>
 <p>This method uses in-band signaling.
 We encode our bits as usual, but when we encounter an escape sequence, the following byte is used as our count.
 We have two escape sequences:</p>
@@ -342,6 +281,33 @@ We have two escape sequences:</p>
 <p>The obvious advantage of this method is that our escape sequences don't conflict with high-entropy data.
 We preserve any bytes which have both <code>0</code> and <code>1</code> in them and only affect fully empty/filled bytes, which occur in a
 low-entropy context anyways.</p>
+<h5>Example</h5>
+<pre><code>in (bitstream):  00001111 0
+out (hex):       0f 00
+
+in (bitstream):  00...00 (64 zeros total)
+out (hex):       00 40
+</code></pre>
+<h3>Adaptive</h3>
+<p>Contrary to in-band RLE, adaptive RLE addresses the issue of high-entropy sections by encoding those explicitly.
+In addition to markers for sequences of 0s and 1s, adaptive coding also allows for "raw" section markers where the
+following N bits are parsed as is.</p>
+<p>For this method, we use about one byte per run:</p>
+<pre><code class="language-rust">struct marker {
+    bit signal
+    if signal == 0 {
+        u8 raw_run_length
+        bit[raw_run_length] raw_data
+    }
+    else {
+        bit run_value
+        u7 run_length
+    }
+}
+</code></pre>
+<p>Notice that due to the variable length of <code>raw_data</code> and due to the length of the tokens preceding it, this format is
+not aligned to byte boundary.
+This, in addition to the large complexity of encoding and decoding means that this is the slowest of all methods.</p>
 <h3>Zlib</h3>
 <p>TODO complete this</p>
 <div class="footnote">
@@ -365,7 +331,7 @@ However, the file format technically allows for greater sizes due to a 32-bit in
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -382,6 +348,11 @@ However, the file format technically allows for greater sizes due to a 32-bit in
       <script src="../js/mathjax_config.js" defer></script>
       <script src="../js/extra.js" defer></script>
       <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

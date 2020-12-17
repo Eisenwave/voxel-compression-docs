@@ -7,14 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
+  
   <link rel="shortcut icon" href="../img/favicon.ico">
 <title>Voxel Compression</title>
 
-  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-  <link href="../css/darcula.css" rel="stylesheet">
-  <link href="../css/extra.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../css/darcula.css" rel="stylesheet" />
+  <link href="../css/extra.css" rel="stylesheet" />
   
   <script>
     // Current page data
@@ -25,12 +26,12 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -41,8 +42,9 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../index.html" class="icon icon-home"> VOXEL COMPRESSION</a>
+        <a href=".." class="icon icon-home"> VOXEL COMPRESSION</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -51,151 +53,82 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../index.html">Compression of Voxel Models</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Basics</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../properties.html">Properties of Voxel Models</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
-                </li>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../index.html">Compression of Voxel Models</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Basics</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../properties.html">Properties of Voxel Models</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Related Work</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/overview.html">Overview over Related Work</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/voxel_formats.html">List of Voxel File Formats</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/literature.html">References</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Geometry Encoding</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../uncompressed.html">Uncompressed Format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rle/rle.html">Run-Length Encoding</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rle/space_filling_curves.html">Space-Filling Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rle/hilbert_curves.html">3D Hilbert Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="svo.html">Sparse Voxel Octree</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="construction.html">SVO Construction</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#efficient-boundary-test">Efficient Boundary Test</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#octree-growth">Octree Growth</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#position-normalization">Position Normalization</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#octree-node-index">Octree Node Index</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#traversing-the-octree">Traversing the Octree</a>
+    </li>
     </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Related Work</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../related/overview.html">Overview over Related Work</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../related/voxel_formats.html">List of Voxel File Formats</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../related/literature.html">References</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Geometry Encoding</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../uncompressed.html">Uncompressed Format</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../rle/rle.html">Run-Length Encoding</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../rle/space_filling_curves.html">Space-Filling Curves</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="svo.html">Sparse Voxel Octree</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="construction.html">SVO Construction</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#svo-construction">SVO Construction</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#efficient-boundary-test">Efficient Boundary Test</a></li>
-        
-            <li><a class="toctree-l4" href="#octree-growth">Octree Growth</a></li>
-        
-            <li><a class="toctree-l4" href="#position-normalization">Position Normalization</a></li>
-        
-            <li><a class="toctree-l4" href="#octree-node-index">Octree Node Index</a></li>
-        
-            <li><a class="toctree-l4" href="#traversing-the-octree">Traversing the Octree</a></li>
-        
-        </ul>
-    
-
-    </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="optimization.html">SVO Optimization</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../dag/dag.html">Directed Acyclic Graph</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../cuboid_extraction.html">Cuboid Extraction</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Attribute Encoding</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../attribute_compression.html">SVO Attribute Compression</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Implementation</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../flvc/flvc.html">Free Lossless Voxel Compression (FLVC)</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Auxiliary File Formats</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
-                </li>
-    </ul>
-	    </li>
-          
-        </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="optimization.html">SVO Optimization</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../dag/dag.html">Directed Acyclic Graph</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../cuboid_extraction.html">Cuboid Extraction</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Attribute Encoding</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../attribute_compression.html">SVO Attribute Compression</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Implementation</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../flvc/flvc.html">Free Lossless Voxel Compression (FLVC)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../flvc/flvc_optimizations.html">FLVC Data Stream</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Auxiliary File Formats</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
+                    </li>
+                </ul>
       </div>
-      &nbsp;
+    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -203,7 +136,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">VOXEL COMPRESSION</a>
+        <a href="..">VOXEL COMPRESSION</a>
       </nav>
 
       
@@ -211,7 +144,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
         
@@ -224,6 +157,7 @@
       
     </li>
   </ul>
+  
   <hr/>
 </div>
           <div role="main">
@@ -291,7 +225,7 @@ abs_{\text{SVO}}(n) =
 </script>
 </p>
 <h3>Implementation</h3>
-<pre><code class="cpp">uint32_t abs_svo(int32_t n)
+<pre><code class="language-cpp">uint32_t abs_svo(int32_t n)
 {
     return n &lt; 0 ? (-n -1) : n;
 }
@@ -301,7 +235,6 @@ bool comp_against_svo_bounds(int32_t x, int32_t y, int32_t z, uint32_t d)
     return (abs_svo(x) | abs_svo(y) | abs_svo(z)) &gt;= d;
 }
 </code></pre>
-
 <p>Such an implementation eliminates five out of six conditional operations on modern compilers, leaving only the final
 <code>&gt;=</code> comparison.
 See <a href="https://godbolt.org/z/K2CCmU">this Compiler Explorer page</a> for an example.</p>
@@ -309,13 +242,12 @@ See <a href="https://godbolt.org/z/K2CCmU">this Compiler Explorer page</a> for a
 <p>Using <script type="math/tex">abs_{\text{SVO}}</script> actually works in ours and the compiler's favor.
 This is due to the fact that negating a number in two's complement requires a bitwise negation and an increment.
 Due to our decrement of the negated number, we eliminate this need.</p>
-<pre><code class="asm">abs_svo(int):
+<pre><code class="language-asm">abs_svo(int):
   mov eax, edi  # copy function parameter into result register
   sar eax, 31   # fill the register with 1s if the number is negative, else with 0s
   xor eax, edi  # xor result register with parameter, performing a conditional bitwise NOT
   retn          # return from the function
 </code></pre>
-
 <h4>Manual Optimization of Comparison with <code>d</code></h4>
 <p>This only works because <script type="math/tex">d</script> is an SVO dimension and thus always guaranteed to be a power of two.
 The most significant bit of lower numbers is lower than the single bit of a greater power of two.
@@ -343,7 +275,7 @@ The current root node goes into the lowest corner (with index 0) of the new, hig
 This means that each node receives a new parent.
 The four new parents are then moved into the root node at the location of their children.
 Here is an implementation in pseudo-C++:</p>
-<pre><code class="cpp">for (size_t i = 0; i &lt; 8; ++i) {
+<pre><code class="language-cpp">for (size_t i = 0; i &lt; 8; ++i) {
     if (root.has(i)) {
         auto parent = make_new_branch();
         parent[~i &amp; 0b111] = root.extract(i);
@@ -351,7 +283,6 @@ Here is an implementation in pseudo-C++:</p>
     }
 }
 </code></pre>
-
 <p>Within each new parent, the current nodes end up positioned in the opposite corner of where they were before.
 In one index from 0 to 7, each bit represents a three-dimensional coordinate.
 So index <code>4 = 0b010</code> represents <script type="math/tex">(0, 1, 0)</script>.
@@ -386,14 +317,13 @@ the octree that leads straight to the insertion point.</p>
 <p>As seen in the above Figure, the lower bit indicates whether the position is left or right in the lower subtree and the
 higher bit indicates whether the position is left or right in the upper subtree.
 To navigate the above binary tree, we can use the following pseudo-code:</p>
-<pre><code class="c++">void insert(size_t index, rgb32_t color)
+<pre><code class="language-c++">void insert(size_t index, rgb32_t color)
 {
     auto &amp;branch = root[(index &gt;&gt; 1) &amp; 1]; // use upper bit to get branch
     auto &amp;leaf = branch[(index &gt;&gt; 0) &amp; 1]; // use lower bit to get leaf
     leaf.color = color;
 }
 </code></pre>
-
 <h3>Approach in Three Dimensions</h3>
 <p>The same pattern occurs for octal digits and octrees.
 <script type="math/tex">(x, y, z)</script> can thus be seen as three positions in separate binary trees which we want to combine into an octree.
@@ -401,7 +331,7 @@ To convert <script type="math/tex">(x, y, z)</script> to a position in an octree
 The result will be a single number of octal digits, each of which represents the position within one octree node.</p>
 <p>Just like we can use the bits of a binary number to navigate the above binary tree, we can use the digits of the octal
 number to navigate the octree at every level.</p>
-<pre><code class="c++">void insert(size_t index, rgb32_t color)
+<pre><code class="language-c++">void insert(size_t index, rgb32_t color)
 {
     auto &amp;branch = root[(index &gt;&gt; 3) &amp; 0b111]; // use upper digit to get branch
     // ... repeat this process for however many levels of branches there are
@@ -409,7 +339,6 @@ number to navigate the octree at every level.</p>
     leaf.color = color;
 }
 </code></pre>
-
 <h3>Examples</h3>
 <p>This is how coordinates can be mapped to octree indices:
 <script type="math/tex; mode=display">\begin{align}
@@ -441,7 +370,7 @@ This is how octree node indices can be mapped to coordinates:</p>
 binary Magic Numbers.
 The implementation expands upon one of the
 <a href="https://graphics.stanford.edu/~seander/bithacks.html#InterleaveBMN">Bit Twiddling Hacks by Sean Eron Anderson</a>.</p>
-<pre><code class="cpp">// interleaves a given number with two zero-bits after each input bit
+<pre><code class="language-cpp">// interleaves a given number with two zero-bits after each input bit
 // the first insertion occurs between the least significant bit and the next higher bit
 uint64_t ileave_two0(uint32_t input)
 {
@@ -470,7 +399,6 @@ uint64_t ileave3(uint32_t x, uint32_t y, uint32_t z)
 }
 
 </code></pre>
-
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>An implementation for a variable amount of inputs is equally possible, but would significantly increase the code
@@ -494,7 +422,7 @@ In such a case, we can enter a different code path that handles this case.</p>
 <h3>Node Implementation</h3>
 <p>An SVO will need to store our voxel colors at some level.
 We can reduce memory consumption and cache misses by using a small voxel array at the second-to-final depth:</p>
-<pre><code class="c++">// a regular node
+<pre><code class="language-c++">// a regular node
 struct svo_node {
     svo_node *children[8];
 };
@@ -509,7 +437,6 @@ struct svo_leaf_node {
     uint32_t color;
 }
 </code></pre>
-
 <p>This code will need to be adjusted so that the nodes are either polymorphic or type unions are used.</p>
               
             </div>
@@ -523,7 +450,7 @@ struct svo_leaf_node {
 
   </div>
 
-  <div class="rst-versions" role="note" style="cursor: pointer">
+  <div class="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -540,6 +467,11 @@ struct svo_leaf_node {
       <script src="../js/mathjax_config.js" defer></script>
       <script src="../js/extra.js" defer></script>
       <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
 
 </body>
 </html>

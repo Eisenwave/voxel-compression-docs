@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+<title>Voxel Compression</title>
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../css/darcula.css" rel="stylesheet" />
+  <link href="../css/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "3D Hilbert Curves";
+    var mkdocs_page_input_path = "rle/hilbert_curves.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> VOXEL COMPRESSION</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../index.html">Compression of Voxel Models</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Basics</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../properties.html">Properties of Voxel Models</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Related Work</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/overview.html">Overview over Related Work</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/voxel_formats.html">List of Voxel File Formats</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/literature.html">References</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Geometry Encoding</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../uncompressed.html">Uncompressed Format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="rle.html">Run-Length Encoding</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="space_filling_curves.html">Space-Filling Curves</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="hilbert_curves.html">3D Hilbert Curves</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#properties">Properties</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#computing-hilbert-curves">Computing Hilbert Curves</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/svo.html">Sparse Voxel Octree</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/construction.html">SVO Construction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/optimization.html">SVO Optimization</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../dag/dag.html">Directed Acyclic Graph</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../cuboid_extraction.html">Cuboid Extraction</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Attribute Encoding</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../attribute_compression.html">SVO Attribute Compression</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Implementation</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../flvc/flvc.html">Free Lossless Voxel Compression (FLVC)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../flvc/flvc_optimizations.html">FLVC Data Stream</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Auxiliary File Formats</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">VOXEL COMPRESSION</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Geometry Encoding &raquo;</li>
+        
+      
+    
+    <li>3D Hilbert Curves</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="3d-hilbert-curves">3D Hilbert Curves</h1>
+<h2 id="properties">Properties</h2>
+<p>Hilbert curves are space-filling curves with numerous properties, beneficial for storage of multi-dimensional data.
+Let a Hilbert curve be a sequence <script type="math/tex">h_n(i): \mathbb{N} \rightarrow \mathbb{N}^3</script> where <script type="math/tex">n \in \mathbb{N}</script> is the
+iteration of the curve.</p>
+<ul>
+<li>the previous element <script type="math/tex">h_n(i-1)</script> is always a direct neighbor to any element of the curve <script type="math/tex">h(i)</script>
+</li>
+<li>the Manhattan distance of <script type="math/tex">h_n(i-2)</script> is always 2</li>
+<li>the Manhattan distance of <script type="math/tex">h_n(i-3)</script> is either 1 or 3</li>
+<li>it is possible to access elements <script type="math/tex">h_n(i)</script> randomly with <script type="math/tex">O(n)</script> complexity</li>
+<li>it is possible to access the index <script type="math/tex">h^{-1}_n(p)</script> of any point randomly with <script type="math/tex">O(n)</script> complexity</li>
+</ul>
+<h2 id="computing-hilbert-curves">Computing Hilbert Curves</h2>
+<p>In this section, we will discuss how to compute elements of the Hilbert curve <script type="math/tex">h(i)</script>.
+In principle, the method to construct a Hilbert curve is as follows:</p>
+<ol>
+<li>Choose a base shape <script type="math/tex">h_0(i), \; 0 \le i \lt 8</script> that fills a 2x2x2 space (this is the first iteration)</li>
+<li>Find a table of rotations <script type="math/tex">R</script> so that a 2x2x2 block <script type="math/tex">h_1(j)</script> of <script type="math/tex">h_0(i)</script> resembles <script type="math/tex">h_0(i)</script> at a coarser level</li>
+<li>Use <script type="math/tex">R</script> to rotate shapes <script type="math/tex">h_0</script> so they form one continuous curve</li>
+</ol>
+<p>The first two steps are just preparation.
+The last step needs to be performed recursively.
+Our goal is to rotate eight 2x2x2 pieces so that they form one continuous curve with the same coarse path as the shapes
+themselves.
+We then have a 4x4x4 shape with starts and ends in the same corners, allowing us to rotate it using <em>exactly</em> the
+same rules and connect it with seven more shapes to obtain an 8x8x8 shape etc.
+Due to this similarity between iterations, we only need a single base shape <script type="math/tex">h_0</script> and rotation table <script type="math/tex">R</script>.</p>
+<h3>Preparation</h3>
+<p>As described, we must first find a fitting shape <script type="math/tex">h_0</script> and a rotation table <script type="math/tex">R</script>.</p>
+<p><img alt="2D Hilbert" src="../img/hilbert0.png" /><br>
+<em>Figure 1: First Iteration of a 3D Hilbert Curve</em></p>
+<p>There are three shapes which can form a Hilbert curve, but this one in particular has properties that make it suited
+for high performance computing.
+In this case, we simply use a Gray Code of length 8, of which the three bits of each element are interpreted as
+coordinates.</p>
+<p><img alt="2D Hilbert" src="../img/hilbert1.png" /><br>
+<em>Figure 2: Second Iteration of a 3D Hilbert Curve</em></p>
+<p>Now, we come up with a rotation table <script type="math/tex">R</script> with 8 rotations <script type="math/tex">R_i, \;0 \le i \lt 8</script> for each of the 8 blocks <script type="math/tex">h_1(i)</script>.
+The blue voxel represents the first element of each block and the red element represents the last.
+Note how the global end and start voxels are in the same corners of the model in both the first and second iteration.
+Also note that the path taken through the blocks <script type="math/tex">h_1(8i)</script> is identical to the path taken within the shape <script type="math/tex">h_0(i)</script>.
+This is what it means that the blocks resemble the shape at a coarser level.</p>
+<p>Finding a rotation table <script type="math/tex">R</script> with such properties can be done using a brute-force algorithm.</p>
+<h3>Algorithm</h3>
+<p>Computing Hilbert curves is greatly simplified when first computing a Morton (Z-Order) curve and permuting its elements.
+A Morton curve also traverses space in 2x2x2 blocks recursively, but lacks many of the properties we discussed earlier.
+3D Morton curves can be computed by simply interleaving the bits of any coordinate triple <script type="math/tex">(x, y, z)</script>, yielding a single
+number.
+With this intermediate step of morton-coding, our pseudo-code looks like this:</p>
+<pre><code class="language-cpp">vec3&lt;unsigned&gt; hilbert_to_xyz(unsigned hilbert, unsigned iteration)
+{
+    unsigned morton = hilbert_to_morton(hilbert, iteration);
+    vec3&lt;unsigned&gt; xyz = deinterleave3(morton);
+    return xyz;
+}
+
+unsigned xyz_to_hilbert(vec3&lt;unsigned&gt; xyz, uint iteration)
+{
+    unsigned morton = interleave3(xyz.x, xyz.y, xyz.z);
+    unsigned hilbert = morton_to_hilbert3(morton, iteration);
+    return hilbert;
+}
+</code></pre>
+<p>As described earlier, we need to recursively apply our rotation table to blocks of 2x2x2 each.
+When our input is already morton-coded, each octal digit represents a position on one level of an octree.
+This means that we just need to rotate each digit correctly.
+A pseudo-code implementation of a hilbert_to_morton function looks as follows:</p>
+<pre><code class="language-cpp">unsigned hilbert_to_morton3(unsigned hilbert, unsigned iteration)
+{
+    for (unsigned i = 0; i &lt; iteration; ++i) {
+        unsigned octal_digit = get_octal(hilbert, i);
+        set_octal(hilbert, i, hilbert_to_morton_shape[octal_digit]);
+    }
+
+    unsigned first_digit = get_octal(hilbert, iteration);
+    mat3 next_rot = rotation_table[first_digit];
+
+    for (unsigned i = iteration; i != 0; --i) {
+        unsigned morton_digit = get_octal(hilbert, i - 1);
+        unsigned rotated_digit = interleave3(next_rot * deinterleave3(morton_digit));
+        set_octal(hilbert, i -1, rotated_digit);
+
+        next_rot = next_rot * hilbert_to_morton_rotations[morton_digit];
+    }
+
+    return hilbert;
+}
+</code></pre>
+<p>In the first loop, we simply perform our shape transform to each digit.
+This means that each hilbert-coded digit gets mapped onto a morton-coded digit.
+In the second loop, we apply the rotation of more significant digits to less significant digits.
+For non-linear transformations, we would have to use a nested loop and iterate over all the less-significant digits.
+However, in this case we only apply rotations and we can multiply the rotation matrices instead, exploiting
+associativity of matrix multiplication:
+<script type="math/tex; mode=display">M_1 (M_0 p) = (M_1 M_0) p</script>
+Note that our rotation table needs to be indexed using morton-coded digits.</p>
+<pre><code class="language-cpp">unsigned hilbert_to_morton3(unsigned hilbert, unsigned iteration)
+{
+    for (size_t shift = 0; shift &lt; iteration * 3; shift += 3)
+        unsigned hilbert_digit = (hilbert &gt;&gt; shift) &amp; 0b111;
+        unsigned morton_digit = hilbert_to_morton_shape[hilbertCodedDigt];
+        hilbert ^= (hilbert_digit ^ morton_digit) &lt;&lt; shift; // replace digit in result
+    }
+
+    unsigned shift = iteration * 3;
+    unsigned first_digit = (hilbert &gt;&gt; shift) &amp; 0b111;
+    mat3 next_rot = hilbert_to_morton_rotations[first_digit];
+
+    while (shift != 0) {
+        shift -= 3;
+        unsigned morton_digit = (result &gt;&gt; shift) &amp; 0b111;
+        unsigned rotated_digit = interleave3(next_rot * deinterleave3(morton_digit));
+        hilbert ^= (mortonDigit ^ rotated_digit) &lt;&lt; shift;  // replace digit in result
+
+        next_rot = next_rot * hilbert_to_morton_rotations[morton_digit];
+    }
+
+    return hilbert;
+}
+</code></pre>
+              
+            </div>
+          </div>
+<footer></footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="space_filling_curves.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../svo/svo.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML" defer></script>
+      <script src="../js/mathjax_config.js" defer></script>
+      <script src="../js/extra.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

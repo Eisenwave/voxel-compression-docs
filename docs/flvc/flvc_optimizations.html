@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+<title>Voxel Compression</title>
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../css/darcula.css" rel="stylesheet" />
+  <link href="../css/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "FLVC Data Stream";
+    var mkdocs_page_input_path = "flvc/flvc_optimizations.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> VOXEL COMPRESSION</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../index.html">Compression of Voxel Models</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Basics</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../properties.html">Properties of Voxel Models</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Related Work</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/overview.html">Overview over Related Work</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/voxel_formats.html">List of Voxel File Formats</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/literature.html">References</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Geometry Encoding</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../uncompressed.html">Uncompressed Format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rle/rle.html">Run-Length Encoding</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rle/space_filling_curves.html">Space-Filling Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rle/hilbert_curves.html">3D Hilbert Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/svo.html">Sparse Voxel Octree</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/construction.html">SVO Construction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/optimization.html">SVO Optimization</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../dag/dag.html">Directed Acyclic Graph</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../cuboid_extraction.html">Cuboid Extraction</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Attribute Encoding</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../attribute_compression.html">SVO Attribute Compression</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Implementation</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="flvc.html">Free Lossless Voxel Compression (FLVC)</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="flvc_optimizations.html">FLVC Data Stream</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#general-structure">General Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#encoding-and-decoding-complexity">Encoding and Decoding Complexity</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#optimizations-overview">Optimizations Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#delta-coding">Delta Coding</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#attribute-de-interleaving">Attribute De-Interleaving</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bitwise-interleaving">Bitwise Interleaving</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Auxiliary File Formats</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">VOXEL COMPRESSION</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Implementation &raquo;</li>
+        
+      
+    
+    <li>FLVC Data Stream</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="flvc-data-stream">FLVC Data Stream</h1>
+<p>The FLVC file format consists of a container format and a zlib-compressed data stream as explained in <a href="flvc.html">FLVC</a>.
+The data stream stores a Sparse Voxel Octree, optimized in multiple ways.
+Due to the FLVC format allowing arbitrary attributes, the exact structure of the data stream is also variable.
+Attribute definitions in the container specify the structure of the attribute data per voxel.
+This structural information is crucial for certain optimizations performed in the FLVC codec.</p>
+<h2 id="general-structure">General Structure</h2>
+<p>Generally, the FLVC data stream consists of nodes of an SVO, ordered in
+<a href="../svo/svo.html#acc-depth-first"><em>Accelerated Depth First</em></a> order.
+For the FLVC data stream, this order has the advantage that multiple child nodes can be compressed and decompressed at
+the same time, compared to <em>Depth First</em> order, where only one node can be read at a time.
+Accelerated Depth First order allows for optimizations that rely on all <em>neighbor nodes</em> being known to the decoder
+at the same time.</p>
+<p>Each node is structured as illustrated under <a href="../svo/svo.html#serialization">SVO Serialization</a>.
+There are two types of nodes: 
+<em>Leaf nodes</em> store a <em>child mask</em> of voxels and attribute data for each voxel.
+<em>Branch nodes</em> only store a mask of other nodes, which can be either <em>leafs</em> or <em>branches</em>.</p>
+<p>Without any optimization steps, a typical data stream with mask <script type="math/tex">m</script> one two-byte attribute <script type="math/tex">a</script> would look like:
+<script type="math/tex; mode=display">
+(m_0, m_1, m_2, m_3, a^\text{lo}_3, a^\text{hi}_3, \ldots, m_n , a^\text{lo}_n, a^\text{hi}_n)
+</script>
+In this example, <script type="math/tex">0..2</script> are branch nodes, <script type="math/tex">3</script> is the first leaf node.</p>
+<p>FLVC data streams encode all attributes in little-endian byte order.
+This byte order is not only the standard for x86 architectures, but is also easier to perform optimization steps such
+as bitwise interleaving on.</p>
+<h2 id="encoding-and-decoding-complexity">Encoding and Decoding Complexity</h2>
+<p>The encoder needs to construct the SVO in its entirety before writing anything to disk.
+Even the very last voxel which is read from the input could change the SVO structurally.
+For example, a voxel that lies outside the current capacity of the SVO will require (unilateral) growth of the tree
+structure, meaning that the tree receives a new root node.</p>
+<p>Depth-first encoded trees can be read using only a stack, resulting in <script type="math/tex">O(\log{v})</script> space complexity for the decoder.
+Accelerated depth-first requires <script type="math/tex">O(b \log_b{v} )</script> space complexity, where <script type="math/tex">b</script> is the branching factor of the tree,
+which is eight in this case.
+FLVC only allows 21 SVO layers because the <a href="../svo/construction.html#octree-node-index">Octree Node Index</a> needs to fit
+a 64-bit integer.
+So in practice, the decoder can simply allocate <script type="math/tex">8 \cdot 21 \cdot x</script> bytes of memory, where x is the size of
+attribute data, child masks, and internal data stored per node.</p>
+<p>In summary:</p>
+<table>
+<thead>
+<tr>
+<th>Complexity</th>
+<th>Encoder</th>
+<th>Decoder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Space</td>
+<td>
+<script type="math/tex">O(v)</script>
+</td>
+<td>
+<script type="math/tex">O(8 \log_8{v})</script>
+</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>
+<script type="math/tex">O(v)</script>
+</td>
+<td>
+<script type="math/tex">O(v)</script>
+</td>
+</tr>
+</tbody>
+</table>
+<p>In practice, decoding is about twice as fast as encoding due to the lower memory requirements.
+Computationally, all following optimizations have linear complexity.
+Some steps require propagating information from the bottom to the top of the SVO, but as explained in
+<a href="../svo/svo.html#extreme-cases-and-limits">SVO - Extreme Cases And Limits</a>, this results in an additional cost of at worst
+<script type="math/tex">\frac{1}{7}</script>.</p>
+<h2 id="optimizations-overview">Optimizations Overview</h2>
+<p>There are three layers of optimizations applied to the SVO before writing to disk:</p>
+<ol>
+<li>SVO Optimizations</li>
+<li>Delta Coding</li>
+<li>Attribute De-Interleaving</li>
+<li>Bitwise Interleaving</li>
+</ol>
+<p>The first step consists of the two SVO optimizations <a href="../svo/optimization.html#single-octant">Single-Octant Optimization</a>
+and <a href="../svo/optimization.html#complete">Complete Branch Trimming</a>.</p>
+<p>All three further optimizations require all children to be available to the encoder/decoder.
+These optimizations steps do not decrease the size of the data stream whatsoever.
+Delta Coding even increases it.
+However, they turn <em>geometric redundancy</em> into <em>bitwise redundancy</em>.
+In short, this means that redundancies such as <em>clustering</em> of voxels in one region of space, as well as the
+<em>clustering</em> of attributes are converted into a redundancy at the bit level.
+This can then be exploited by an entropy coder.
+In the case of FLVC, the whole data stream is compressed using zlib.</p>
+<h2 id="delta-coding">Delta Coding</h2>
+<h3>Idea</h3>
+<p>Delta Coding is a popular method of eliminating redundancy from data where the numerical difference between consecutive
+elements most often falls into a limited range.
+Take the following example:</p>
+<p>
+<script type="math/tex; mode=display">\begin{align}
+n_i =& (0, 1, 2, 3, 4, 5, ...) \\
+\frac{\Delta n_i}{\Delta i} =& (1, 1, 1, ...) \\
+\frac{\Delta\Delta n_i}{\Delta i} =& (0, 0, 0, ...)
+\end{align}</script>
+</p>
+<p>Here, it may be obvious to the viewer that the <script type="math/tex">n_i</script> follows a very predictable pattern.
+However, at the bit level, this sequence would be <script type="math/tex">(00_2, 01_2, 10_2, 11_2, \ldots)</script>.
+We can see that there is a lot of variation in the lowest two bits.
+The first derivative has no variation at all and the second derivative is simply an infinite zero-sequence.
+In conclusion, we turn our knowledge that the sequence follows a predictable pattern into a <em>bitwise redundancy</em>.</p>
+<h3>FLVC Delta Coding</h3>
+<p>Delta Coding in FLVC takes place between child and parent, meaning that the attributes of the children are converted to
+a delta from the parent attribute.
+At this point you may be confused, because parents don't have any attributes.
+Only voxels, which are the leaf nodes of the tree, have attributes such as color; their parents do not.</p>
+<p>As part of this optimization step, we must assign values to the parents depending on their children.
+This occurs in a <em>mipmapping</em> or <em>reduction</em> step where the values of children are propagated towards the root of the
+tree using the <script type="math/tex">min</script> operator.
+The parents thus receive the minimum attribute of their children and the children are stored as deltas to this common
+minimum.</p>
+<p>Such a <em>reduction</em> step is performed bottom-up for the entire tree by the encoder after the last voxel has been stored
+in the SVO.
+This step exploits <em>attribute locality</em>, meaning that voxels close to each other also tend to have similar attributes.
+When all attributes fall into a similar range, the deltas will all be low as well.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The reason for using the <script type="math/tex">min</script> operator in particular is that deltas are always representable as unsigned integers
+without relying on specific overflow semantics.
+Deltas must be unsigned to avoid problems such as the delta between the 8-bit unsigned integers <code>0</code> and <code>200</code> not
+being representable by an 8-bit signed integer.</p>
+</div>
+<h5>Example</h5>
+<pre><code class="language-cpp">// original attribute values of the child nodes
+child[0] = 200 = 0b1100'1000
+child[1] = 205 = 0b1100'1101
+child[2] = 210 = 0b1101'0010
+child[3] = 215 = 0b1101'0010
+
+// minimum assigned to parent
+parent   = 200 = min(child[0..3])
+
+// deltas to parent computed and stored in each child node
+child[0] - parent =  0  = 0b0000'0000
+child[1] - parent =  5  = 0b0000'1001
+child[2] - parent = 10  = 0b0000'1010
+child[3] - parent = 15  = 0b0000'1111
+</code></pre>
+<p>As can be seen in this example, the attribute values started out as having differences both in the upper and lower
+nibble (half-byte).
+After the optimization step, there is only variation in the lower nibble.
+The upper nibble is completely zeroed out.</p>
+<h2 id="attribute-de-interleaving">Attribute De-Interleaving</h2>
+<p>In the next step, attributes are de-interleaved.
+Remember, our data stream currently looks like this, where <script type="math/tex">m</script> is a child mask and <script type="math/tex">a</script> is an attribute:
+<script type="math/tex; mode=display">
+(m_0, a_0, m_1, (a_1-a_0), m_2, (a_2-a_0), m_3, (a_3-a_0), \ldots)
+</script>
+Attributes which might have no correlation with each other are stored right next to each other in the stream.
+For example, high-entropy child masks are stored right next to attributes, which are delta coded and potentially
+all zeroed out.
+By de-interleaving these attributes and storing one list per attribute instead, we can bring correlated bytes closer
+together in the byte stream:
+<script type="math/tex; mode=display">
+(m_0, a_0, m_1, m_2, m_3, (a_1-a_0), (a_2-a_0), (a_3-a_0), \ldots)
+</script>
+We can only do this for at most eight neighboring nodes at a time.
+In a breadth-first stream, we could also perform this for an entire layer of the tree, but we use <em>Accelerated
+Depth-First</em>.</p>
+<p>This optimization is almost trivial computationally, because we can simply create a permutation for each possible
+number of child nodes for our specific attribute layout.
+Decoding (interleaving) can be performed just as easily by computing the inverse of the pre-computed permutation.</p>
+<h2 id="bitwise-interleaving">Bitwise Interleaving</h2>
+<p>The motivation of this is to clump together all less significant bits and all more significant bits, per child.
+After Delta Coding, the more significant bits will often consist of only zeros.
+Grouping together those bits is helpful to entropy coders, which can then perform RLE or other compression steps.
+An example of how bit-interleaving works can be found under <a href="../svo/optimization.html#examples">SVO Optimization</a>.</p>
+<p>After this final optimization step, the data stream looks as follows:
+<script type="math/tex; mode=display">
+(m_0, a_0, m_1, m_2, m_3, \text{ileave}(a_1-a_0, a_2-a_0, a_3-a_0), \ldots)
+</script>
+</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Attribute De-Interleaving and Bitwise Interleaving together are actually equivalent to bitwise interleaving of
+the raw data of each node.</p>
+</div>
+              
+            </div>
+          </div>
+<footer></footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="flvc.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../file_formats/vl32.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML" defer></script>
+      <script src="../js/mathjax_config.js" defer></script>
+      <script src="../js/extra.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

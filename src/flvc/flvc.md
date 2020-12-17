@@ -6,7 +6,7 @@ FLVC is the file format produced based on the results of the presented research.
 **Media Type:** `model/x-flvc`<br>
 **Magic Bytes:** `"\xff\x11\x33\xccflvc"` = `ff 11 33 cc 66 6c 76 63`
 
-## Specification
+## Container Format Specification
 
 ```rust
 // TYPE DEFINITIONS ============================================================

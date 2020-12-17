@@ -98,7 +98,7 @@ On the deepest level, the next node is chosen until the end is reached and the n
 This low memory cost (which is in fact $O(\log{n})$ where n is the number of nodes) is highly advantageous when encoding
 enormous models.
 
-#### Breadth-First
+<h4 id="breadth-first"> Breadth-First</h4>
 
 ![breadth-first-tree](../img/graph/breadth_first.svg)<br>
 *Figure 2: Tree, traversed breadth-first*
@@ -107,7 +107,7 @@ BFS comes with a higher cost since a typical algorithm appends all branches to a
 This means that in the worst case, which is at the beginning of serialization eight nodes are appended on every level
 before any node is popped from the queue, resulting in a higher memory cost.
 
-#### Accelerated Depth-First
+<h4 id="acc-depth-first">Accelerated Depth-First</h4>
 
 ![depth-first-tree](../img/graph/acc_depth_first.svg)<br>
 *Figure 3: Tree, traversed depth-first*
