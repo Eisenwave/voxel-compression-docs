@@ -1,0 +1,45 @@
+digraph g {
+    rankdir=LR
+    bgcolor=transparent
+    node [shape = record]
+    root [label="<f0>1 |00 |<f3> 1 |00 |<f6> 1 |<f7> 1| ff33000a"]
+
+    b_red [label="<f0> 1 |0 |<f2> 1 |<f3> 1 |0 |<f5> 1 |<f6> 1 |<f7> 1| ffff000a"]
+    b_gra [label="<f0> 1|<f1> 1|<f2> 1|<f3> 1|<f4> 1|<f5> 1|<f6> 1|<f7> 1| ff646464"]
+    b_wht [label="0 |<f1> 1 |000000 | ffffffff"]
+    b_aqu [label="<f0> 1 |000000 |<f7> 1 | ff33734c"]
+    
+    red [shape=rectangle, label=<<font face="monospace" color="#ff000a">ffff000a</font>>]
+    org [shape=rectangle, label=<<font face="monospace" color="#ff8b33">ffff8b33</font>>]
+    gra [shape=rectangle, label=<<font face="monospace" color="#646464">ff646464</font>>]
+    wht [shape=rectangle, label=<<font face="monospace" color="#000000">ffffffff</font>>]
+    grn [shape=rectangle, label=<<font face="monospace" color="#33ff4c">ff33ff4c</font>>]
+    blu [shape=rectangle, label=<<font face="monospace" color="#3373ff">ff3373ff</font>>]
+
+    root:f0 -> b_red
+    root:f3 -> b_gra
+    root:f6 -> b_wht
+    root:f7 -> b_aqu
+
+    b_red:f0 -> org
+    b_red:f2 -> red
+    b_red:f3 -> red
+    b_red:f5 -> org
+    b_red:f6 -> red
+    b_red:f7 -> red
+
+    b_aqu:f0 -> grn
+    b_aqu:f7 -> blu
+
+    b_wht:f1 -> wht
+
+    b_gra:f0 -> gra
+    b_gra:f1 -> gra
+    b_gra:f2 -> gra
+    b_gra:f3 -> gra
+    b_gra:f4 -> gra
+    b_gra:f5 -> gra
+    b_gra:f6 -> gra
+    b_gra:f7 -> gra
+} 
+ 
