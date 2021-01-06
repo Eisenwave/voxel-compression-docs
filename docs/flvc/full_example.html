@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+<title>Voxel Compression</title>
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../css/darcula.css" rel="stylesheet" />
+  <link href="../css/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Full Example";
+    var mkdocs_page_input_path = "flvc/full_example.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/asm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/ebnf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/rust.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> VOXEL COMPRESSION</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../index.html">Compression of Voxel Models</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Basics</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../properties.html">Properties of Voxel Models</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../statistical_tests.html">Statistical Tests to Determine Voxel Model Properties</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Related Work</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/overview.html">Overview over Related Work</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/voxel_formats.html">List of Voxel File Formats</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../related/literature.html">References</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Geometry Encoding</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../uncompressed.html">Uncompressed Format</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rle/rle.html">Run-Length Encoding</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rle/space_filling_curves.html">Space-Filling Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../rle/hilbert_curves.html">3D Hilbert Curves</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/svo.html">Sparse Voxel Octree</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/construction.html">SVO Construction</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../svo/optimization.html">SVO Optimization</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../dag/dag.html">Directed Acyclic Graph</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../cuboid_extraction.html">Cuboid Extraction</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Attribute Encoding</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../attribute_compression.html">SVO Attribute Compression</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Implementation</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="flvc.html">Free Lossless Voxel Compression (FLVC)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="flvc_optimizations.html">FLVC Data Stream</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="full_example.html">Full Example</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#vl32-encoding">VL32 Encoding</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conversion-to-flvc-step-by-step">Conversion to FLVC Step by Step</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Auxiliary File Formats</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vl32.html">32-Bit Voxel List (VL32)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/vlascii.html">ASCII Voxel List (VLASCII)</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../file_formats/structlang.html">Structure Language (StructLang)</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">VOXEL COMPRESSION</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Implementation &raquo;</li>
+        
+      
+    
+    <li>Full Example</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="full-example">Full Example</h1>
+<p>To better illustrate the functionality of the FLVC codec, we will walk through
+a full example of encoding a VL32 file using FLVC manually.</p>
+<p>Our test model will be the following 4x4x4 partially filled cube.
+The blue voxel is the uppermost point <script type="math/tex">(3,3,3)</script> and, the bottom-right, red voxel
+is the lowermost point at <script type="math/tex">(0,0,0)</script>.</p>
+<p>The octant containing gray voxels is completely filled, meaning it consists of
+2x2x2 voxels.</p>
+<p><img src="../img/test_model.png"
+     alt="input model"
+     style="width: 360px; height: auto"/><br>
+<em>Figure 1: The test model visualized as a graph</em></p>
+<h2 id="vl32-encoding">VL32 Encoding</h2>
+<p>See <a href="../file_formats/vl32.html">VL32 Specification</a>.
+This following block shows a hex-printout of the VL32 file with added comments.
+Each row is one voxel.
+Each voxel consist of three big-endian two-complement coordinates followed by
+ARGB color bytes.</p>
+<pre><code class="language-rust">// 4 red bottom voxels
+00000000 00000000 00000000 ffff000a
+00000001 00000000 00000000 ffff000a
+00000000 00000000 00000001 ffff000a
+00000001 00000000 00000001 ffff000a
+// 2 orange voxels
+00000000 00000001 00000000 ffff8b33
+00000001 00000001 00000001 ffff8b33
+// 8 gray voxels
+00000000 00000000 00000002 ff646464
+00000001 00000000 00000002 ff646464
+00000000 00000001 00000002 ff646464
+00000001 00000001 00000002 ff646464
+00000000 00000000 00000003 ff646464
+00000001 00000000 00000003 ff646464
+00000000 00000001 00000003 ff646464
+00000001 00000001 00000003 ff646464
+// 1 white voxel
+00000003 00000001 00000000 ffffffff
+// 1 green voxel
+00000002 00000002 00000002 ff33ff4c
+// 1 blue voxel
+00000003 00000003 00000003 ff3373ff
+</code></pre>
+<h2 id="conversion-to-flvc-step-by-step">Conversion to FLVC Step by Step</h2>
+<h3>Header</h3>
+<p>We start out by encoding the constant parts of the header:</p>
+<pre><code class="language-rust">ff1133cc666c7663            // magic bytes
+00 01                       // version 0.1
+feffffff feffffff feffffff  // volume_offset = (-2, -2, -2)
+                            // keep in mind these are little-endian integers
+04000000 04000000 04000000  // volume_size = (4, 4, 4)
+00                          // empty = false
+&quot;(def)&quot;                     // five ASCII padding bytes
+</code></pre>
+<h3>Attribute Definitions</h3>
+<p>Then, we must encode the attribute definitions.
+There must always be a definition for the <code>position</code> attribute.
+While the type and modifiers for this attribute have no influence on the rest of
+the stored data, they are necessary for the FLVC API to know the layout of
+position triples when encoding and decoding a data stream.</p>
+<pre><code class="language-rust">0200               // definitions_size = 2
+
+08                 // identifier_length = 8
+&quot;position&quot;         // identifier
+14                 // type = 0x14 = INT32
+03                 // cardinality = 3
+0000               // no modifiers
+
+05                 // identifier_length = 5
+&quot;color&quot;            // identifier
+21                 // type = 0x21 = UINT8
+04                 // cardinality = 4
+00                 // no modifiers
+
+&quot;|&quot;                // end of header, start of data
+</code></pre>
+<h3>SVO Processing</h3>
+<p>We must first encode our voxel data as an SVO.
+We won't go into detail how to do this in this chapter.
+The end result looks as follows:</p>
+<p><img alt="test model graph" src="../img/graph/test_model.svg"
+style="width: 300px; height: auto"><br>
+<em>Figure 2: The test model visualized as a graph</em></p>
+<p>In this figure, we see the root node connected to four octants.
+Each octant has up to eight voxels.
+The topmost bit in each <em>child mask</em> represents the lowermost octant of a node.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For each connection to a voxel, a separate node in the SVO  is stored.
+Multiple connections to one node are only part of this visualization to save space.</p>
+</div>
+<p>There are some SVO optimizations that we have to apply for FLVC but none of them
+are necessary here:</p>
+<ul>
+<li>Trimming completely filled branches would have no impact on the gray octant.</li>
+<li>The root node has more than octant, so the depth can not be reduced further.</li>
+</ul>
+<p>The next optimization would be delta coding.
+For that, we must first perform a <script type="math/tex">min</script> mipmapping step.
+The <code>color</code> attribute has a <code>cardinality</code> of 4.
+Henceforth, the <script type="math/tex">min</script> is computed for each channel of the colors.
+We then delta-code the SVO by subtracting children's channels from their parents'.
+Here is the result:</p>
+<p><img alt="test model mipmapped with min" src="../img/graph/test_model_min.svg"
+style="width: 300px; height: auto; margin-right: 24px">
+<img alt="test model delta-coded" src="../img/graph/test_model_delta.svg"
+style="width: 300px; height: auto">
+<br>
+<em>Figure 3: The mipmapped (left) and then delta-coded (right) graph of the model</em></p>
+<h3>Interleaving Steps</h3>
+<p>Now, we perform <em>attribute de-interleaving</em> and <em>bitwise interleaving</em>.
+Starting with the red octant:</p>
+<pre><code class="language-plain">00_00_00_00                   00 00 00 00 00 00
+00_00_00_00    --dileave-&gt;    00 00 00 00 00 00
+00_00_8b_29                   00 00 8b 00 00 8b
+00_00_00_00                   00 00 29 00 00 29
+00_00_00_00
+00_00_8b_29
+</code></pre>
+<p>Essentially, we have turned 6 nodes with 4 attributes each into 4 sequences
+with one byte for each of the 6 nodes.
+The first de-interleaved row shows the alpha channel, the next is red, etc.
+Another example, here in the form of the root node, which contains another 4
+branch nodes:</p>
+<pre><code class="language-plain">b7 00_cc_00_00                   b7 ff 40 81
+ff 00_31_64_5a    --dileave-&gt;    00 00 00 00
+40 00_cc_ff_f5                   cc 31 cc 00
+81 00_00_73_42                   00 64 ff 73
+                                 00 5a f5 42
+</code></pre>
+<p>We repeat this process for all nodes.
+At this point it becomes abundantly clear what the effect of these steps is.
+We started out with a graph that contains a variety of different numbers and no
+obvious pattern, exploitable by an entropy coder.
+Now e.g. the attribute data for the red block of voxels starts with 18 zeros,
+and although the effect on the branch node was less severe, we now still have
+4 consecutive zeros due to uniformity in the alpha channel.</p>
+<p>Now, the final step is <em>bit-interleaving</em>.
+This means that we concatenate the least significant bit of each row, followed
+by the next most significant bit, etc.
+This time, we use the green and blue node as an example:</p>
+<pre><code class="language-plain">00 00 8c 00   --ileave-&gt; 00 00 00 00 50 40 0a 8a
+00 00 00 b3
+</code></pre>
+<p>Also see <a href="flvc_optimizations.html#bitwise-interleaving">Bitwise Interleaving</a> for more examples.</p>
+<h3>Serialization</h3>
+<p>We still need to get all of this data into a single, sequential data stream.
+In the FLVC reference implementation, the interleaving steps are actually done
+just-in-time when writing a node, not during optimizations.
+However, this is ultimately the choice of the implementing developer.</p>
+<p>The order of nodes in FLVC is <a href="../svo/svo.html">Accelerated Depth-First</a>.
+When arranged in this order, the complete data stream looks as follows:</p>
+<pre><code class="language-plain">80 FF 33 00 0A 93 00 00 00 00 B7 00 40 81
+00 00 00 00 02 55 22 55 CC 46 EC 4E A4 24
+46 4E 00 00 00 00 00 00 00 00 00 00 00 00
+24 09 90 00 00 90 24 00 90 00 09 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 00 00 50 40 0A 8A
+</code></pre>
+<h3>Compression</h3>
+<p>When finally compressing, we encode the data stream using zlib and append the
+stream to the header directly after the <code>|</code> character, which separates header
+from content.</p>
+<pre><code class="language-plain">78 DA 6B F8 6F CC C0 35 99 01 08
+B6 33 38 34 82 68 A6 50 A5 D0 33
+6E 6F FC 96 A8 B8 F9 31 20 01 15
+CE 09 0C 0C 13 54 18 26 30 70 32
+10 0B 02 1C B8 BA 00 13 57 0B 6C
+</code></pre>
+<p>You can access the complete file for your own purposes here:
+<a href="../assets/test_model.flvc">Download</a></p>
+              
+            </div>
+          </div>
+<footer></footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="flvc_optimizations.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../file_formats/vl32.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML" defer></script>
+      <script src="../js/mathjax_config.js" defer></script>
+      <script src="../js/extra.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
