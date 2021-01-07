@@ -113,6 +113,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../flvc/full_example.html">Full Example</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../flvc/results.html">FLVC Performance, Conclusions</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Auxiliary File Formats</span></p>
                 <ul>
@@ -189,13 +191,13 @@ same rules and connect it with seven more shapes to obtain an 8x8x8 shape etc.
 Due to this similarity between iterations, we only need a single base shape <script type="math/tex">h_0</script> and rotation table <script type="math/tex">R</script>.</p>
 <h3>Preparation</h3>
 <p>As described, we must first find a fitting shape <script type="math/tex">h_0</script> and a rotation table <script type="math/tex">R</script>.</p>
-<p><img alt="2D Hilbert" src="../img/hilbert0.png" /><br>
+<p><img alt="2D Hilbert" src="../img/model/hilbert0.png" /><br>
 <em>Figure 1: First Iteration of a 3D Hilbert Curve</em></p>
 <p>There are three shapes which can form a Hilbert curve, but this one in particular has properties that make it suited
 for high performance computing.
 In this case, we simply use a Gray Code of length 8, of which the three bits of each element are interpreted as
 coordinates.</p>
-<p><img alt="2D Hilbert" src="../img/hilbert1.png" /><br>
+<p><img alt="2D Hilbert" src="../img/model/hilbert1.png" /><br>
 <em>Figure 2: Second Iteration of a 3D Hilbert Curve</em></p>
 <p>Now, we come up with a rotation table <script type="math/tex">R</script> with 8 rotations <script type="math/tex">R_i, \;0 \le i \lt 8</script> for each of the 8 blocks <script type="math/tex">h_1(i)</script>.
 The blue voxel represents the first element of each block and the red element represents the last.

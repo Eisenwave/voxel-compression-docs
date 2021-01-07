@@ -115,6 +115,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="flvc/full_example.html">Full Example</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="flvc/results.html">FLVC Performance, Conclusions</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Auxiliary File Formats</span></p>
                 <ul>
@@ -238,9 +240,9 @@ This kind of overhead is still preferable to the potential (near) complete waste
 </tbody>
 </table>
 <h2 id="serialization">Serialization</h2>
-<p>Serialization of this representation is trivial because the data structure in memory is similar of not identical to its
-serialized counterpart.
-Here, the <a href="file_formats/vl32.html">VL32</a> file format is used.</p>
+<p>Serialization of the <a href="file_formats/vl32.html">VL32</a> representation is trivial because the data structure in memory is
+similar, if not identical to its serialized counterpart.
+To serialize it, we must simply write each element of the array from first to last to disk.</p>
 <div class="footnote">
 <hr />
 <ol>
