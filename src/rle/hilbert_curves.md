@@ -33,7 +33,7 @@ Due to this similarity between iterations, we only need a single base shape $h_0
 
 As described, we must first find a fitting shape $h_0$ and a rotation table $R$.
 
-![2D Hilbert](../img/hilbert0.png)<br>
+![2D Hilbert](../img/model/hilbert0.png)<br>
 *Figure 1: First Iteration of a 3D Hilbert Curve*
 
 There are three shapes which can form a Hilbert curve, but this one in particular has properties that make it suited
@@ -41,7 +41,7 @@ for high performance computing.
 In this case, we simply use a Gray Code of length 8, of which the three bits of each element are interpreted as
 coordinates.
 
-![2D Hilbert](../img/hilbert1.png)<br>
+![2D Hilbert](../img/model/hilbert1.png)<br>
 *Figure 2: Second Iteration of a 3D Hilbert Curve*
 
 Now, we come up with a rotation table $R$ with 8 rotations $R_i, \;0 \le i \lt 8$ for each of the 8 blocks $h_1(i)$.

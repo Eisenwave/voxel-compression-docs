@@ -51,7 +51,7 @@ If there are not just a handful of values but an entire bit per byte which is un
 Otherwise, OOB signaling is preferable, as it gives much more flexibility to the implementing developer and doesn't 
 produce any conflicts with the data to be compressed.
 
-## Tested Implementations
+## Existing Implementations
 
 ### Binvox
 

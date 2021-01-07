@@ -10,10 +10,10 @@ is the lowermost point at $(0,0,0)$.
 The octant containing gray voxels is completely filled, meaning it consists of
 2x2x2 voxels.
 
-<img src="../img/test_model.png"
+<img src="../img/model/test_model.png"
      alt="input model"
-     style="width: 360px; height: auto"/><br>
-*Figure 1: The test model visualized as a graph*
+     style="width: auto; height: auto"/><br>
+*Figure 1: The test model*
 
 ## VL32 Encoding
 

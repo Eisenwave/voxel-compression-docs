@@ -26,7 +26,7 @@ Compression schemes have to be able to describe large volumes of positive and ne
 
 ## Color/Attribute Locality
 
-![Ragged Cluster ](img/ragged_cluster_magica.png)
+![Ragged Cluster ](img/model/ragged_cluster_magica.png)
 *"Ragged Cluster" model visualized in Magica Voxel*
 
 Color and other attributes such as normals correlate with geometry.

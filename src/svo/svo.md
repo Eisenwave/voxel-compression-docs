@@ -1,7 +1,8 @@
 # Sparse Voxel Octree
 
-![Octree](https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Octree2.svg/1280px-Octree2.svg.png)
-*An Octree - Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Octree2.svg), WhiteTimberwolf*
+![Octree](https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Octree2.svg/1280px-Octree2.svg.png)<br>
+*Figure 1: An Octree -
+Source: [Wikipedia](https://commons.wikimedia.org/wiki/File:Octree2.svg), WhiteTimberwolf*
 
 A sparse voxel octree is a data structure which stores voxels in a tree with a branching factor of 8, with its branches
 being potentially absent.
@@ -63,7 +64,7 @@ See [SVO Optimization](optimization.md).
 ## Serialization
 
 ![SVO](../img/graph/octree.svg)<br>
-*Figure 0: A Sparse Voxel Octree, encoded in memory*
+*Figure 2: A Sparse Voxel Octree, encoded in memory*
 
 To be used in a serial data format, octrees must first be serialized.
 Nodes will no longer be laid out freely in memory but instead be arranged one after another.
@@ -91,7 +92,7 @@ The main points of comparison are as follows:
 #### Depth-First
 
 ![depth-first-tree](../img/graph/depth_first.svg)<br>
-*Figure 1: Tree, traversed depth-first*
+*Figure 3: Tree, traversed depth-first*
 
 DFS can be performed using only a stack to keep track of the node number at each level.
 On the deepest level, the next node is chosen until the end is reached and the next parent node is chosen.
@@ -101,7 +102,7 @@ enormous models.
 <h4 id="breadth-first"> Breadth-First</h4>
 
 ![breadth-first-tree](../img/graph/breadth_first.svg)<br>
-*Figure 2: Tree, traversed breadth-first*
+*Figure 4: Tree, traversed breadth-first*
 
 BFS comes with a higher cost since a typical algorithm appends all branches to a queue for every traversed node.
 This means that in the worst case, which is at the beginning of serialization eight nodes are appended on every level
@@ -110,7 +111,7 @@ before any node is popped from the queue, resulting in a higher memory cost.
 <h4 id="acc-depth-first">Accelerated Depth-First</h4>
 
 ![depth-first-tree](../img/graph/acc_depth_first.svg)<br>
-*Figure 3: Tree, traversed depth-first*
+*Figure 5: Tree, traversed depth-first*
 
 In *Figure 3*, the labels symbolize `order of storage`**/**`order of visitation`.
 
@@ -146,7 +147,7 @@ We can still use just a stack as a data structure, but we need to store a list a
 #### Why To Serialize Octrees Depth-First and not Breadth-First
 
 ![octree-serial](../img/graph/octree_serial.svg)<br>
-*Figure 4: A serialized octree, depth-first*
+*Figure 6: A serialized octree, depth-first*
 
 The scheme more practical for encoding octrees is depth-first.
 This is due to the fact that only a stack is necessary to keep track of the current position.
@@ -223,7 +224,7 @@ any unused values.
 ## Squashed Octrees
 
 ![octree-squashed](../img/graph/octree_squashed.svg)<br>
-*Figure 5: A squashed Octree (compare to Figure 0)*
+*Figure 7: A squashed Octree (compare to Figure 0)*
 
 A squashed octree is an octree where two or more layers of the tree have been combined into a single layer.
 

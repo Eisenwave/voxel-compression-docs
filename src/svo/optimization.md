@@ -59,7 +59,7 @@ redundancy and no benefit in this case.
 To optimize such cases, we must eliminate nodes which are recursively filled in, or *complete*.
 A voxel model that demonstrates this well is *chessmaster3*:
 
-![Chessmaster3](../img/chessmaster3.png)<br>
+![Chessmaster3](../img/model/chessmaster3.png)<br>
 *Figure 3: chessmaster3 Model, visualized in Magica Voxel*
 
 A very large portion of this model is completely filled in.

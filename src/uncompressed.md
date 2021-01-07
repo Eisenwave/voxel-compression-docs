@@ -58,6 +58,6 @@ random access (time) | $O(1)$ | $O(n)$
 
 ## Serialization
 
-Serialization of this representation is trivial because the data structure in memory is similar of not identical to its
-serialized counterpart.
-Here, the [VL32](file_formats/vl32.md) file format is used.
+Serialization of the [VL32](file_formats/vl32.md) representation is trivial because the data structure in memory is
+similar, if not identical to its serialized counterpart.
+To serialize it, we must simply write each element of the array from first to last to disk.
