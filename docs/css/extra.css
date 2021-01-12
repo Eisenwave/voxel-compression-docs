@@ -10,10 +10,10 @@
     font-weight: bold;
 }
 
-/* Hide the page title in the table of contents.*/
+/* Hide the page title in the table of contents.
 li.toctree-l2:first-child, li.toctree-l3:first-child {
     display: none;
-}
+}*/
 
 /* Reduce excessive left-padding.*/
 .toctree-l4 {

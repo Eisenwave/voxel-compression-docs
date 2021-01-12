@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "SVO Attribute Compression";
-    var mkdocs_page_input_path = "attribute_compression.md";
+    var mkdocs_page_name = "Introduction";
+    var mkdocs_page_input_path = "introduction.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -57,8 +57,12 @@
                     <li class="toctree-l1"><a class="reference internal" href="index.html">Compression of Voxel Models</a>
                     </li>
                 </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="introduction.html">Introduction</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#related-work">Related Work</a>
+    </li>
+    </ul>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Basics</span></p>
@@ -99,18 +103,8 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Attribute Encoding</span></p>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="attribute_compression.html">SVO Attribute Compression</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#inspiration-image-based-approach">Inspiration: Image-Based Approach</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#primer-on-png-filtering">Primer on PNG Filtering</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#applying-the-approach-to-three-dimensions">Applying The Approach to Three Dimensions</a>
-    </li>
-    </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="attribute_compression.html">SVO Attribute Compression</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Implementation</span></p>
@@ -153,12 +147,8 @@
     <li><a href=".">Docs</a> &raquo;</li>
     
       
-        
-          <li>Attribute Encoding &raquo;</li>
-        
-      
     
-    <li>SVO Attribute Compression</li>
+    <li>Introduction</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -169,85 +159,60 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="svo-attribute-compression">SVO Attribute Compression</h1>
-<p>Geometry is the most important attribute, as it gives the model shape.
-A model can exist without color attributes but not without a shape.
-However, geometry does not inherently make up the majority of a model's
-information in bytes.
-Whether a voxel exists or not is only single-bit information, whereas color is
-often 24-bit information.
-Also consider alpha channels, weights, and many other attributes and it becomes
-plain to see that other attributes comprise the vast majority of information.</p>
-<h2 id="requirements">Requirements</h2>
-<p>We have already decided to use SVOs as the form of geometry compression.
-It is essential that whatever method we design, it must work well with an
-existing SVO structure.
-In total, we have the following requirements:</p>
-<ul>
-<li>good SVO interoperability</li>
-<li>low memory/time complexity when encoding/decoding models</li>
-<li>streamability</li>
-<li>exploiting redundancies in typical models</li>
-<li>high compression ratio</li>
-<li>acceptable real world performance</li>
-</ul>
-<h2 id="inspiration-image-based-approach">Inspiration: Image-Based Approach</h2>
-<p>Storing a 24-bit RGB color for every voxel would be very expensive.
-What some formats such as PNG instead do is store a delta between neighboring colors.
-Instead of storing deltas we could also store whether neighboring colors are exactly identical, but such a naive
-approach would become very ineffective when introducing small amounts of noise into the colors.</p>
-<h2 id="primer-on-png-filtering">Primer on PNG Filtering</h2>
-<pre><code class="language-plain">c|b
--+-
-a|x
-</code></pre>
-<p><code>x</code> is the color to encode and <code>a, b, c</code> are its neighbors.
-In the <a href="https://www.w3.org/TR/2003/REC-PNG-20031110/#9Filters">Filtering Section</a> of the PNG specification we can
-see that the colors are converted to a delta-based representation relative to their neighbors.</p>
-<p>This step however does not reduce the size of the data as "both the inputs and outputs fit into a byte".
-It is merely a pre-processing step which increases redundancy in the image bytes and thus improves
-<a href="https://www.w3.org/TR/2003/REC-PNG-20031110/#10Compression">DEFLATE compression, the next step</a>.
-The data will be turned into mostly low values, often times exactly zero,
-assuming that the deltas from the prediction are low in magnitude.</p>
-<h2 id="applying-the-approach-to-three-dimensions">Applying The Approach to Three Dimensions</h2>
-<p>The PNG-style approach is already very promising but needs to be heavily modified
-so that we can apply it to 3D models.
-It meets all requirements in terms of performance and streamability.
-An added bonus is that the entropy coder can be treated as a black box and easily
-swapped out by a different algorithm.
-We are not in any way restricted to using zlib specifically.</p>
-<p>However, it is not obvious how to extend this approach to work well with an SVO.
-The greatest problems arise during the decoding process:</p>
-<ol>
-<li>We might not always have a neighbor, unlike in an image where we only need to
-   store the previous and the current line of pixels.
-   Voxels can be surrounded by vast quantities of empty space.</li>
-<li>Making it possible to access already read neighbors randomly would require
-   reading the entire SVO into memory when decoding.</li>
-<li>Random access to neighbors in an SVO would have logarithmic complexity.
-   In an image, it would be constant.</li>
-<li>We don't make any use of the hierarchical structure of the SVO when referencing
-   direct neighbors.</li>
-</ol>
-<p>There is a simple solution that solves every single one of these problems:
-Referencing parent nodes and encoding deltas to parents instead of deltas to
-direct neighbors.
-Since every node has a parent (except for the root node) and parents are very
-easy to access during encoding and decoding, we resolve almost all problems
-regarding space/time/memory requirements.
-The center of parent nodes is also located half a voxel away from the center of
-its child nodes, which is why their attributes are typically similar.</p>
-<p>In an SVO which encodes voxel models, only the leaf nodes have any attribute values.
-The leaf nodes represent the voxels, all layers above are just subdivisions of space.
-Before we can compute a delta from the parents, we must propagate the values of
-children upwards in the tree in a mipmapping step.
-For example, the parent could be assigned the minimum, maximum, average, etc. of
-all its children.
-See the <a href="flvc/flvc_optimizations.html">FLVC Data Stream</a> for how this was
-implemented in practice.
-This mipmapping step does increase the size of the model initially, but if the
-values of the  children are all very similar, there will be a net benefit for
-the entropy coder.</p>
+                <h1 id="introduction">Introduction</h1>
+<p>Volumetric Pixels or voxels are an increasingly popular method of representing 3-dimensional data.
+Their uses are plentiful such as representing quantized point cloud data, medical scans, acceleration data structures
+for VFX, high resolution sculptures, or 3D models with an intentional voxel art style.
+Accessing voxels randomly can even be achieved with constant time complexity, all while using relatively simple data
+structures.</p>
+<p>However, perhaps because of this simplicity, efficient permanent storage of voxel models is rarely a concern.
+Out of more than 20 common voxel file formats, only one
+(<a href="related/voxel_formats.html#qubicle-binary-tree">Qubicle Binary Tree</a>) makes a serious attempt at compression
+of voxel models by using <a href="https://zlib.net/">zlib</a>.
+Some solutions combining general-purpose technologies such as storing a stack of PNG layers can also be found in formats
+like <a href="related/voxel_formats.html#simple-voxels">SVX</a>.
+The sophistication of widely used voxel software is overall at a pre-1996 level compared to image compression.
+This fact promises enormous improvements in compression ratio for a new file format that was designed specifically
+for the purpose of efficiently storing voxel models on disk.</p>
+<p>The goal of this project was to develop an efficient codec for the purpose of on-disk storage of voxel models.
+Compression ratio and performance are equally important.
+In addition to the overwhelmingly popular approach of using sparse voxel octrees (SVOs) for compact storage, we also
+examine alternative solutions such as a variety of run-length encoding schemes (RLE) using different space-filling
+curves, including Nested Iteration, Morton Curves, and Hilbert Curves.</p>
+<p>In the following chapters we first examine geometry-only encoding of voxel models.
+RLE and SVO techniques are examined thoroughly and compared against each other in compression and performance.
+The reference point for compression efficiency is a list of points with quantized coordinates.
+This was the size of the input data is directly proportional to the number of voxels.
+Based on the findings, we discuss a suitable attribute encoding scheme that can be well combined with our geometry
+encoding scheme of choice.
+Finally, the FLVC codec which incorporates all our findings is presented.</p>
+<h2 id="related-work">Related Work</h2>
+<p><a href="related/literature.html#octree-based-point-cloud-compression">Schnabel et al.</a> first presented in 2006 how sparse voxel
+octrees can be used to efficiently store point-cloud data.
+A technique is suggested where a single byte is used to encode the existence of a child node, which represents
+individual voxels at the bottommost level of the SVO.
+While this technique was not its main subject, the suggested approach can be further optimized by encoding recursively
+occupied nodes of the octree specially.
+The research also shows that the number of child nodes is not uniformly distributed and may show significant
+redundancy based on the model, which can be exploited by an arithmetic coder.</p>
+<p><a href="related/literature.html#vola">Byrne et al.</a> designed an efficient file format named VOLA for storing quantized point
+cloud data with no attributes other than geometry.
+VOLA stores voxels not as an array -as is often done at runtime- but as an octree where to layers are
+combined into one, creating a tree with a branching factor of 64.
+The performance of this approach is outdone by our codec, but VOLA was an inspiration.</p>
+<p>Most other contemporary research is focused on the use of voxels at runtime.
+In part, this is because voxels are being used primarily as VFX accelerators where polygonal models are unsuited to
+achieve certain effects in real time, such as global illumination.
+This task inherently comes with strict performance requirements.</p>
+<p><a href="related/literature.html#efficient-svos">Laine et al.</a> presents a sparse voxel octree-based technique for representing 
+geometry and shading attributes.
+Some techniques found in our implementation are similar to the presented memory layout.
+Namely, the use of an 8-bit child mask to encode which children of a parent node exist was inspired by this paper.</p>
+<p><a href="related/literature.html#high-resolution-sparse-voxel-dags">Kämpe et al.</a> show that SVOs can be further compactified
+by merging identical trees and generalizing to sparse voxel directed acyclic graphs (SVDAGs).
+This approach was developed for realtime rendering with 32-bit pointers encoding links between nodes.
+While a significant reduction in space can be observed, this technique does not provide significant benefits to a
+pointerless structure with 8-bit child masks, which is why it was not used in our project.</p>
               
             </div>
           </div>
@@ -264,10 +229,10 @@ the entropy coder.</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="cuboid_extraction.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="index.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="flvc/flvc.html" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="properties.html" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -57,6 +57,10 @@
                     <li class="toctree-l1"><a class="reference internal" href="../index.html">Compression of Voxel Models</a>
                     </li>
                 </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a>
+                    </li>
+                </ul>
                 <p class="caption"><span class="caption-text">Basics</span></p>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../properties.html">Properties of Voxel Models</a>
@@ -66,7 +70,7 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Related Work</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../related/overview.html">Overview over Related Work</a>
+                    <li class="toctree-l1"><a class="" href="../related/overview.md">None</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../related/voxel_formats.html">List of Voxel File Formats</a>
                     </li>
@@ -184,9 +188,13 @@ background: silver;
 
 <h2 id="examples">Examples</h2>
 <p>In the following section, we will look at three concrete examples of real world
-performance of the FLVC codec.
-All test were performed on the ramdisk of a Linux machine
-(Ryzen 9 3900X, 64 GiB 3200MHz).</p>
+performance of the FLVC codec.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All test were performed on the ramdisk of a Debian 11 Desktop.<br>
+<strong>Processor:</strong> Ryzen 9 3900X<br>
+<strong>Memory:</strong> 64 GiB 3200MHz</p>
+</div>
 <h3>Spacestation</h3>
 <p><img style="width: 560px" alt="Spacestation" src="../img/model/spacestation.png"></p>
 <table>
@@ -227,7 +235,7 @@ Even for the smaller and somewhat less redundant models, we need less than one
 byte per voxel despite starting with 16 bytes per voxel (<code>x, y, z, argb</code>).
 At best, the file size is reduced by over 99%.
 It must be emphasized that in related work, the reference point is typically a
-voxel array where only a miniscule fraction consists of voxels.
+voxel array where only a minuscule fraction consists of voxels.
 Here, the reference point is a list of voxels with no empty space between.</p>
 <p>The level of compression has little impact on the size of the produced filed.
 At best, a 10% reduction ca be seen, at worst, almost none.</p>
