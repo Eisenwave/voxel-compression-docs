@@ -2,6 +2,7 @@
 
 ## Literature
 
+<div id="efficient-svos"></div>
 ### Efficient Sparse Voxel Octrees
 
 **Authors:** Samuli Laine, Tero Karras<br>
@@ -13,6 +14,7 @@ http://graphics.cs.williams.edu/i3d10/)<br>
 [PDF](https://research.nvidia.com/sites/default/files/pubs/2010-02_Efficient-Sparse-Voxel/laine2010i3d_paper.pdf)<br>
 **Last Viewed:** 2020-05-04
 
+<div id="compression-for-voxel-scenes"></div>
 ### Geometry and Attribute Compression for Voxel Scenes
 
 **Authors:** Bas Dado, Timothy R. Kol, Pablo Bauszat, Jean-Marc Thiery, Elmar Eisemann<br>
@@ -25,6 +27,16 @@ https://www.researchgate.net/profile/Timothy_Kol/publication/303597840_Geometry_
 <br>
 **Last Viewed:** 2020-05-04
 
+div id="octree-cloud-compression"></div>
+### Octree-based Point-Cloud Compression
+
+**Authors:** Ruwen Schnabel, Reinhard Klein<br>
+**Publisher:** Institut für Informatik II, Universität Bonn, Germany<br>
+**Links:** [PDF](https://cg.cs.uni-bonn.de/aigaion2root/attachments/schnabel-2006-octree.pdf)<br>
+**Last Viewed:** 2021-01-11
+
+<div id="high-res-sparse-voxel-dags"></div>
+
 ### High Resolution Sparse Voxel DAGs
 
 **Authors:** Viktor Kämpe, Erik Sintorn, Ulf Assarsson<br>
@@ -35,6 +47,7 @@ https://www.researchgate.net/profile/Timothy_Kol/publication/303597840_Geometry_
 [PDF](https://dl.acm.org/doi/pdf/10.1145/2461912.2462024?download=true)<br>
 **Last Viewed:** 2020-05-04
 
+<div id="vola"></div>
 ### VOLA: A Compact Volumetric Format for 3D Mapping and Embedded Systems
 
 **Authors:** Jonathan Byrne, Léonie Buckley, Sam Caulfield, David Moloney<br>
@@ -49,6 +62,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 <br>
 **Last Viewed:** 2020-05-04
 
+<div id="symmetry-aware-sparse-voxel-dags"></div>
 ### Symmetry-aware Sparse Voxel DAGs (SSVDAGs) for compression-domain tracing of high-resolution geometric scenes 
 
 **Authors:** Alberto Jaspe Villanueva, Fabio Marton, Enrico Gobbetti, CRS4<br>
@@ -59,6 +73,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 [Low-Resolution PDF](http://jcgt.org/published/0006/02/01/paper-lowres.pdf),
 [Video Demo](http://jcgt.org/published/0006/02/01/jcgt-ssvdags-demo.mp4)
 
+<div id="computer-oriented-geodetic-data-base"></div>
 ### A Computer Oriented Geodetic Data Base And a New Technique in File Sequencing
 
 **Author:** G.M. Morton<br>
@@ -66,6 +81,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 **Published In:** Journal of Computer Graphics Techniques (JCGT), vol. 6, no. 2<br>
 **Links:** [PDF](https://dominoweb.draco.res.ibm.com/reports/Morton1966.pdf)
 
+<div id="hilbert"></div>
 ### Über die stetige Abbildung einer Linie auf ein Flächenstück {abc}
 
 **Author:** David Hilbert<br>
@@ -76,6 +92,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 
 ## Specifications
 
+<div id="spec-qb"></div>
 ### Qubicle File Specification Articles
 
 **Authors:** Minddesk Software GmbH<br>
@@ -86,6 +103,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 <br>
 **Last Viewed:** 2020-05-04
 
+<div id="spec-binvox"></div>
 ### Binvox Voxel File Format Specification
 
 **Author:** Patrick Min<br>
@@ -96,6 +114,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 [Parent Page](https://www.patrickmin.com/binvox/index.php)<br>
 **Last Viewed:** 2020-06-03
 
+<div id="spec-svx"></div>
 ### SVX Format Specification
 
 **Author:** Alan Hudson (?)<br>
@@ -105,6 +124,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 **Links:** [Website](https://abfab3d.com/svx-format/)<br>
 **Last Viewed:** 2020-06-04
 
+<div id="spec-slab6"></div>
 ### SLAB6 Project Page (KVX, KV6 Documentation)
 
 **Author:** Ken Silverman<br>
@@ -115,6 +135,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 [SLAB6 Download](http://www.advsys.net/ken/slab6.zip)<br>
 **Last Viewed:** 2020-06-07
 
+<div id="spec-zoxel"></div>
 ### Zoxel File Format Specification
 
 **Author:** Graham King<br>
@@ -124,6 +145,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 **Links:** [Wiki Page](https://github.com/grking/zoxel/wiki/Zoxel-File-Format)<br>
 **Last Viewed:** 2020-06-08
 
+<div id="spec-schematic"></div>
 ### Schematic File Format
 
 **Authors:** Minecraft Wiki<br>
@@ -133,6 +155,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 **Links:** [Wiki Page](https://minecraft.gamepedia.com/Schematic_file_format)<br>
 **Last Viewed:** 2020-06-08
 
+<div id="spec-structure"></div>
 ### Structure Block File Format
 
 **Authors:** Minecraft Wiki<br>
@@ -142,6 +165,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 **Links:** [Wiki Page](https://minecraft.gamepedia.com/Structure_block_file_format)<br>
 **Last Viewed:** 2020-06-08
 
+<div id="spec-sproxel"></div>
 ### Sproxel User Manual
 
 **Author:** androo.gardner@gmail.com (?)<br>
@@ -153,6 +177,7 @@ http://www.scitepress.net/ProceedingsDetails.aspx?ID=bxb3QTEeduo=&t=1)<br>
 
 ## Web
 
+<div id="compressing-voxel-worlds"></div>
 ### Compressing Voxel Worlds
 
 **Author:** Steven Pigeon<br>

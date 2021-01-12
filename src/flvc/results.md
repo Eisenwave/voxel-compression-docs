@@ -24,9 +24,11 @@ background: silver;
 
 In the following section, we will look at three concrete examples of real world
 performance of the FLVC codec.
-All test were performed on the ramdisk of a Linux machine
-(Ryzen 9 3900X, 64 GiB 3200MHz).
 
+!!! note
+    All test were performed on the ramdisk of a Debian 11 Desktop.<br>
+    **Processor:** Ryzen 9 3900X<br>
+    **Memory:** 64 GiB 3200MHz
 
 ### Spacestation
 
@@ -76,7 +78,7 @@ Even for the smaller and somewhat less redundant models, we need less than one
 byte per voxel despite starting with 16 bytes per voxel (`x, y, z, argb`).
 At best, the file size is reduced by over 99%.
 It must be emphasized that in related work, the reference point is typically a
-voxel array where only a miniscule fraction consists of voxels.
+voxel array where only a minuscule fraction consists of voxels.
 Here, the reference point is a list of voxels with no empty space between.
 
 The level of compression has little impact on the size of the produced filed.

@@ -22,6 +22,7 @@ markdown_extensions:
 
 nav:
   - index.md
+  - introduction.md
   - Basics:
       - properties.md
       - statistical_tests.md

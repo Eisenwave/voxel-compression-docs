@@ -6,8 +6,6 @@ Due to the FLVC format allowing arbitrary attributes, the exact structure of the
 Attribute definitions in the container specify the structure of the attribute data per voxel.
 This structural information is crucial for certain optimizations performed in the FLVC codec.
 
-
-
 ## General Structure
 
 Generally, the FLVC data stream consists of nodes of an SVO, ordered in
